@@ -1,0 +1,42 @@
+name: Weekly Screen
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r python/requirements.txt
+
+      - name: Write .env
+        run: |
+          echo "ALPACA_API_KEY=${{ secrets.ALPACA_API_KEY }}" >> python/.env
+          echo "ALPACA_SECRET_KEY=${{ secrets.ALPACA_SECRET_KEY }}" >> python/.env
+          echo "ALPACA_FEED=iex" >> python/.env
+          echo "SEC_USER_AGENT=${{ secrets.SEC_USER_AGENT }}" >> python/.env
+
+      - name: Run weekly screen
+        run: cd python && python3 run_screen.py > ../data/latest.json
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/latest.json
+          git diff --staged --quiet || git commit -m "data: weekly screen $(date -u +%Y-%m-%d)"
+          git push
