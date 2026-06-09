@@ -4,7 +4,7 @@
 
 import fs from "fs";
 import path from "path";
-import type { PipelineOutput, Screen } from "./types";
+import type { PipelineOutput, Screen, ResearchBlock } from "./types";
 
 const DATA_PATH = path.join(process.cwd(), "data", "latest.json");
 
@@ -17,6 +17,13 @@ export function getScreen(): Screen | null {
   } catch {
     return null;
   }
+}
+
+// Returns the classical-vs-quantum research block, or null until the quantum
+// arm ships. Decoupled so the existing dashboard is unaffected by its absence.
+export function getResearch(): ResearchBlock | null {
+  const screen = getScreen();
+  return screen?.research ?? null;
 }
 
 export function getMeta(): Pick<

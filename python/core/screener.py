@@ -173,6 +173,43 @@ def run() -> dict:
     for s in stocks:
         s["fundWeight"] = round(fw.get(s["ticker"], 0.0), 5)
 
+    # 9. Research arms + forward logging ------------------------------------
+    from core import research_log
+
+    def _latest_return(weights: dict, rets) -> float | None:
+        """Most-recent-day portfolio return for a set of frozen weights."""
+        held = [t for t in weights if t in rets.columns]
+        if not held or rets.empty:
+            return None
+        last = rets[held].iloc[-1].fillna(0.0)
+        w = pd.Series({t: weights[t] for t in held}); w /= (w.sum() or 1.0)
+        return float((last * w).sum())
+
+    # Key the forward record on the actual last PRICE date, never the run date:
+    # the daily job runs Tue-Sun, so run-date keying would log the same Friday
+    # return again on Sat/Sun. Price-date keying dedups those onto the real day.
+    price_date = (returns.index[-1].strftime("%Y-%m-%d")
+                  if not returns.empty else market["date"])
+
+    greedy_arm = research_log.make_arm(
+        "greedy", the_fund,
+        selection=[s["ticker"] for s in stocks],
+        weights=fw,
+    )
+    arms = [greedy_arm]
+    # When quantum_fund.py lands, append its arms here, e.g.:
+    #   arms.append(research_log.make_arm("qubo_classical", qf_c["fund"],
+    #               qf_c["selection"], qf_c["weights"], qf_c["diagnostics"]))
+    #   arms.append(research_log.make_arm("qubo_quantum",   qf_q["fund"],
+    #               qf_q["selection"], qf_q["weights"], qf_q["diagnostics"]))
+
+    arm_returns = {a["key"]: _latest_return(a["weights"], returns) for a in arms}
+    research_log.append_run_record(
+        price_date, "weekly", arm_returns,
+        rebalance={"selectionByArm": {a["key"]: a["selection"] for a in arms}},
+    )
+    research_block = research_log.build_research_block(arms, as_of=market["date"])
+
     return {
         "asOf": market["date"],
         "universeSize": universe_size,
@@ -189,6 +226,7 @@ def run() -> dict:
         },
         "stocks": stocks,
         "fund": the_fund,
+        "research": research_block,
         "marketConditions": market,
     }
 
