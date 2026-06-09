@@ -121,9 +121,14 @@ def test_research_block(arms, hist_file):
     assert len(block["arms"]) == 3
     assert block["forwardStats"]["available"]
     assert "selectionComparison" in block
+    nav = block["forwardNav"]
+    assert len(nav) == 300, f"forwardNav should have one point per run, got {len(nav)}"
+    assert all(k in nav[0] for k in ("date", "greedy", "qubo_classical", "qubo_quantum"))
+    assert all(abs(p) < 10 for k, p in nav[-1].items() if k != "date"), "NAV blew up"
+    assert nav[0]["date"] < nav[-1]["date"], "forwardNav must be date-sorted"
     import json
     json.dumps(block, default=str)  # must be serialisable for latest.json
-    print("  PASS: research block assembles and is JSON-serialisable")
+    print(f"  PASS: research block assembles (incl. {len(nav)}-point forwardNav) and is JSON-serialisable")
 
 
 if __name__ == "__main__":
