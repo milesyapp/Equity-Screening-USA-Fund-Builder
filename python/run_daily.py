@@ -98,6 +98,29 @@ def main() -> int:
     port["marketConditions"] = market
     port["pricesAsOf"] = market["date"]
 
+    # 3. Re-mark research arms forward (no re-selection; selection is frozen
+    #    between weekly runs, so no solver/D-Wave call here). Keyed on the last
+    #    PRICE date so weekend/holiday re-runs dedup onto the real trading day.
+    from core import research_log
+    prev = port.get("research")
+    if prev and prev.get("arms"):
+        price_date = (close.index[-1].strftime("%Y-%m-%d")
+                      if not close.empty else market["date"])
+        arm_returns = {}
+        for arm in prev["arms"]:
+            w = arm.get("weights", {})
+            held_arm = [t for t in w if t in close.columns]
+            if not held_arm:
+                continue
+            last_ret = (close[held_arm].pct_change(fill_method=None)
+                        .replace([np.inf, -np.inf], np.nan).iloc[-1].fillna(0.0))
+            wser = pd.Series({t: w[t] for t in held_arm}); wser /= (wser.sum() or 1.0)
+            arm_returns[arm["key"]] = float((last_ret * wser).sum())
+        if arm_returns:
+            research_log.append_run_record(price_date, "daily", arm_returns)
+            prev["forwardStats"] = research_log.forward_stats(research_log.load_history())
+            port["research"] = prev
+
     blob["run_type"] = "daily"
     blob["elapsed_seconds"] = round(time.time() - t0, 1)
     blob["date"] = market["date"]

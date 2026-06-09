@@ -85,6 +85,85 @@ export interface Methodology {
   momentumFactors: string[];
 }
 
+// --- Classical-vs-quantum research instrumentation -------------------------
+// Mirrors python/core/research_log.py. Each arm reuses the Fund type above, so
+// any arm renders with the existing fund components.
+
+export interface QuboDiagnostics {
+  solver: string;
+  isQuantum: boolean;
+  numReads: number | null;
+  bestEnergy: number | null;
+  energyStd: number | null;
+  chainBreakFraction: number | null; // QPU only
+  numQubitsUsed: number | null;      // QPU only (post-embedding)
+  wallSeconds: number | null;
+  lambdas: { l1: number; l2: number; l3: number; l4: number } | null;
+  targetSize: number | null;
+}
+
+export interface FundArm {
+  key: "greedy" | "qubo_classical" | "qubo_quantum" | string;
+  label: string;
+  isQuantum: boolean;
+  selection: string[];
+  weights: Record<string, number>;
+  diagnostics: QuboDiagnostics | null; // null for the greedy arm
+  fund: Fund;
+}
+
+export interface SelectionComparison {
+  pair: string;            // e.g. "qubo_classical_vs_qubo_quantum"
+  jaccard: number | null;
+  overlapCount: number;
+  nA: number;
+  nB: number;
+  onlyA: string[];
+  onlyB: string[];
+}
+
+export interface SharpeDifference {
+  difference: number | null;
+  ci95: [number, number] | null;
+  pValue: number | null;
+  method?: string;
+  note?: string;
+}
+
+export interface ForwardArmStat {
+  arm: string;
+  vsBaseline: string;
+  nDays: number;
+  activeReturnAnnualised: number | null;
+  trackingError: number | null;
+  informationRatio: number | null;
+  sharpe: { arm: number | null; baseline: number | null };
+  neweyWestT_meanActive: number | null;
+  sharpeDifference: SharpeDifference;
+  ledoitWolfTest: unknown | null; // reserved hook
+}
+
+export interface ForwardStats {
+  available: boolean;
+  nDays: number;
+  baseline?: string;
+  perArm?: ForwardArmStat[];
+  caveat?: string;
+  reason?: string;
+}
+
+export interface ResearchBlock {
+  schemaVersion: number;
+  asOf: string;
+  inceptionDate: string;
+  baselineArm: string;
+  armOrder: string[];
+  arms: FundArm[];
+  selectionComparison: SelectionComparison[];
+  forwardStats: ForwardStats;
+  disclaimer: string;
+}
+
 export interface MarketConditions {
   date?: string;
   vix?: number | null;
@@ -108,6 +187,7 @@ export interface Screen {
   methodology: Methodology;
   stocks: StockPick[];
   fund: Fund;
+  research?: ResearchBlock | null;
   marketConditions?: MarketConditions | null;
 }
 
