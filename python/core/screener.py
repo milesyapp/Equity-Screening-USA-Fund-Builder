@@ -197,11 +197,43 @@ def run() -> dict:
         weights=fw,
     )
     arms = [greedy_arm]
-    # When quantum_fund.py lands, append its arms here, e.g.:
-    #   arms.append(research_log.make_arm("qubo_classical", qf_c["fund"],
-    #               qf_c["selection"], qf_c["weights"], qf_c["diagnostics"]))
-    #   arms.append(research_log.make_arm("qubo_quantum",   qf_q["fund"],
-    #               qf_q["selection"], qf_q["weights"], qf_q["diagnostics"]))
+
+    # --- QUBO arms ---------------------------------------------------------
+    # Build the candidate pool, build the QUBO ONCE, and solve that identical
+    # problem with (a) a classical sampler -> qubo_classical, and (b) when a
+    # D-Wave token is configured, real hardware -> qubo_quantum. Solving the
+    # SAME QUBO with both isolates the quantum-solver effect from the
+    # objective-function effect. Wrapped so a quantum failure can never break
+    # the live classical pipeline.
+    try:
+        from core import quantum_fund
+        cand_ranked = combined.sort_values("score", ascending=False).head(
+            quantum_fund.candidate_pool_size()
+        )
+        candidates = []
+        for t, row in cand_ranked.iterrows():
+            m = meta.get(t, {})
+            candidates.append({
+                "ticker": t,
+                "score": _f(row.get("score")),
+                "sector": m.get("sector", "Unknown"),
+                **{k: _f(row.get(k)) for k in _FUND_FIELDS},
+            })
+
+        problem = quantum_fund.build_qubo(candidates, returns)
+
+        sel_c, diag_c = quantum_fund.solve(problem, "sim")
+        f_c, w_c = quantum_fund.build_fund_from_selection(sel_c, candidates, returns, bench_daily)
+        arms.append(research_log.make_arm("qubo_classical", f_c, sel_c, w_c, diag_c))
+
+        if quantum_fund.hardware_available():
+            sel_q, diag_q = quantum_fund.solve(problem, quantum_fund.production_sampler())
+            f_q, w_q = quantum_fund.build_fund_from_selection(sel_q, candidates, returns, bench_daily)
+            arms.append(research_log.make_arm("qubo_quantum", f_q, sel_q, w_q, diag_q))
+        else:
+            logger.info("No DWAVE_API_TOKEN — qubo_quantum skipped; logging classical QUBO only.")
+    except Exception as e:  # noqa: BLE001 — never let the quantum arm break the pipeline
+        logger.exception("Quantum fund arm failed; continuing with available arms: %s", e)
 
     arm_returns = {a["key"]: _latest_return(a["weights"], returns) for a in arms}
     research_log.append_run_record(

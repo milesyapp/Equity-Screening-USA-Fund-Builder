@@ -32,6 +32,7 @@ jobs:
           echo "ALPACA_SECRET_KEY=${{ secrets.ALPACA_SECRET_KEY }}" >> python/.env
           echo "ALPACA_FEED=iex" >> python/.env
           echo "SEC_USER_AGENT=${{ secrets.SEC_USER_AGENT }}" >> python/.env
+          echo "DWAVE_API_TOKEN=${{ secrets.DWAVE_API_TOKEN }}" >> python/.env
 
       - name: Run daily refresh
         run: cd python && python3 run_daily.py
