@@ -5,6 +5,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from "recharts";
 import { Search, TrendingUp, ShieldCheck, Activity, Info, ChevronUp, ChevronDown } from "lucide-react";
+import Research from "./Research";
 import type { Screen, StockPick, FundWindow } from "../../lib/types";
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -361,6 +362,9 @@ export default function Screener({ data, meta }: { data: Screen; meta?: Meta | n
           </div>
         </div>
       </section>
+
+      {/* ════════ RESEARCH: classical vs quantum construction ════════ */}
+      {data.research && <Research research={data.research} />}
 
       {/* ════════ FOOTER ════════ */}
       <footer style={{ ...S.wrap, ...S.footer }}>

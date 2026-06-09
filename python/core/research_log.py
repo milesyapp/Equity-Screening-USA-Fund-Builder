@@ -315,6 +315,31 @@ def forward_stats(history: list[dict], baseline: str = BASELINE_ARM) -> dict:
 
 
 # --------------------------------------------------------------------------- #
+# Forward NAV series (for the frontend comparison chart)
+# --------------------------------------------------------------------------- #
+def forward_nav_series(history: list[dict]) -> list[dict]:
+    """Per-arm growth-of-$1 from realized forward returns ONLY (no in-sample
+    reconstruction). Each arm is rebased to 1.0 at its own first record, so a
+    later-starting quantum arm begins at 1.0 the day it goes live. Output:
+    [{date, greedy: 1.0123, qubo_classical: ..., qubo_quantum: ...}, ...]
+    """
+    rows = [r for r in history if r.get("armReturns")]
+    rows.sort(key=lambda r: r.get("date", ""))
+    nav: dict[str, float] = {}
+    out: list[dict] = []
+    for r in rows:
+        point: dict = {"date": r["date"]}
+        for arm, ret in r["armReturns"].items():
+            if ret is None:
+                continue
+            nav[arm] = nav.get(arm, 1.0) * (1.0 + float(ret))
+            point[arm] = round(nav[arm], 5)
+        if len(point) > 1:
+            out.append(point)
+    return out
+
+
+# --------------------------------------------------------------------------- #
 # Assemble the snapshot block embedded in latest.json
 # --------------------------------------------------------------------------- #
 def build_research_block(arms: list[dict], as_of: str,
@@ -331,6 +356,7 @@ def build_research_block(arms: list[dict], as_of: str,
         "arms": arms,
         "selectionComparison": compare_selections(arms),
         "forwardStats": forward_stats(history, baseline),
+        "forwardNav": forward_nav_series(history),
         "disclaimer": (
             "Research instrument. Per-arm 3Y/5Y metrics are in-sample "
             "characterisations of today's basket, not a forward record. The "

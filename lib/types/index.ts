@@ -161,6 +161,9 @@ export interface ResearchBlock {
   arms: FundArm[];
   selectionComparison: SelectionComparison[];
   forwardStats: ForwardStats;
+  // Growth of $1 from realized forward returns only (one point per logged run).
+  // Keys beyond `date` are arm keys; an arm appears from its own inception.
+  forwardNav?: Array<{ date: string } & Record<string, number | string>>;
   disclaimer: string;
 }
 
