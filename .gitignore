@@ -5,3 +5,8 @@ python/.env
 python/__pycache__/
 python/**/__pycache__/
 *.pyc
+.DS_Store
+**/.DS_Store
+.env.local
+.env*.local
+python/test_output.json
