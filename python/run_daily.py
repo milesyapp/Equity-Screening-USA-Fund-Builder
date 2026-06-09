@@ -58,13 +58,20 @@ def main() -> int:
     tickers = [s["ticker"] for s in stocks]
     bench = port.get("fund", {}).get("benchmark", settings.SCREENER_BENCHMARK)
 
+    # Include every research arm's holdings: quantum arms can hold names ranked
+    # 101-150 that aren't in the classical top-100, and they must be re-priced
+    # too or their forward marks would silently drop those names.
+    arm_tickers = set()
+    for arm in port.get("research", {}).get("arms", []):
+        arm_tickers.update(arm.get("weights", {}).keys())
+
     from core import data_fetcher, metrics, fund
     from reports import market_analyzer
 
     t0 = time.time()
     max_years = max(settings.FUND_WINDOWS_YEARS)
     close, _ = data_fetcher.download_price_data(
-        sorted(set(tickers + [bench])), lookback_years=max_years
+        sorted(set(tickers) | arm_tickers | {bench}), lookback_years=max_years
     )
     if close.empty:
         logger.error("Price refresh returned nothing — leaving latest.json unchanged.")
