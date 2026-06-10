@@ -127,7 +127,6 @@ export default function Landing() {
       <header style={S.wrap}>
         <div style={S.topbar} className="rise">
           <span style={S.kicker}>EQUITYLENS · RESEARCH</span>
-          <Link href="/screener" style={S.navLink}>The 100-stock screener →</Link>
         </div>
         <div style={S.rule} />
         <div style={S.mastRow} className="rise d1">
@@ -319,12 +318,9 @@ export default function Landing() {
         )}
       </section>
 
-      {/* ── footer nav ────────────────────────────────────────────────── */}
+      {/* ── footer ────────────────────────────────────────────────────── */}
       <footer style={{ ...S.wrap, ...S.footer }}>
         <p style={S.disclaimer}>{research.disclaimer}</p>
-        <Link href="/screener" style={S.footerLink}>
-          Open the full 100-stock screener <ArrowRight size={13} />
-        </Link>
       </footer>
     </div>
   );
@@ -409,7 +405,6 @@ const S: Record<string, React.CSSProperties> = {
 
   topbar: { display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 34 },
   kicker: { fontSize: 11, letterSpacing: 3, color: "#a8a08c", fontWeight: 600, fontFamily: "IBM Plex Mono" },
-  navLink: { fontSize: 11.5, color: "#a8a08c", textDecoration: "none", fontFamily: "IBM Plex Mono", letterSpacing: 0.5 },
   rule: { height: 1, background: "linear-gradient(90deg,#2a2f36,transparent)", margin: "20px 0 26px" },
 
   mastRow: { display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 24 },
@@ -482,7 +477,6 @@ const S: Record<string, React.CSSProperties> = {
 
   footer: { marginTop: 44, paddingTop: 22, borderTop: "1px solid #1d2127", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 },
   disclaimer: { fontSize: 11.5, color: "#7a7566", lineHeight: 1.7, maxWidth: 820, margin: 0, fontFamily: "IBM Plex Sans" },
-  footerLink: { fontSize: 12, color: "#e8b34e", textDecoration: "none", fontFamily: "IBM Plex Mono", display: "inline-flex", alignItems: "center", gap: 6, whiteSpace: "nowrap" },
 };
 
 const CSS = `
