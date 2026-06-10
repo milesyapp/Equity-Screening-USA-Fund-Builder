@@ -143,6 +143,25 @@ export default function FundDetail({ arm: armKey }: { arm: string }) {
 
   const selRow = filtered.find((r) => r.ticker === selected) ?? rows.find((r) => r.ticker === selected) ?? null;
 
+  /* in-sample NAV + benchmark + realized-forward overlay, merged by date.
+     NOTE: this hook must run on every render (before any early return), or
+     React throws error #310 (hook count changes between renders). */
+  const navData = useMemo(() => {
+    const series = arm?.fund.navSeries ?? [];
+    const fwd = research?.forwardNav ?? [];
+    const map = new Map<string, { date: string; fund?: number; benchmark?: number; forward?: number }>();
+    series.forEach((p) => map.set(p.date, { date: p.date, fund: p.fund, benchmark: p.benchmark }));
+    fwd.forEach((r) => {
+      const v = r[armKey];
+      if (typeof v === "number") {
+        const e = map.get(r.date) ?? { date: r.date };
+        e.forward = v;
+        map.set(r.date, e);
+      }
+    });
+    return Array.from(map.values()).sort((a, z) => a.date.localeCompare(z.date));
+  }, [arm, research, armKey]);
+
   /* ── error / loading ─────────────────────────────────────────────────── */
   if (error) {
     return <Shell color={color}><div style={S.centered}>
@@ -184,21 +203,6 @@ export default function FundDetail({ arm: armKey }: { arm: string }) {
   const fs = research.forwardStats;
   const fwdAvailable = fs.available;
   const fwdForArm = (fs.perArm ?? []).find((p) => p.arm === armKey);
-
-  /* in-sample NAV + benchmark + realized-forward overlay, merged by date */
-  const navData = useMemo(() => {
-    const map = new Map<string, { date: string; fund?: number; benchmark?: number; forward?: number }>();
-    fund.navSeries.forEach((p) => map.set(p.date, { date: p.date, fund: p.fund, benchmark: p.benchmark }));
-    (research.forwardNav ?? []).forEach((r) => {
-      const v = r[armKey];
-      if (typeof v === "number") {
-        const e = map.get(r.date) ?? { date: r.date };
-        e.forward = v;
-        map.set(r.date, e);
-      }
-    });
-    return Array.from(map.values()).sort((a, z) => a.date.localeCompare(z.date));
-  }, [fund.navSeries, research.forwardNav, armKey]);
 
   return (
     <Shell color={color}>
