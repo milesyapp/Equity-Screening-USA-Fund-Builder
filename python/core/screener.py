@@ -255,6 +255,26 @@ def run() -> dict:
             "healthFactors": list(scoring.HEALTH_FACTORS),
             "valuationFactors": list(scoring.VALUATION_FACTORS),
             "momentumFactors": list(scoring.MOMENTUM_FACTORS),
+            # Known, disclosed limitations — rendered verbatim on the frontend.
+            # These are structural to the data available, not bugs; the forward
+            # log (data/research_log.jsonl) is the only out-of-sample evidence.
+            "limitations": [
+                "Survivorship bias: the universe is CURRENT S&P 1500 membership, so "
+                "names delisted or acquired during the lookback are absent and the "
+                "backward-looking NAV/metrics are biased upward.",
+                "Point-in-time violation: fundamentals come from each company's most "
+                "recent annual filing (up to ~15 months old) and are applied to "
+                "today's ranks; historical-window metrics apply today's holdings and "
+                "weights backward — an in-sample characterisation, not a track record.",
+                "Only the forward record accumulated in data/research_log.jsonl from "
+                "each arm's inception is out-of-sample evidence.",
+                f"Benchmark is {settings.SCREENER_BENCHMARK} (S&P 1500 composite), "
+                "matching the selection universe so alpha/beta are not size-exposure "
+                "artifacts; no further factor attribution is performed.",
+                "On the free IEX feed, volume reflects only IEX's ~2-3% venue share; "
+                "the liquidity floor is adjusted accordingly and capacity of the "
+                "paper portfolio is not modeled.",
+            ],
         },
         "stocks": stocks,
         "fund": the_fund,

@@ -209,7 +209,6 @@ export default function FundDetail({ arm: armKey }: { arm: string }) {
       {/* breadcrumb */}
       <div style={S.topbar} className="rise">
         <Link href="/" style={S.crumb}><ArrowLeft size={13} /> Research home</Link>
-        <Link href="/screener" style={S.crumb}>Full screener →</Link>
       </div>
 
       {/* ── SECTION 1 · OVERVIEW ──────────────────────────────────────── */}
@@ -229,8 +228,8 @@ export default function FundDetail({ arm: armKey }: { arm: string }) {
           <Metric label="3Y RETURN" value={pct(m?.annualReturn)} color={GREEN} />
           <Metric label="3Y SHARPE" value={num(m?.sharpeRatio)} />
           <Metric label="3Y MAX DD" value={pct(m?.maximumDrawdown)} color={RED} />
-          <Metric label="3Y ALPHA" value={pct(m?.alpha)} />
-          <Metric label="3Y BETA (vs IVV)" value={num(m?.beta)} />
+          <Metric label="3Y ALPHA" value={`${pct(m?.alpha)}${m?.alphaTStat != null ? ` (t ${m.alphaTStat.toFixed(1)})` : ""}`} />
+          <Metric label={`3Y BETA (vs ${fund.benchmark})`} value={num(m?.beta)} />
           <Metric label="VOLATILITY" value={pct(m?.annualVolatility)} />
         </div>
 
@@ -259,7 +258,7 @@ export default function FundDetail({ arm: armKey }: { arm: string }) {
                 itemStyle={{ fontFamily: "IBM Plex Mono", fontSize: 12 }} />
               <Line type="monotone" dataKey="fund" name="In-sample basket" stroke={color}
                 strokeWidth={1.6} dot={false} isAnimationActive={false} />
-              <Line type="monotone" dataKey="benchmark" name="Benchmark (IVV)" stroke="#5a9e6f"
+              <Line type="monotone" dataKey="benchmark" name={`Benchmark (${fund.benchmark})`} stroke="#5a9e6f"
                 strokeWidth={1.1} strokeOpacity={0.55} dot={false} isAnimationActive={false} />
               <Line type="monotone" dataKey="forward" name="Realized forward" stroke={color}
                 strokeWidth={2.2} strokeDasharray="2 2" connectNulls={false}
@@ -270,7 +269,7 @@ export default function FundDetail({ arm: armKey }: { arm: string }) {
         </div>
         <p style={S.chartNote}>
           The solid line is an <b style={{ color: "#cfc8b8" }}>in-sample characterisation of the current
-          basket, not a track record</b> — today&apos;s weights applied backward. The benchmark (IVV) is
+          basket, not a track record</b> — today&apos;s weights applied backward. The benchmark ({fund.benchmark}) is
           overlaid in muted green. The dashed line is the{" "}
           <b style={{ color }}>realized forward record from {fmtDate(research.inceptionDate)}</b>,
           rebased to $1 at inception, so it sits near 1.0 at the right edge while the multi-year
@@ -282,6 +281,18 @@ export default function FundDetail({ arm: armKey }: { arm: string }) {
       <section style={{ ...S.wrap, marginTop: 40 }} className="rise d2">
         <PanelHead n="02" title="Methodology" sub="HOW THIS BASKET IS BUILT" />
         <Methodology armKey={armKey} diag={diag} color={color} />
+        {(data.methodology?.limitations?.length ?? 0) > 0 && (
+          <div style={{ marginTop: 22, border: "1px solid #1d2127", padding: "16px 18px" }}>
+            <div style={{ fontFamily: "IBM Plex Mono", fontSize: 10, letterSpacing: 2, color: "#7a7566", marginBottom: 10 }}>
+              KNOWN LIMITATIONS — DISCLOSED BY THE PIPELINE
+            </div>
+            {data.methodology.limitations!.map((l, i) => (
+              <p key={i} style={{ fontSize: 12.5, lineHeight: 1.75, color: "#a8a08c", margin: "0 0 7px" }}>
+                · {l}
+              </p>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* ── SECTION 3 · HOLDINGS ──────────────────────────────────────── */}
@@ -391,6 +402,7 @@ export default function FundDetail({ arm: armKey }: { arm: string }) {
           <PanelHead n="04" title="Forward performance" sub="REALIZED OUT-OF-SAMPLE RECORD" />
           <div style={S.fwdMeta}>{fwdForArm.nDays} days on record · vs {ARM_TITLE[fwdForArm.vsBaseline] ?? fwdForArm.vsBaseline}</div>
           <div style={S.fwdStatRow4}>
+            <Metric label="ACTIVE (CUMUL.)" value={signedPct(fwdForArm.activeReturnCumulative)} small />
             <Metric label="ACTIVE RETURN" value={signedPct(fwdForArm.activeReturnAnnualised)} small />
             <Metric label="TRACKING ERR" value={pct(fwdForArm.trackingError)} small />
             <Metric label="INFO RATIO" value={num(fwdForArm.informationRatio)} small />

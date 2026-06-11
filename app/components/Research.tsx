@@ -244,6 +244,7 @@ function StatRow({ p }: { p: ForwardArmStat }) {
         {ARM_SHORT[p.arm] ?? p.arm}
       </div>
       <div style={R.statGrid}>
+        <Mini label="Active (cumul.)" v={signedPct(p.activeReturnCumulative)} />
         <Mini label="Active (ann.)" v={signedPct(p.activeReturnAnnualised)} />
         <Mini label="Tracking err" v={pct(p.trackingError)} />
         <Mini label="Info ratio" v={num(p.informationRatio)} />

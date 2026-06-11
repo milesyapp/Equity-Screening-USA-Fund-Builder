@@ -1,11 +1,16 @@
 """
-Central configuration for the portfolio optimization system.
+Central configuration for the US equity screener + research pipeline.
 Values can be overridden via environment variables (python/.env).
+
+v2.1: removed the dead v1 multi-asset allocator block (ASSET_CLASSES, cash
+sleeves, risk-parity/min-variance knobs, 60/40 benchmark) — nothing imported
+it. COV_METHOD / EWMA_HALFLIFE / LOOKBACK_YEARS are now genuinely consumed by
+core/covariance.py (the QUBO risk term), so the documented covariance
+methodology finally matches the code. Default benchmark corrected to SPTM.
 """
 from __future__ import annotations
 
 import os
-import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -13,15 +18,16 @@ from dotenv import load_dotenv
 # Load python/.env (this file is python/config/settings.py -> parent.parent = python/)
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
-VERSION = "2.0.0"
+VERSION = "2.1.0"
 
-# ── US STOCK SCREENER (the active product as of v2.0) ────────────────────────
+# ── US STOCK SCREENER ────────────────────────────────────────────────────────
 #
 # Screens the broad US universe (S&P 500/400/600), scores every name that has
 # >= SCREENER_MIN_HISTORY_YEARS of price history and usable fundamentals, ranks
 # the top SCREENER_TOP_N, and builds a score-weighted "mini-fund" from them.
 #
-# Methodology weights (must sum to 1.0). Stated verbatim on the frontend.
+# Methodology weights (must sum to 1.0 — enforced in validate()). Stated
+# verbatim on the frontend.
 SCREENER_TOP_N = int(os.getenv("SCREENER_TOP_N", 100))
 SCREENER_MIN_HISTORY_YEARS = float(os.getenv("SCREENER_MIN_HISTORY_YEARS", 3.0))
 
@@ -34,8 +40,15 @@ SCORE_WEIGHTS = {
 # Per-name cap inside the score-weighted fund (renormalized after capping).
 SCREENER_MAX_WEIGHT = float(os.getenv("SCREENER_MAX_WEIGHT", 0.04))
 
-# Benchmark the fund is measured against (alpha/beta). US large-cap proxy.
-SCREENER_BENCHMARK = os.getenv("SCREENER_BENCHMARK", "IVV")
+# Benchmark the fund is measured against (alpha/beta).
+#
+# WHY SPTM (changed from IVV in v2.1): the selection universe is the S&P
+# Composite 1500 (500 large + 400 mid + 600 small). IVV tracks only the S&P
+# 500, so part of every "alpha" measured against it was simply mid/small-cap
+# size exposure, not selection skill. SPTM tracks the S&P 1500 itself — the
+# benchmark now spans exactly the universe the screener picks from, so
+# alpha/beta isolate selection rather than size.
+SCREENER_BENCHMARK = os.getenv("SCREENER_BENCHMARK", "SPTM")
 
 # History windows for the fund's rolling metrics.
 FUND_WINDOWS_YEARS = (3, 5)
@@ -51,61 +64,28 @@ ALPACA_FEED = os.getenv("ALPACA_FEED", "iex")  # 'iex' (free) or 'sip' (full vol
 SEC_USER_AGENT = os.getenv("SEC_USER_AGENT", "Portfolio Project contact@example.com")
 FETCH_FUNDAMENTALS = os.getenv("FETCH_FUNDAMENTALS", "true").lower() == "true"
 
-# --- Multi-asset universe (ETF proxies for the top-layer allocation) ---
-# The six RISKY building blocks the allocator balances; cash is sized separately.
-ASSET_CLASSES = [
-    {"key": "IVV", "name": "US Equities",            "assetClass": "Equity"},
-    {"key": "VEA", "name": "International Developed", "assetClass": "Equity"},
-    {"key": "VWO", "name": "Emerging Markets",        "assetClass": "Equity"},
-    {"key": "AGG", "name": "US Bonds",                "assetClass": "Fixed Income"},
-    {"key": "GLD", "name": "Gold",                    "assetClass": "Commodity"},
-    {"key": "VNQ", "name": "Real Estate (REITs)",     "assetClass": "Real Estate"},
-]
-CASH_TICKER = "BIL"
-CASH_NAME = "Cash & T-Bills"
-# Cash sleeve sized from the detected regime; the rest is risk-balanced.
-CASH_BY_REGIME = {"risk-on": 0.0, "neutral": 0.05, "risk-off": 0.15}
-ALLOCATION_METHOD = os.getenv("ALLOCATION_METHOD", "risk_parity")  # or 'min_variance'
-
-# Benchmark: a transparent stock/bond blend, plus the S&P as a context line.
-BENCHMARK_EQUITY = "IVV"
-BENCHMARK_BOND = "AGG"
-BENCHMARK_EQUITY_WEIGHT = float(os.getenv("BENCHMARK_EQUITY_WEIGHT", 0.60))
-
 # --- Universe ---
 # Broad US universe = S&P 500 (large) + S&P 400 (mid) + S&P 600 (small).
 # Set USE_SMALLCAP=False for a faster run.
 USE_MIDCAP = os.getenv("USE_MIDCAP", "true").lower() == "true"
 USE_SMALLCAP = os.getenv("USE_SMALLCAP", "true").lower() == "true"
 
-# --- Lookback / rebalance ---
+# --- Covariance estimation (consumed by core/covariance.py for the QUBO) ---
 #
-# WHY 3 YEARS (changed from 5 in v1.2):
-#   Risk parity's primary input is the covariance matrix. A 5-year window through
-#   2026 captures 2022, when bonds suffered their worst drawdown since 1788 and the
-#   stock/bond correlation inverted — an anomalous regime that inflates bond
-#   volatility estimates and distorts risk contributions relative to today's market
-#   structure. 3 years (~750 daily observations) is statistically sufficient while
-#   reflecting current correlations. Bridgewater, AQR, and most institutional
-#   risk-parity desks use a 3-year or shorter lookback for covariance estimation,
-#   supplemented by EWMA weighting (see COV_METHOD) to further down-weight shocks.
+# LOOKBACK_YEARS: estimation window for the candidate-pool covariance that
+#   feeds the QUBO risk term. 3 years (~750 daily observations) is enough for
+#   a 150-name matrix while staying representative of the current correlation
+#   regime; longer windows drag in stale regimes at full weight.
 #
+# COV_METHOD:
+#   "ewma"   — exponentially-weighted covariance (default). EWMA_HALFLIFE=63
+#              (~3 months) is the RiskMetrics standard: a shock decays to 50%
+#              influence after 63 trading days instead of persisting at full
+#              weight for the whole window.
+#   "ledoit" — Ledoit-Wolf shrinkage of the sample covariance; the
+#              well-conditioned choice when names ≈ observations.
+#   "sample" — plain sample covariance (escape hatch / tests).
 LOOKBACK_YEARS = int(os.getenv("LOOKBACK_YEARS", 3))
-REBALANCE_FREQUENCY = os.getenv("REBALANCE_FREQUENCY", "monthly")  # informational
-
-# --- Covariance estimation method ---
-#
-# "ewma"   — Exponentially-weighted moving average (default).
-#             Places more weight on recent days using exponential decay.
-#             EWMA_HALFLIFE=63 (~3 months) is the RiskMetrics industry standard:
-#             a 2022-style shock fades to 50% influence after 63 days rather than
-#             persisting at full weight for the entire lookback window.
-#             Standard at most systematic quant desks for daily covariance.
-#
-# "ledoit" — Ledoit-Wolf shrinkage of the simple historical covariance.
-#             More stable than the raw sample covariance; treats all days equally.
-#             Appropriate for very long lookbacks or when regime stability matters.
-#
 COV_METHOD = os.getenv("COV_METHOD", "ewma")
 EWMA_HALFLIFE = int(os.getenv("EWMA_HALFLIFE", 63))  # trading days (~3 months)
 
@@ -126,23 +106,11 @@ EWMA_HALFLIFE = int(os.getenv("EWMA_HALFLIFE", 63))  # trading days (~3 months)
 MIN_AVG_VOLUME = int(os.getenv("MIN_AVG_VOLUME", 1_000_000))       # SIP / consolidated
 MIN_AVG_VOLUME_IEX = int(os.getenv("MIN_AVG_VOLUME_IEX", 25_000))  # IEX-only volume
 MIN_PRICE = float(os.getenv("MIN_PRICE", 5.0))                # avoid penny stocks
-MIN_MARKET_CAP = float(os.getenv("MIN_MARKET_CAP", 1e9))      # $1B+ floor
 
-# Fundamental quality gates (applied only to liquidity survivors)
-MIN_OPERATING_MARGIN = float(os.getenv("MIN_OPERATING_MARGIN", 0.0))
-MIN_FCF_MARGIN = float(os.getenv("MIN_FCF_MARGIN", 0.0))       # >0 = generates cash
-
-# --- Portfolio construction ---
-MIN_STOCKS = int(os.getenv("MIN_STOCKS", 8))
-MAX_STOCKS = int(os.getenv("MAX_STOCKS", 12))
-MAX_WEIGHT = float(os.getenv("MAX_WEIGHT", 0.30))   # cap any single name at 30%
+# --- Risk-free rate for Sharpe / CAPM alpha (annualized) ---
 RISK_FREE_RATE = float(os.getenv("RISK_FREE_RATE", 0.04))
 
-# Shrinkage intensity for expected returns (0 = raw means, 1 = all toward grand mean)
-RETURN_SHRINKAGE = float(os.getenv("RETURN_SHRINKAGE", 0.5))
-
-# --- Market regime detection ---
-# VIX thresholds for the risk-on / neutral / risk-off heuristic
+# --- Market regime detection (display only — does not alter selection) ---
 VIX_RISK_ON_BELOW = float(os.getenv("VIX_RISK_ON_BELOW", 16.0))
 VIX_RISK_OFF_ABOVE = float(os.getenv("VIX_RISK_OFF_ABOVE", 24.0))
 
@@ -176,20 +144,25 @@ def validate() -> None:
         errors.append(
             f"ALPACA_FEED='{ALPACA_FEED}' is invalid; use 'iex' (free) or 'sip'."
         )
+    if abs(sum(SCORE_WEIGHTS.values()) - 1.0) > 1e-6:
+        errors.append(
+            f"SCORE_WEIGHTS must sum to 1.0 (got {sum(SCORE_WEIGHTS.values()):.4f}); "
+            "the frontend states these weights verbatim."
+        )
+    if not (0.0 < SCREENER_MAX_WEIGHT <= 1.0):
+        errors.append(
+            f"SCREENER_MAX_WEIGHT={SCREENER_MAX_WEIGHT} must be in (0, 1]."
+        )
     if LOOKBACK_YEARS < 1 or LOOKBACK_YEARS > 20:
         errors.append(
             f"LOOKBACK_YEARS={LOOKBACK_YEARS} is outside the sensible range [1, 20]."
         )
-    if COV_METHOD not in ("ewma", "ledoit"):
+    if COV_METHOD not in ("ewma", "ledoit", "sample"):
         errors.append(
-            f"COV_METHOD='{COV_METHOD}' is invalid; use 'ewma' or 'ledoit'."
+            f"COV_METHOD='{COV_METHOD}' is invalid; use 'ewma', 'ledoit', or 'sample'."
         )
-    if not (0.0 < MAX_WEIGHT <= 1.0):
-        errors.append(f"MAX_WEIGHT={MAX_WEIGHT} must be in (0, 1].")
-    if MIN_STOCKS < 2:
-        errors.append(f"MIN_STOCKS={MIN_STOCKS} must be >= 2 for the optimizer.")
-    if MAX_STOCKS < MIN_STOCKS:
-        errors.append(f"MAX_STOCKS={MAX_STOCKS} must be >= MIN_STOCKS={MIN_STOCKS}.")
+    if EWMA_HALFLIFE < 2:
+        errors.append(f"EWMA_HALFLIFE={EWMA_HALFLIFE} must be >= 2 trading days.")
 
     if errors:
         raise RuntimeError(

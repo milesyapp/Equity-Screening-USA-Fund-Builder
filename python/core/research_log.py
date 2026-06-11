@@ -61,6 +61,13 @@ ARM_LABELS = {
 }
 BASELINE_ARM = "greedy"
 
+# Minimum aligned forward observations before annualised statistics (active
+# return, tracking error, information ratio, arm Sharpe) are reported. Below
+# this, annualising a daily mean is dominated by one or two days and produces
+# misleading figures, so those fields are None and the UI shows "—". The
+# cumulative active return and the bootstrap/HAC tests have their own gates.
+_MIN_ANNUALISE_DAYS = 20
+
 
 # --------------------------------------------------------------------------- #
 # Arm + diagnostics builders
@@ -285,19 +292,36 @@ def forward_stats(history: list[dict], baseline: str = BASELINE_ARM) -> dict:
         if arm == baseline:
             continue
         active = series - base
-        te = active.std(ddof=1) * np.sqrt(TRADING_DAYS) if n > 1 else float("nan")
-        ann_active = active.mean() * TRADING_DAYS
-        ir = ann_active / te if te and not np.isnan(te) and te != 0 else None
+        # Annualised statistics are only meaningful once the forward record is
+        # long enough that a daily mean isn't dominated by one or two days.
+        # Below the floor, annualising a ~2-day mean produces absurd figures
+        # (e.g. a -0.19%/day gap -> -48%/yr), so report None and let the
+        # frontend render "—" until enough history accrues. Same logic the
+        # bootstrap (>=10) and Newey-West (>=3) gates already apply.
+        sufficient = n >= _MIN_ANNUALISE_DAYS
+        cumulative_active = float(np.prod(1.0 + active) - 1.0)  # always honest
+        if sufficient:
+            te = active.std(ddof=1) * np.sqrt(TRADING_DAYS)
+            ann_active = active.mean() * TRADING_DAYS
+            ir = ann_active / te if te and not np.isnan(te) and te != 0 else None
+            sharpe_arm = _annualised_sharpe(series)
+            sharpe_base = _annualised_sharpe(base)
+        else:
+            te = ann_active = ir = sharpe_arm = sharpe_base = None
         per_arm.append({
             "arm": arm,
             "vsBaseline": baseline,
             "nDays": n,
+            "minDaysForAnnualised": _MIN_ANNUALISE_DAYS,
+            # Cumulative realised active return since inception — defined at any
+            # n, never annualised, so it's safe to show from day one.
+            "activeReturnCumulative": _r(cumulative_active, 4),
             "activeReturnAnnualised": _r(ann_active, 4),
             "trackingError": _r(te, 4),
             "informationRatio": _r(ir, 3),
             "sharpe": {
-                "arm": _r(_annualised_sharpe(series), 3),
-                "baseline": _r(_annualised_sharpe(base), 3),
+                "arm": _r(sharpe_arm, 3),
+                "baseline": _r(sharpe_base, 3),
             },
             "neweyWestT_meanActive": _r(_newey_west_t(active), 3),
             "sharpeDifference": _block_bootstrap_sharpe_diff(series, base),

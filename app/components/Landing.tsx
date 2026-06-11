@@ -283,6 +283,7 @@ export default function Landing() {
                       {ARM_TITLE[p.arm] ?? p.arm} <span style={S.fwdVs}>vs {ARM_TITLE[p.vsBaseline] ?? p.vsBaseline}</span>
                     </div>
                     <div style={S.fwdStatRow}>
+                      <FwdStat label="ACTIVE (CUMUL.)" value={signedPct(p.activeReturnCumulative)} />
                       <FwdStat label="ACTIVE RETURN" value={signedPct(p.activeReturnAnnualised)} />
                       <FwdStat label="TRACKING ERR" value={pct(p.trackingError)} />
                       <FwdStat label="INFO RATIO" value={num(p.informationRatio)} />

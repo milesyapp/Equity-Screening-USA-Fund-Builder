@@ -81,13 +81,23 @@ def main() -> int:
     last = px.iloc[-1]
 
     # 1. Refresh trailing returns per held name.
+    #    NaN-guarded: a name with leading-NaN history inside the window would
+    #    otherwise write float('nan') into latest.json, which json.dumps emits
+    #    as a bare NaN token — invalid JSON that JS's JSON.parse rejects,
+    #    silently blanking the whole site until the next weekly run.
     for s in stocks:
         t = s["ticker"]
         if t not in px.columns:
             continue
+        cur = float(last[t]) if t in last and np.isfinite(last[t]) else None
         for name, days in _RETURN_WINDOWS.items():
-            s[name] = (float(last[t] / px[t].iloc[-days - 1]) - 1.0) if len(px) > days else None
-        s["price"] = float(last[t]) if t in last else s.get("price")
+            if cur is None or len(px) <= days:
+                s[name] = None
+                continue
+            prev = px[t].iloc[-days - 1]
+            s[name] = (cur / float(prev) - 1.0) if np.isfinite(prev) and prev > 0 else None
+        if cur is not None:
+            s["price"] = cur
 
     # 2. Rebuild fund NAV / rolling metrics on the SAME holdings & weights.
     held = [t for t in tickers if t in close.columns]
@@ -98,6 +108,10 @@ def main() -> int:
     )
     refreshed = fund.build_fund(stocks, rets, bench_daily)
     refreshed.pop("weights", None)
+    # The daily job re-prices against the benchmark FROZEN in latest.json (the
+    # one the weekly run selected). Pin the label to that series so a changed
+    # settings default can't mislabel the chart between weekly runs.
+    refreshed["benchmark"] = bench
     # Preserve the frozen weekly weights already attached to each stock.
     port["fund"] = refreshed
 

@@ -1,0 +1,4772 @@
+{
+  "success": true,
+  "date": "2026-06-06",
+  "elapsed_seconds": 287.4,
+  "backend_version": "2.1.0",
+  "run_type": "weekly",
+  "portfolio": {
+    "asOf": "2026-06-06",
+    "pricesAsOf": "2026-06-06",
+    "universeSize": 2864,
+    "screenedCount": 1912,
+    "scoredCount": 1788,
+    "excludedCount": 1076,
+    "exclusionReasons": {
+      "insufficientHistory": 642,
+      "lowLiquidity": 214,
+      "lowPrice": 96,
+      "missingFundamentals": 0,
+      "noHealthData": 124
+    },
+    "minHistoryYears": 3.0,
+    "methodology": {
+      "weights": {
+        "health": 0.7,
+        "valuation": 0.2,
+        "momentum": 0.1
+      },
+      "healthFactors": [
+        "returnOnEquity",
+        "operatingMargin",
+        "netMargin",
+        "fcfMargin",
+        "revenueGrowth",
+        "debtToEquity"
+      ],
+      "valuationFactors": [
+        "peRatio",
+        "fcfYield",
+        "peg"
+      ],
+      "momentumFactors": [
+        "return6M",
+        "return3M"
+      ]
+    },
+    "stocks": [
+      {
+        "rank": 1,
+        "ticker": "SYN219",
+        "name": "Synthetic Company 219",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 127.99,
+        "score": 90.35,
+        "healthScore": 98.71,
+        "valuationScore": 58.46,
+        "momentumScore": 95.62,
+        "peRatio": 40.27276704517561,
+        "dividendYield": 0.0007881255697945351,
+        "grossMargin": 0.5706756500104228,
+        "operatingMargin": 0.3720742091500981,
+        "netMargin": 0.29678169093096873,
+        "returnOnEquity": 0.44783819110502465,
+        "fcfMargin": 0.3913825462156404,
+        "fcfYield": 0.09101345084287381,
+        "revenueGrowth": 0.31204405014571096,
+        "debtToEquity": 0.012478279498605083,
+        "marketCap": 30773203887.310448,
+        "return1W": 0.009466910051789557,
+        "return1M": 0.04813284571995945,
+        "return3M": 0.3699973143029289,
+        "return6M": 0.2590241051228257,
+        "return1Y": 0.48783513495536024,
+        "reasons": [
+          "Revenue growth of 31.2% \u2014 the highest in the universe",
+          "Return on equity of 44.8% \u2014 the highest in the universe",
+          "Free-cash-flow margin of 39.1% \u2014 the highest in the universe",
+          "Operating margin of 37.2% \u2014 top 1% of the universe",
+          "Low leverage \u2014 debt/equity of 0.01"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 40.3 vs sector median 14.4"
+        ],
+        "fundWeight": 0.01226
+      },
+      {
+        "rank": 2,
+        "ticker": "SYN287",
+        "name": "Synthetic Company 287",
+        "sector": "Utilities",
+        "subIndustry": "",
+        "price": 348.54,
+        "score": 89.94,
+        "healthScore": 95.04,
+        "valuationScore": 67.66,
+        "momentumScore": 98.75,
+        "peRatio": 24.808743444387872,
+        "dividendYield": 0.0228582532139223,
+        "grossMargin": 0.643040047408202,
+        "operatingMargin": 0.3807242509550946,
+        "netMargin": 0.344216051576101,
+        "returnOnEquity": 0.41877754728618666,
+        "fcfMargin": 0.3517618947786817,
+        "fcfYield": 0.06420965579743651,
+        "revenueGrowth": 0.27763831135532696,
+        "debtToEquity": 0.4948042931703878,
+        "marketCap": 13796169462.204596,
+        "return1W": -0.004037864832116379,
+        "return1M": -0.058235253910449085,
+        "return3M": 0.30391501669860743,
+        "return6M": 0.4849681187406163,
+        "return1Y": 0.5277321522102001,
+        "reasons": [
+          "Return on equity of 41.9% \u2014 the highest in the universe",
+          "Operating margin of 38.1% \u2014 the highest in the universe",
+          "Net margin of 34.4% \u2014 top 1% of the universe",
+          "Revenue growth of 27.8% \u2014 top 1% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 24.8 vs sector median 15.1"
+        ],
+        "fundWeight": 0.0122
+      },
+      {
+        "rank": 3,
+        "ticker": "SYN281",
+        "name": "Synthetic Company 281",
+        "sector": "Materials",
+        "subIndustry": "",
+        "price": 61.34,
+        "score": 89.71,
+        "healthScore": 97.88,
+        "valuationScore": 57.43,
+        "momentumScore": 97.12,
+        "peRatio": 36.959908147260414,
+        "dividendYield": 0.0,
+        "grossMargin": 0.7380681228204422,
+        "operatingMargin": 0.36947106073884245,
+        "netMargin": 0.3304117859926437,
+        "returnOnEquity": 0.39800150454992156,
+        "fcfMargin": 0.367476003534868,
+        "fcfYield": 0.06766537918300268,
+        "revenueGrowth": 0.29795302191118717,
+        "debtToEquity": 0.18836383867920964,
+        "marketCap": 5520221382.213793,
+        "return1W": 0.029188484652496727,
+        "return1M": 0.09992059291163036,
+        "return3M": 0.2164752734135648,
+        "return6M": 0.45570827368961625,
+        "return1Y": 0.6199527819152034,
+        "reasons": [
+          "Revenue growth of 29.8% \u2014 the highest in the universe",
+          "Operating margin of 36.9% \u2014 top 1% of the universe",
+          "Net margin of 33.0% \u2014 top 1% of the universe",
+          "Free-cash-flow margin of 36.7% \u2014 top 1% of the universe",
+          "Low leverage \u2014 debt/equity of 0.19"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 37.0 vs sector median 14.8"
+        ],
+        "fundWeight": 0.01217
+      },
+      {
+        "rank": 4,
+        "ticker": "SYN215",
+        "name": "Synthetic Company 215",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 56.8,
+        "score": 89.17,
+        "healthScore": 91.54,
+        "valuationScore": 86.0,
+        "momentumScore": 78.88,
+        "peRatio": -1.0,
+        "dividendYield": 0.003611580345768863,
+        "grossMargin": 0.5110302832549521,
+        "operatingMargin": 0.27445212361845683,
+        "netMargin": 0.2365578537221072,
+        "returnOnEquity": 0.2746117954830587,
+        "fcfMargin": 0.27598387431670324,
+        "fcfYield": 0.0629980289850039,
+        "revenueGrowth": 0.16358897960569002,
+        "debtToEquity": 0.12635042307724415,
+        "marketCap": 12913219021.321144,
+        "return1W": 0.018693630808068854,
+        "return1M": 0.08585794750220455,
+        "return3M": 0.14288473056496703,
+        "return6M": 0.11011848208489357,
+        "return1Y": -0.023720157353468718,
+        "reasons": [
+          "Free-cash-flow margin of 27.6% \u2014 top 6% of the universe",
+          "Operating margin of 27.4% \u2014 top 7% of the universe",
+          "Net margin of 23.7% \u2014 top 8% of the universe",
+          "Return on equity of 27.5% \u2014 top 10% of the universe",
+          "Low leverage \u2014 debt/equity of 0.13",
+          "Trades at a 105% discount to its sector (P/E -1.0 vs 19.2 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.0121
+      },
+      {
+        "rank": 5,
+        "ticker": "SYN306",
+        "name": "Synthetic Company 306",
+        "sector": "Consumer Discretionary",
+        "subIndustry": "",
+        "price": 520.65,
+        "score": 86.21,
+        "healthScore": 91.88,
+        "valuationScore": 64.68,
+        "momentumScore": 89.62,
+        "peRatio": 24.276949515723526,
+        "dividendYield": 0.01777915004354738,
+        "grossMargin": 0.389413902172936,
+        "operatingMargin": 0.2569525014251791,
+        "netMargin": 0.2517192866368237,
+        "returnOnEquity": 0.30611549537220134,
+        "fcfMargin": 0.25249503906700854,
+        "fcfYield": 0.08258508540714385,
+        "revenueGrowth": 0.17104946208276084,
+        "debtToEquity": 0.16393221131225966,
+        "marketCap": 10689961868.10366,
+        "return1W": 0.011589364273772268,
+        "return1M": 0.04645070703720649,
+        "return3M": 0.18879929288822112,
+        "return6M": 0.20427001012333035,
+        "return1Y": 0.3889508949320819,
+        "reasons": [
+          "Fcf yield of 8.3% \u2014 top 3% of the universe",
+          "Net margin of 25.2% \u2014 top 6% of the universe",
+          "Return on equity of 30.6% \u2014 top 7% of the universe",
+          "Free-cash-flow margin of 25.2% \u2014 top 8% of the universe",
+          "Low leverage \u2014 debt/equity of 0.16"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 24.3 vs sector median 15.5"
+        ],
+        "fundWeight": 0.0117
+      },
+      {
+        "rank": 6,
+        "ticker": "SYN178",
+        "name": "Synthetic Company 178",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 21.39,
+        "score": 85.0,
+        "healthScore": 91.96,
+        "valuationScore": 55.79,
+        "momentumScore": 94.75,
+        "peRatio": 36.18199954299401,
+        "dividendYield": 0.004249232439495234,
+        "grossMargin": 0.5677680193308589,
+        "operatingMargin": 0.28820376313085594,
+        "netMargin": 0.27314016034614075,
+        "returnOnEquity": 0.27504355032940514,
+        "fcfMargin": 0.28707665380112685,
+        "fcfYield": 0.08622187021313,
+        "revenueGrowth": 0.23344049596051974,
+        "debtToEquity": 0.3949936768236437,
+        "marketCap": 3410750525.4137444,
+        "return1W": 0.03936959718384578,
+        "return1M": 0.032962014612729844,
+        "return3M": 0.3357863586820571,
+        "return6M": 0.24296213057807706,
+        "return1Y": 0.5029746875684242,
+        "reasons": [
+          "Fcf yield of 8.6% \u2014 top 2% of the universe",
+          "Net margin of 27.3% \u2014 top 4% of the universe",
+          "Revenue growth of 23.3% \u2014 top 4% of the universe",
+          "Operating margin of 28.8% \u2014 top 5% of the universe",
+          "Low leverage \u2014 debt/equity of 0.39"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 36.2 vs sector median 18.9"
+        ],
+        "fundWeight": 0.01153
+      },
+      {
+        "rank": 7,
+        "ticker": "SYN150",
+        "name": "Synthetic Company 150",
+        "sector": "Utilities",
+        "subIndustry": "",
+        "price": 76.27,
+        "score": 84.75,
+        "healthScore": 92.04,
+        "valuationScore": 60.59,
+        "momentumScore": 82.0,
+        "peRatio": 28.315799733688642,
+        "dividendYield": 0.01984795876276735,
+        "grossMargin": 0.47494851492208523,
+        "operatingMargin": 0.2748851838303596,
+        "netMargin": 0.22624822835693645,
+        "returnOnEquity": 0.31005556064912093,
+        "fcfMargin": 0.25049210890957635,
+        "fcfYield": 0.0609395160229331,
+        "revenueGrowth": 0.2543785491599553,
+        "debtToEquity": 0.3119865168403291,
+        "marketCap": 6531536965.4437,
+        "return1W": -0.006901208326507363,
+        "return1M": 0.08499452036798294,
+        "return3M": 0.2596884461043987,
+        "return6M": 0.07855605830194773,
+        "return1Y": 0.01223572818283973,
+        "reasons": [
+          "Revenue growth of 25.4% \u2014 top 3% of the universe",
+          "Return on equity of 31.0% \u2014 top 7% of the universe",
+          "Operating margin of 27.5% \u2014 top 7% of the universe",
+          "Net margin of 22.6% \u2014 top 9% of the universe",
+          "Low leverage \u2014 debt/equity of 0.31"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 28.3 vs sector median 15.1"
+        ],
+        "fundWeight": 0.0115
+      },
+      {
+        "rank": 8,
+        "ticker": "SYN103",
+        "name": "Synthetic Company 103",
+        "sector": "Consumer Staples",
+        "subIndustry": "",
+        "price": 81.36,
+        "score": 84.59,
+        "healthScore": 94.56,
+        "valuationScore": 59.59,
+        "momentumScore": 64.75,
+        "peRatio": 28.03224376892375,
+        "dividendYield": 0.0,
+        "grossMargin": 0.5093419424759945,
+        "operatingMargin": 0.28627269917139486,
+        "netMargin": 0.23190721866027858,
+        "returnOnEquity": 0.3479219746212005,
+        "fcfMargin": 0.29969150516027504,
+        "fcfYield": 0.09950267274808468,
+        "revenueGrowth": 0.18248343701434655,
+        "debtToEquity": 0.0,
+        "marketCap": 8241639280.639629,
+        "return1W": 0.018776221315861864,
+        "return1M": 0.025832848033169997,
+        "return3M": 0.05659906949993351,
+        "return6M": 0.06569701957750396,
+        "return1Y": 0.14269513559021313,
+        "reasons": [
+          "Fcf yield of 10.0% \u2014 the highest in the universe",
+          "Free-cash-flow margin of 30.0% \u2014 top 4% of the universe",
+          "Return on equity of 34.8% \u2014 top 4% of the universe",
+          "Operating margin of 28.6% \u2014 top 6% of the universe",
+          "Low leverage \u2014 debt/equity of 0.00"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 28.0 vs sector median 17.4"
+        ],
+        "fundWeight": 0.01148
+      },
+      {
+        "rank": 9,
+        "ticker": "SYN164",
+        "name": "Synthetic Company 164",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 432.72,
+        "score": 84.55,
+        "healthScore": 94.5,
+        "valuationScore": 53.38,
+        "momentumScore": 77.25,
+        "peRatio": 38.933707175213186,
+        "dividendYield": 0.012180068895322273,
+        "grossMargin": 0.6298026449747816,
+        "operatingMargin": 0.3594237939119816,
+        "netMargin": 0.36111841226381297,
+        "returnOnEquity": 0.2769139617192083,
+        "fcfMargin": 0.31599151175242557,
+        "fcfYield": 0.06329571932367622,
+        "revenueGrowth": 0.2796775196612047,
+        "debtToEquity": 0.3856980195551775,
+        "marketCap": 9780211473.908424,
+        "return1W": 0.03262025110515929,
+        "return1M": 0.021633595222019734,
+        "return3M": 0.18462648226409473,
+        "return6M": 0.0547066849974152,
+        "return1Y": 0.19824455697038956,
+        "reasons": [
+          "Revenue growth of 28.0% \u2014 the highest in the universe",
+          "Net margin of 36.1% \u2014 the highest in the universe",
+          "Operating margin of 35.9% \u2014 top 1% of the universe",
+          "Free-cash-flow margin of 31.6% \u2014 top 3% of the universe",
+          "Low leverage \u2014 debt/equity of 0.39"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 38.9 vs sector median 18.9"
+        ],
+        "fundWeight": 0.01147
+      },
+      {
+        "rank": 10,
+        "ticker": "SYN385",
+        "name": "Synthetic Company 385",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 384.49,
+        "score": 84.47,
+        "healthScore": 98.77,
+        "valuationScore": 64.74,
+        "momentumScore": 23.88,
+        "peRatio": 26.468268661544087,
+        "dividendYield": 0.0034360149853032737,
+        "grossMargin": 0.6273235861160027,
+        "operatingMargin": 0.4100690435437927,
+        "netMargin": 0.4006702367293823,
+        "returnOnEquity": 0.4265635877680801,
+        "fcfMargin": 0.44600859979991614,
+        "fcfYield": 0.09279687608706275,
+        "revenueGrowth": 0.20726635588173012,
+        "debtToEquity": 0.0,
+        "marketCap": 34007936843.99568,
+        "return1W": 0.009124154482783087,
+        "return1M": -0.015264805653967551,
+        "return3M": -0.05459669530970034,
+        "return6M": -0.20906894456975209,
+        "return1Y": -0.4843610668664658,
+        "reasons": [
+          "Net margin of 40.1% \u2014 the highest in the universe",
+          "Free-cash-flow margin of 44.6% \u2014 the highest in the universe",
+          "Return on equity of 42.7% \u2014 the highest in the universe",
+          "Operating margin of 41.0% \u2014 the highest in the universe",
+          "Low leverage \u2014 debt/equity of 0.00"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.5 vs sector median 17.7"
+        ],
+        "fundWeight": 0.01146
+      },
+      {
+        "rank": 11,
+        "ticker": "SYN008",
+        "name": "Synthetic Company 8",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 145.21,
+        "score": 83.86,
+        "healthScore": 88.42,
+        "valuationScore": 62.76,
+        "momentumScore": 94.12,
+        "peRatio": 25.1635706559941,
+        "dividendYield": 0.009731737961037849,
+        "grossMargin": 0.517658241623466,
+        "operatingMargin": 0.35729099348673415,
+        "netMargin": 0.30746302417137056,
+        "returnOnEquity": 0.354257122669942,
+        "fcfMargin": 0.34471047204515876,
+        "fcfYield": 0.09903174525484405,
+        "revenueGrowth": 0.16923542535983052,
+        "debtToEquity": 0.823194609515804,
+        "marketCap": 2214167523.370216,
+        "return1W": -0.020632479525522378,
+        "return1M": 0.02411743248302809,
+        "return3M": 0.16465158515629935,
+        "return6M": 0.42781898943414737,
+        "return1Y": 0.7189876209981465,
+        "reasons": [
+          "Fcf yield of 9.9% \u2014 the highest in the universe",
+          "Operating margin of 35.7% \u2014 top 2% of the universe",
+          "Net margin of 30.7% \u2014 top 2% of the universe",
+          "Free-cash-flow margin of 34.5% \u2014 top 2% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 25.2 vs sector median 17.7"
+        ],
+        "fundWeight": 0.01138
+      },
+      {
+        "rank": 12,
+        "ticker": "SYN048",
+        "name": "Synthetic Company 48",
+        "sector": "Industrials",
+        "subIndustry": "",
+        "price": 257.9,
+        "score": 83.59,
+        "healthScore": 90.38,
+        "valuationScore": 62.05,
+        "momentumScore": 79.12,
+        "peRatio": 26.42605343457288,
+        "dividendYield": 0.0,
+        "grossMargin": 0.6229212739924775,
+        "operatingMargin": 0.27953105663869166,
+        "netMargin": 0.23326547475377235,
+        "returnOnEquity": 0.18116292836311382,
+        "fcfMargin": 0.290510335099079,
+        "fcfYield": 0.07113421449954467,
+        "revenueGrowth": 0.20497458143092057,
+        "debtToEquity": 0.15817251060352944,
+        "marketCap": 23382036781.515472,
+        "return1W": 0.04641356018867538,
+        "return1M": -0.004199072681469846,
+        "return3M": 0.07481371990546389,
+        "return6M": 0.23629187495254733,
+        "return1Y": 0.488907399602506,
+        "reasons": [
+          "Free-cash-flow margin of 29.1% \u2014 top 4% of the universe",
+          "Revenue growth of 20.5% \u2014 top 6% of the universe",
+          "Operating margin of 28.0% \u2014 top 6% of the universe",
+          "Net margin of 23.3% \u2014 top 8% of the universe",
+          "Low leverage \u2014 debt/equity of 0.16"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.4 vs sector median 17.6"
+        ],
+        "fundWeight": 0.01134
+      },
+      {
+        "rank": 13,
+        "ticker": "SYN006",
+        "name": "Synthetic Company 6",
+        "sector": "Utilities",
+        "subIndustry": "",
+        "price": 571.9,
+        "score": 83.04,
+        "healthScore": 91.08,
+        "valuationScore": 69.53,
+        "momentumScore": 53.75,
+        "peRatio": 18.270647693116977,
+        "dividendYield": 0.002725024778852841,
+        "grossMargin": 0.4985582771630571,
+        "operatingMargin": 0.3084063830023073,
+        "netMargin": 0.24436613521423667,
+        "returnOnEquity": 0.41036429523535073,
+        "fcfMargin": 0.34374416361933846,
+        "fcfYield": 0.05601061489531476,
+        "revenueGrowth": 0.16203468146581093,
+        "debtToEquity": 0.4966609095529737,
+        "marketCap": 118500849643.68521,
+        "return1W": 0.010724275595256617,
+        "return1M": 0.03351674083920016,
+        "return3M": -0.033756931064623054,
+        "return6M": 0.07484178104058449,
+        "return1Y": 0.17790782727475718,
+        "reasons": [
+          "Return on equity of 41.0% \u2014 top 1% of the universe",
+          "Free-cash-flow margin of 34.4% \u2014 top 2% of the universe",
+          "Operating margin of 30.8% \u2014 top 4% of the universe",
+          "Net margin of 24.4% \u2014 top 7% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.01127
+      },
+      {
+        "rank": 14,
+        "ticker": "SYN037",
+        "name": "Synthetic Company 37",
+        "sector": "Consumer Staples",
+        "subIndustry": "",
+        "price": 142.11,
+        "score": 82.93,
+        "healthScore": 96.71,
+        "valuationScore": 48.72,
+        "momentumScore": 54.88,
+        "peRatio": 37.55757555607961,
+        "dividendYield": 0.0,
+        "grossMargin": 0.5753405570790577,
+        "operatingMargin": 0.4103281049538192,
+        "netMargin": 0.39247362614132486,
+        "returnOnEquity": 0.3303447582731666,
+        "fcfMargin": 0.39954482211509085,
+        "fcfYield": 0.07904304420819698,
+        "revenueGrowth": 0.17518352129371023,
+        "debtToEquity": 0.04538848367630105,
+        "marketCap": 22523621777.812683,
+        "return1W": -0.013263402186116015,
+        "return1M": -0.06902360322459154,
+        "return3M": 0.02895899246742918,
+        "return6M": -0.003616320090830849,
+        "return1Y": -0.20279447806749143,
+        "reasons": [
+          "Operating margin of 41.0% \u2014 the highest in the universe",
+          "Net margin of 39.2% \u2014 the highest in the universe",
+          "Free-cash-flow margin of 40.0% \u2014 the highest in the universe",
+          "Fcf yield of 7.9% \u2014 top 4% of the universe",
+          "Low leverage \u2014 debt/equity of 0.05"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 37.6 vs sector median 17.4"
+        ],
+        "fundWeight": 0.01125
+      },
+      {
+        "rank": 15,
+        "ticker": "SYN076",
+        "name": "Synthetic Company 76",
+        "sector": "Consumer Staples",
+        "subIndustry": "",
+        "price": 59.32,
+        "score": 82.65,
+        "healthScore": 90.46,
+        "valuationScore": 47.25,
+        "momentumScore": 98.75,
+        "peRatio": 34.585063590988995,
+        "dividendYield": 0.024070354465461866,
+        "grossMargin": 0.4537187671386315,
+        "operatingMargin": 0.3239335281017771,
+        "netMargin": 0.3205040473204045,
+        "returnOnEquity": 0.2830229966075615,
+        "fcfMargin": 0.31013620606796655,
+        "fcfYield": 0.08291891638128074,
+        "revenueGrowth": 0.12970870730049536,
+        "debtToEquity": 0.38958899712406425,
+        "marketCap": 10591523743.767887,
+        "return1W": 0.018141207018696127,
+        "return1M": -0.11083494958686281,
+        "return3M": 0.37260641915244097,
+        "return6M": 0.38762018709476054,
+        "return1Y": 0.47826393181292676,
+        "reasons": [
+          "Net margin of 32.1% \u2014 top 1% of the universe",
+          "Operating margin of 32.4% \u2014 top 3% of the universe",
+          "Fcf yield of 8.3% \u2014 top 3% of the universe",
+          "Free-cash-flow margin of 31.0% \u2014 top 3% of the universe",
+          "Low leverage \u2014 debt/equity of 0.39"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 34.6 vs sector median 17.4"
+        ],
+        "fundWeight": 0.01121
+      },
+      {
+        "rank": 16,
+        "ticker": "SYN139",
+        "name": "Synthetic Company 139",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 395.12,
+        "score": 81.82,
+        "healthScore": 90.21,
+        "valuationScore": 48.79,
+        "momentumScore": 89.12,
+        "peRatio": 33.53515948547488,
+        "dividendYield": 0.006164845442078851,
+        "grossMargin": 0.5765462928867674,
+        "operatingMargin": 0.2459732846557461,
+        "netMargin": 0.22354332415726524,
+        "returnOnEquity": 0.2302719006007088,
+        "fcfMargin": 0.2155052639729592,
+        "fcfYield": 0.056287020336655356,
+        "revenueGrowth": 0.20175594820837986,
+        "debtToEquity": 0.09146016572386134,
+        "marketCap": 12903676774.47456,
+        "return1W": -0.018758196286285663,
+        "return1M": -0.0594790828911707,
+        "return3M": 0.16258572629544574,
+        "return6M": 0.22703812394812256,
+        "return1Y": 0.46302801473958627,
+        "reasons": [
+          "Revenue growth of 20.2% \u2014 top 6% of the universe",
+          "Net margin of 22.4% \u2014 top 9% of the universe",
+          "Operating margin of 24.6% \u2014 top 10% of the universe",
+          "Free-cash-flow margin of 21.6% \u2014 top 12% of the universe",
+          "Low leverage \u2014 debt/equity of 0.09"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 33.5 vs sector median 18.9"
+        ],
+        "fundWeight": 0.0111
+      },
+      {
+        "rank": 17,
+        "ticker": "SYN371",
+        "name": "Synthetic Company 371",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 82.61,
+        "score": 81.08,
+        "healthScore": 88.92,
+        "valuationScore": 59.05,
+        "momentumScore": 70.25,
+        "peRatio": 26.663024285009424,
+        "dividendYield": 0.0339620978789201,
+        "grossMargin": 0.5193713601109573,
+        "operatingMargin": 0.24770278119506636,
+        "netMargin": 0.20222994204684083,
+        "returnOnEquity": 0.25160703339006313,
+        "fcfMargin": 0.18353490700694375,
+        "fcfYield": 0.0685421519789287,
+        "revenueGrowth": 0.18737681526936395,
+        "debtToEquity": 0.07760155677775571,
+        "marketCap": 26470874873.759953,
+        "return1W": -0.029261721133264244,
+        "return1M": 0.05843613896665921,
+        "return3M": 0.21468494520906212,
+        "return6M": -0.03385396298048829,
+        "return1Y": -0.14962193603054963,
+        "reasons": [
+          "Revenue growth of 18.7% \u2014 top 9% of the universe",
+          "Fcf yield of 6.9% \u2014 top 10% of the universe",
+          "Operating margin of 24.8% \u2014 top 10% of the universe",
+          "Return on equity of 25.2% \u2014 top 12% of the universe",
+          "Low leverage \u2014 debt/equity of 0.08"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.7 vs sector median 17.7"
+        ],
+        "fundWeight": 0.011
+      },
+      {
+        "rank": 18,
+        "ticker": "SYN059",
+        "name": "Synthetic Company 59",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 342.72,
+        "score": 81.03,
+        "healthScore": 88.17,
+        "valuationScore": 72.78,
+        "momentumScore": 47.62,
+        "peRatio": 13.61927077300057,
+        "dividendYield": 0.006282583053822718,
+        "grossMargin": 0.5107015940705149,
+        "operatingMargin": 0.2832821294116977,
+        "netMargin": 0.30629822419339287,
+        "returnOnEquity": 0.33016995967128343,
+        "fcfMargin": 0.2783878157455942,
+        "fcfYield": 0.0404579916317612,
+        "revenueGrowth": 0.18386834255532516,
+        "debtToEquity": 0.7243274609387192,
+        "marketCap": 20931340381.148026,
+        "return1W": -0.0013792227528981826,
+        "return1M": -0.0005564886324964657,
+        "return3M": -0.00022502662787457495,
+        "return6M": -0.035374816059648206,
+        "return1Y": 0.033388188244432994,
+        "reasons": [
+          "Net margin of 30.6% \u2014 top 2% of the universe",
+          "Return on equity of 33.0% \u2014 top 5% of the universe",
+          "Operating margin of 28.3% \u2014 top 6% of the universe",
+          "Free-cash-flow margin of 27.8% \u2014 top 6% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.01099
+      },
+      {
+        "rank": 19,
+        "ticker": "SYN142",
+        "name": "Synthetic Company 142",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 167.88,
+        "score": 80.51,
+        "healthScore": 84.12,
+        "valuationScore": 59.19,
+        "momentumScore": 97.88,
+        "peRatio": 24.501646298869474,
+        "dividendYield": 0.014930866784979745,
+        "grossMargin": 0.6431344679393415,
+        "operatingMargin": 0.2055563251309186,
+        "netMargin": 0.15128439886931436,
+        "returnOnEquity": 0.3256299954883408,
+        "fcfMargin": 0.16316446496900514,
+        "fcfYield": 0.05159767544348341,
+        "revenueGrowth": 0.1965923559029757,
+        "debtToEquity": 0.36285843908529897,
+        "marketCap": 65472840767.46405,
+        "return1W": -0.00872803154341952,
+        "return1M": -0.02262532640958949,
+        "return3M": 0.27290188374226404,
+        "return6M": 0.43743508063041825,
+        "return1Y": 0.17297957509767697,
+        "reasons": [
+          "Return on equity of 32.6% \u2014 top 6% of the universe",
+          "Revenue growth of 19.7% \u2014 top 8% of the universe",
+          "Operating margin of 20.6% \u2014 top 18% of the universe",
+          "Low leverage \u2014 debt/equity of 0.36"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 24.5 vs sector median 17.7"
+        ],
+        "fundWeight": 0.01092
+      },
+      {
+        "rank": 20,
+        "ticker": "SYN145",
+        "name": "Synthetic Company 145",
+        "sector": "Utilities",
+        "subIndustry": "",
+        "price": 38.9,
+        "score": 79.66,
+        "healthScore": 87.12,
+        "valuationScore": 45.64,
+        "momentumScore": 95.5,
+        "peRatio": 33.05037558996921,
+        "dividendYield": 0.0,
+        "grossMargin": 0.5862391965649381,
+        "operatingMargin": 0.33115066480539457,
+        "netMargin": 0.2971086939087436,
+        "returnOnEquity": 0.3657080162512106,
+        "fcfMargin": 0.253228941548324,
+        "fcfYield": 0.08190929554764953,
+        "revenueGrowth": 0.11060458309916682,
+        "debtToEquity": 0.5943064881921778,
+        "marketCap": 11352327519.163548,
+        "return1W": -0.02782420325147316,
+        "return1M": 0.027908961379907362,
+        "return3M": 0.19960253519412025,
+        "return6M": 0.37216837800952696,
+        "return1Y": 0.27072148632924603,
+        "reasons": [
+          "Operating margin of 33.1% \u2014 top 2% of the universe",
+          "Return on equity of 36.6% \u2014 top 3% of the universe",
+          "Net margin of 29.7% \u2014 top 3% of the universe",
+          "Fcf yield of 8.2% \u2014 top 3% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 33.1 vs sector median 15.1"
+        ],
+        "fundWeight": 0.01081
+      },
+      {
+        "rank": 21,
+        "ticker": "SYN014",
+        "name": "Synthetic Company 14",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 401.92,
+        "score": 79.62,
+        "healthScore": 87.38,
+        "valuationScore": 59.35,
+        "momentumScore": 65.88,
+        "peRatio": 24.582824189690605,
+        "dividendYield": 0.005689871231450114,
+        "grossMargin": 0.5738937228832829,
+        "operatingMargin": 0.20644580478846603,
+        "netMargin": 0.20062379547185288,
+        "returnOnEquity": 0.35521584713762744,
+        "fcfMargin": 0.22010967054353262,
+        "fcfYield": 0.06328369901514479,
+        "revenueGrowth": 0.16445256544961848,
+        "debtToEquity": 0.3885396419199058,
+        "marketCap": 3026145807.9511266,
+        "return1W": -0.005444508773668218,
+        "return1M": 0.06574486225544166,
+        "return3M": -0.050714981075054094,
+        "return6M": 0.3485905696517478,
+        "return1Y": 0.28216248125450555,
+        "reasons": [
+          "Return on equity of 35.5% \u2014 top 3% of the universe",
+          "Free-cash-flow margin of 22.0% \u2014 top 12% of the universe",
+          "Net margin of 20.1% \u2014 top 12% of the universe",
+          "Revenue growth of 16.4% \u2014 top 13% of the universe",
+          "Low leverage \u2014 debt/equity of 0.39"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 24.6 vs sector median 14.4"
+        ],
+        "fundWeight": 0.0108
+      },
+      {
+        "rank": 22,
+        "ticker": "SYN399",
+        "name": "Synthetic Company 399",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 456.02,
+        "score": 79.34,
+        "healthScore": 75.42,
+        "valuationScore": 83.62,
+        "momentumScore": 98.25,
+        "peRatio": 12.20917140924622,
+        "dividendYield": 0.023434396986210877,
+        "grossMargin": 0.39534426779293497,
+        "operatingMargin": 0.23307718184710102,
+        "netMargin": 0.15712095753195288,
+        "returnOnEquity": 0.05875002651808463,
+        "fcfMargin": 0.18888686450719344,
+        "fcfYield": 0.06174878725351203,
+        "revenueGrowth": 0.17194252548180905,
+        "debtToEquity": 0.5273361127899459,
+        "marketCap": 12759683101.990873,
+        "return1W": 0.0022935631865529126,
+        "return1M": 0.02031575618924485,
+        "return3M": 0.3823322896076238,
+        "return6M": 0.3653181638843487,
+        "return1Y": 0.48575708804341644,
+        "reasons": [
+          "Revenue growth of 17.2% \u2014 top 11% of the universe",
+          "Operating margin of 23.3% \u2014 top 12% of the universe",
+          "Fcf yield of 6.2% \u2014 top 15% of the universe",
+          "Free-cash-flow margin of 18.9% \u2014 top 18% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.01076
+      },
+      {
+        "rank": 23,
+        "ticker": "SYN132",
+        "name": "Synthetic Company 132",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 202.22,
+        "score": 78.52,
+        "healthScore": 91.0,
+        "valuationScore": 52.97,
+        "momentumScore": 42.25,
+        "peRatio": 32.2938136069227,
+        "dividendYield": 0.006866335056392661,
+        "grossMargin": 0.49064580412806547,
+        "operatingMargin": 0.3295619302989429,
+        "netMargin": 0.31078525871160795,
+        "returnOnEquity": 0.3788888108192268,
+        "fcfMargin": 0.3372890374880185,
+        "fcfYield": 0.07640906406634747,
+        "revenueGrowth": 0.180040657317174,
+        "debtToEquity": 0.6216140299693271,
+        "marketCap": 14177744343.557884,
+        "return1W": 0.0018291539867010178,
+        "return1M": 0.007928172750682704,
+        "return3M": -0.01129818278256297,
+        "return6M": -0.0727156685773705,
+        "return1Y": -0.22890395649035733,
+        "reasons": [
+          "Net margin of 31.1% \u2014 top 2% of the universe",
+          "Return on equity of 37.9% \u2014 top 2% of the universe",
+          "Operating margin of 33.0% \u2014 top 2% of the universe",
+          "Free-cash-flow margin of 33.7% \u2014 top 2% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 32.3 vs sector median 17.7"
+        ],
+        "fundWeight": 0.01065
+      },
+      {
+        "rank": 24,
+        "ticker": "SYN319",
+        "name": "Synthetic Company 319",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 111.79,
+        "score": 78.47,
+        "healthScore": 92.21,
+        "valuationScore": 60.75,
+        "momentumScore": 17.75,
+        "peRatio": -1.0,
+        "dividendYield": 0.0032474619463636763,
+        "grossMargin": 0.5627319669799496,
+        "operatingMargin": 0.3157957502340597,
+        "netMargin": 0.28753361464010024,
+        "returnOnEquity": 0.17128408804985004,
+        "fcfMargin": 0.31808750341497766,
+        "fcfYield": 0.042693214636653695,
+        "revenueGrowth": 0.23953443936413174,
+        "debtToEquity": 0.11651924052989004,
+        "marketCap": 49164015751.29365,
+        "return1W": 0.0017725438966898993,
+        "return1M": 0.11544359803486386,
+        "return3M": -0.0909162542482449,
+        "return6M": -0.24711220640760556,
+        "return1Y": -0.4788367940429411,
+        "reasons": [
+          "Free-cash-flow margin of 31.8% \u2014 top 2% of the universe",
+          "Revenue growth of 24.0% \u2014 top 3% of the universe",
+          "Operating margin of 31.6% \u2014 top 3% of the universe",
+          "Net margin of 28.8% \u2014 top 4% of the universe",
+          "Low leverage \u2014 debt/equity of 0.12",
+          "Trades at a 106% discount to its sector (P/E -1.0 vs 17.7 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.01065
+      },
+      {
+        "rank": 25,
+        "ticker": "SYN097",
+        "name": "Synthetic Company 97",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 586.4,
+        "score": 78.0,
+        "healthScore": 83.04,
+        "valuationScore": 60.25,
+        "momentumScore": 78.25,
+        "peRatio": -1.0,
+        "dividendYield": 0.001938574990452158,
+        "grossMargin": 0.45881416106014744,
+        "operatingMargin": 0.22651918080728595,
+        "netMargin": 0.17645087059726444,
+        "returnOnEquity": 0.2429058074501764,
+        "fcfMargin": 0.1908919772775953,
+        "fcfYield": 0.04236636787110232,
+        "revenueGrowth": 0.08664126452009398,
+        "debtToEquity": 0.09001209208718908,
+        "marketCap": 1485435972.7319384,
+        "return1W": -0.006355866301109143,
+        "return1M": 0.10265895275701564,
+        "return3M": 0.051552712521587774,
+        "return6M": 0.2970314443937834,
+        "return1Y": 0.4344269133292065,
+        "reasons": [
+          "Operating margin of 22.7% \u2014 top 13% of the universe",
+          "Return on equity of 24.3% \u2014 top 14% of the universe",
+          "Free-cash-flow margin of 19.1% \u2014 top 17% of the universe",
+          "Net margin of 17.6% \u2014 top 18% of the universe",
+          "Low leverage \u2014 debt/equity of 0.09",
+          "Trades at a 107% discount to its sector (P/E -1.0 vs 14.4 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.01058
+      },
+      {
+        "rank": 26,
+        "ticker": "SYN259",
+        "name": "Synthetic Company 259",
+        "sector": "Consumer Discretionary",
+        "subIndustry": "",
+        "price": 161.95,
+        "score": 77.93,
+        "healthScore": 84.04,
+        "valuationScore": 55.26,
+        "momentumScore": 80.5,
+        "peRatio": 28.56785578399573,
+        "dividendYield": 0.023829046379666964,
+        "grossMargin": 0.3694246096299538,
+        "operatingMargin": 0.15910466190457606,
+        "netMargin": 0.1265634729417925,
+        "returnOnEquity": 0.34842885861346623,
+        "fcfMargin": 0.19477008565156945,
+        "fcfYield": 0.051359484617465694,
+        "revenueGrowth": 0.2385860596319361,
+        "debtToEquity": 0.27549062310013017,
+        "marketCap": 40755996907.834496,
+        "return1W": -0.017344864681973736,
+        "return1M": 0.07732773887820345,
+        "return3M": 0.10729314587170086,
+        "return6M": 0.17884188602456907,
+        "return1Y": 0.30577968670559397,
+        "reasons": [
+          "Revenue growth of 23.9% \u2014 top 4% of the universe",
+          "Return on equity of 34.8% \u2014 top 4% of the universe",
+          "Free-cash-flow margin of 19.5% \u2014 top 16% of the universe",
+          "Low leverage \u2014 debt/equity of 0.28"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 28.6 vs sector median 15.5"
+        ],
+        "fundWeight": 0.01057
+      },
+      {
+        "rank": 27,
+        "ticker": "SYN094",
+        "name": "Synthetic Company 94",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 162.86,
+        "score": 77.83,
+        "healthScore": 85.92,
+        "valuationScore": 50.0,
+        "momentumScore": 76.88,
+        "peRatio": 29.62205709437688,
+        "dividendYield": 0.0003085984501422674,
+        "grossMargin": 0.6216400259672801,
+        "operatingMargin": 0.2879485765256752,
+        "netMargin": 0.254507697108094,
+        "returnOnEquity": 0.3020345025386568,
+        "fcfMargin": 0.27592855514748904,
+        "fcfYield": 0.038964429712448734,
+        "revenueGrowth": 0.26295216793436205,
+        "debtToEquity": 0.9039545181301585,
+        "marketCap": 3952263879.655544,
+        "return1W": 0.03520830110689963,
+        "return1M": -0.035750749721296195,
+        "return3M": 0.08149296405159823,
+        "return6M": 0.1760737567394996,
+        "return1Y": 0.21974386653950895,
+        "reasons": [
+          "Revenue growth of 26.3% \u2014 top 2% of the universe",
+          "Operating margin of 28.8% \u2014 top 5% of the universe",
+          "Net margin of 25.5% \u2014 top 6% of the universe",
+          "Free-cash-flow margin of 27.6% \u2014 top 6% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 29.6 vs sector median 18.9"
+        ],
+        "fundWeight": 0.01056
+      },
+      {
+        "rank": 28,
+        "ticker": "SYN381",
+        "name": "Synthetic Company 381",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 232.2,
+        "score": 77.83,
+        "healthScore": 82.75,
+        "valuationScore": 58.77,
+        "momentumScore": 81.5,
+        "peRatio": 26.838751403808985,
+        "dividendYield": 0.013509035747750576,
+        "grossMargin": 0.6305680924315653,
+        "operatingMargin": 0.23310838171498235,
+        "netMargin": 0.1718377018343949,
+        "returnOnEquity": 0.33278981331821333,
+        "fcfMargin": 0.17067374550083875,
+        "fcfYield": 0.06295605478124494,
+        "revenueGrowth": 0.20717129032782788,
+        "debtToEquity": 0.6847345644666663,
+        "marketCap": 18801740570.211147,
+        "return1W": 0.011307789541978478,
+        "return1M": -0.05226044967881206,
+        "return3M": 0.11636486519277131,
+        "return6M": 0.17185910043094654,
+        "return1Y": 0.41208370798707583,
+        "reasons": [
+          "Return on equity of 33.3% \u2014 top 4% of the universe",
+          "Revenue growth of 20.7% \u2014 top 6% of the universe",
+          "Operating margin of 23.3% \u2014 top 12% of the universe",
+          "Fcf yield of 6.3% \u2014 top 14% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.8 vs sector median 18.9"
+        ],
+        "fundWeight": 0.01056
+      },
+      {
+        "rank": 29,
+        "ticker": "SYN318",
+        "name": "Synthetic Company 318",
+        "sector": "Health Care",
+        "subIndustry": "",
+        "price": 159.18,
+        "score": 77.5,
+        "healthScore": 91.54,
+        "valuationScore": 58.12,
+        "momentumScore": 18.0,
+        "peRatio": 28.573127440217775,
+        "dividendYield": 0.017258191306982723,
+        "grossMargin": 0.6623193790626374,
+        "operatingMargin": 0.28017660726993604,
+        "netMargin": 0.25347128129620605,
+        "returnOnEquity": 0.3887350563637899,
+        "fcfMargin": 0.2743598470097919,
+        "fcfYield": 0.05863477581275265,
+        "revenueGrowth": 0.23793357138269244,
+        "debtToEquity": 0.5230999348137981,
+        "marketCap": 6115333094.318399,
+        "return1W": 0.010850405820876787,
+        "return1M": 0.0015034860325769867,
+        "return3M": -0.062224392485330626,
+        "return6M": -0.3519266748786455,
+        "return1Y": -0.24944581092321305,
+        "reasons": [
+          "Return on equity of 38.9% \u2014 top 2% of the universe",
+          "Revenue growth of 23.8% \u2014 top 4% of the universe",
+          "Net margin of 25.3% \u2014 top 6% of the universe",
+          "Operating margin of 28.0% \u2014 top 6% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 28.6 vs sector median 15.1"
+        ],
+        "fundWeight": 0.01051
+      },
+      {
+        "rank": 30,
+        "ticker": "SYN055",
+        "name": "Synthetic Company 55",
+        "sector": "Real Estate",
+        "subIndustry": "",
+        "price": 162.62,
+        "score": 77.33,
+        "healthScore": 90.04,
+        "valuationScore": 44.7,
+        "momentumScore": 53.62,
+        "peRatio": 29.694605317910604,
+        "dividendYield": 0.022449216985313693,
+        "grossMargin": 0.5354827418514105,
+        "operatingMargin": 0.31060755992160877,
+        "netMargin": 0.2503254051927834,
+        "returnOnEquity": 0.31171757955707136,
+        "fcfMargin": 0.2909392420532292,
+        "fcfYield": 0.06045355237397294,
+        "revenueGrowth": 0.11502514919556832,
+        "debtToEquity": 0.2580234586057172,
+        "marketCap": 2816556429.431034,
+        "return1W": -0.013444488103693319,
+        "return1M": -0.06922158292837828,
+        "return3M": -0.06019829936326747,
+        "return6M": 0.12294732987393811,
+        "return1Y": 0.35648150800789696,
+        "reasons": [
+          "Operating margin of 31.1% \u2014 top 4% of the universe",
+          "Free-cash-flow margin of 29.1% \u2014 top 4% of the universe",
+          "Return on equity of 31.2% \u2014 top 6% of the universe",
+          "Net margin of 25.0% \u2014 top 6% of the universe",
+          "Low leverage \u2014 debt/equity of 0.26"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 29.7 vs sector median 14.5"
+        ],
+        "fundWeight": 0.01049
+      },
+      {
+        "rank": 31,
+        "ticker": "SYN359",
+        "name": "Synthetic Company 359",
+        "sector": "Health Care",
+        "subIndustry": "",
+        "price": 556.18,
+        "score": 76.83,
+        "healthScore": 73.33,
+        "valuationScore": 78.15,
+        "momentumScore": 98.62,
+        "peRatio": 14.466542985157558,
+        "dividendYield": 0.024779221146704652,
+        "grossMargin": 0.46980841340498974,
+        "operatingMargin": 0.1320654858690289,
+        "netMargin": 0.12168751201441953,
+        "returnOnEquity": 0.24821662719169257,
+        "fcfMargin": 0.13777426320582783,
+        "fcfYield": 0.05202518874525668,
+        "revenueGrowth": 0.27771623888510666,
+        "debtToEquity": 0.6729345130770974,
+        "marketCap": 7813986237.137658,
+        "return1W": 0.001830576293186542,
+        "return1M": -0.029844509000486415,
+        "return3M": 0.3527403430782507,
+        "return6M": 0.4100366823625523,
+        "return1Y": 0.5517132775559466,
+        "reasons": [
+          "Revenue growth of 27.8% \u2014 top 1% of the universe",
+          "Return on equity of 24.8% \u2014 top 13% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.01042
+      },
+      {
+        "rank": 32,
+        "ticker": "SYN267",
+        "name": "Synthetic Company 267",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 67.56,
+        "score": 76.35,
+        "healthScore": 83.17,
+        "valuationScore": 56.85,
+        "momentumScore": 67.62,
+        "peRatio": 26.382800104818532,
+        "dividendYield": 0.0,
+        "grossMargin": 0.5257589602301691,
+        "operatingMargin": 0.20620252395195093,
+        "netMargin": 0.1716409401744622,
+        "returnOnEquity": 0.18529240038153982,
+        "fcfMargin": 0.1863616581599238,
+        "fcfYield": 0.07349481403578838,
+        "revenueGrowth": 0.15378297274414704,
+        "debtToEquity": 0.15087167767105092,
+        "marketCap": 12012784882.467447,
+        "return1W": -0.012475057421682985,
+        "return1M": -0.0421075365315498,
+        "return3M": -0.02468445032027483,
+        "return6M": 0.24865011106258672,
+        "return1Y": 0.35093529035062576,
+        "reasons": [
+          "Fcf yield of 7.3% \u2014 top 6% of the universe",
+          "Revenue growth of 15.4% \u2014 top 16% of the universe",
+          "Operating margin of 20.6% \u2014 top 17% of the universe",
+          "Net margin of 17.2% \u2014 top 18% of the universe",
+          "Low leverage \u2014 debt/equity of 0.15"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.4 vs sector median 18.9"
+        ],
+        "fundWeight": 0.01036
+      },
+      {
+        "rank": 33,
+        "ticker": "SYN063",
+        "name": "Synthetic Company 63",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 504.02,
+        "score": 76.2,
+        "healthScore": 72.79,
+        "valuationScore": 82.44,
+        "momentumScore": 87.62,
+        "peRatio": 10.085113821483054,
+        "dividendYield": 0.03132944202899346,
+        "grossMargin": 0.3502879777367957,
+        "operatingMargin": 0.167072654679292,
+        "netMargin": 0.132782665634228,
+        "returnOnEquity": 0.08746048845970424,
+        "fcfMargin": 0.17677849254608313,
+        "fcfYield": 0.05281953746248835,
+        "revenueGrowth": 0.12710665248969844,
+        "debtToEquity": 0.32474759773910333,
+        "marketCap": 15352557461.453209,
+        "return1W": 0.02613655305268267,
+        "return1M": 0.037721329165829154,
+        "return3M": 0.1282776784375551,
+        "return6M": 0.25486300272067874,
+        "return1Y": 0.3626113856933798,
+        "reasons": [
+          "Low leverage \u2014 debt/equity of 0.32",
+          "Trades at a 47% discount to its sector (P/E 10.1 vs 18.9 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.01034
+      },
+      {
+        "rank": 34,
+        "ticker": "SYN393",
+        "name": "Synthetic Company 393",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 330.15,
+        "score": 76.13,
+        "healthScore": 83.25,
+        "valuationScore": 66.65,
+        "momentumScore": 45.25,
+        "peRatio": 24.613834120481037,
+        "dividendYield": 0.011733065435332897,
+        "grossMargin": 0.4799918321972386,
+        "operatingMargin": 0.18371850691761699,
+        "netMargin": 0.14759718289742366,
+        "returnOnEquity": 0.24828254927148727,
+        "fcfMargin": 0.16559651469134443,
+        "fcfYield": 0.0678930324169138,
+        "revenueGrowth": 0.23415158784645312,
+        "debtToEquity": 0.26987380834550123,
+        "marketCap": 11326357438.367933,
+        "return1W": 0.012197830277666917,
+        "return1M": 0.039566161131485145,
+        "return3M": 0.05108891530812784,
+        "return6M": -0.12717578949076952,
+        "return1Y": -0.2370908922283131,
+        "reasons": [
+          "Revenue growth of 23.4% \u2014 top 4% of the universe",
+          "Fcf yield of 6.8% \u2014 top 10% of the universe",
+          "Return on equity of 24.8% \u2014 top 13% of the universe",
+          "Low leverage \u2014 debt/equity of 0.27"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 24.6 vs sector median 17.7"
+        ],
+        "fundWeight": 0.01033
+      },
+      {
+        "rank": 35,
+        "ticker": "SYN384",
+        "name": "Synthetic Company 384",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 40.46,
+        "score": 76.07,
+        "healthScore": 83.27,
+        "valuationScore": 41.8,
+        "momentumScore": 94.25,
+        "peRatio": 36.036938658985804,
+        "dividendYield": 0.0,
+        "grossMargin": 0.48251349505200936,
+        "operatingMargin": 0.18525766331252347,
+        "netMargin": 0.16437524865318115,
+        "returnOnEquity": 0.38802862737235394,
+        "fcfMargin": 0.1700541288643858,
+        "fcfYield": 0.08158376749692738,
+        "revenueGrowth": 0.09941324789897568,
+        "debtToEquity": 0.0,
+        "marketCap": 61289747294.390884,
+        "return1W": 0.008957093254098391,
+        "return1M": 0.004256419410885385,
+        "return3M": 0.30411378823180624,
+        "return6M": 0.24088023731587993,
+        "return1Y": 0.22222704749873945,
+        "reasons": [
+          "Return on equity of 38.8% \u2014 top 2% of the universe",
+          "Fcf yield of 8.2% \u2014 top 4% of the universe",
+          "Net margin of 16.4% \u2014 top 20% of the universe",
+          "Low leverage \u2014 debt/equity of 0.00"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 36.0 vs sector median 18.9"
+        ],
+        "fundWeight": 0.01032
+      },
+      {
+        "rank": 36,
+        "ticker": "SYN075",
+        "name": "Synthetic Company 75",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 107.6,
+        "score": 75.98,
+        "healthScore": 89.33,
+        "valuationScore": 53.66,
+        "momentumScore": 27.12,
+        "peRatio": 39.8872530833257,
+        "dividendYield": 0.0,
+        "grossMargin": 0.6050095797258666,
+        "operatingMargin": 0.3356596137094826,
+        "netMargin": 0.2805969511341917,
+        "returnOnEquity": 0.22744106391394975,
+        "fcfMargin": 0.38031536929101584,
+        "fcfYield": 0.07536068661805412,
+        "revenueGrowth": 0.25831850682821844,
+        "debtToEquity": 0.6748271857240824,
+        "marketCap": 32962310896.365433,
+        "return1W": 0.02774474153619163,
+        "return1M": 0.07140878664097984,
+        "return3M": -0.10955145066285497,
+        "return6M": -0.10431300330462306,
+        "return1Y": -0.5069904013415021,
+        "reasons": [
+          "Free-cash-flow margin of 38.0% \u2014 top 1% of the universe",
+          "Operating margin of 33.6% \u2014 top 2% of the universe",
+          "Revenue growth of 25.8% \u2014 top 2% of the universe",
+          "Net margin of 28.1% \u2014 top 4% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 39.9 vs sector median 17.7"
+        ],
+        "fundWeight": 0.01031
+      },
+      {
+        "rank": 37,
+        "ticker": "SYN087",
+        "name": "Synthetic Company 87",
+        "sector": "Utilities",
+        "subIndustry": "",
+        "price": 400.36,
+        "score": 75.91,
+        "healthScore": 83.96,
+        "valuationScore": 43.62,
+        "momentumScore": 84.12,
+        "peRatio": 39.95385391536396,
+        "dividendYield": 0.010946727578949768,
+        "grossMargin": 0.5767319481183435,
+        "operatingMargin": 0.2523818501549737,
+        "netMargin": 0.2042397940781893,
+        "returnOnEquity": 0.21041481920558153,
+        "fcfMargin": 0.22447760286888202,
+        "fcfYield": 0.07718548298421363,
+        "revenueGrowth": 0.1398722996669909,
+        "debtToEquity": 0.4788924224303379,
+        "marketCap": 3198765266.0921216,
+        "return1W": 0.007252926800136771,
+        "return1M": -0.03382834480579225,
+        "return3M": 0.24572412116412146,
+        "return6M": 0.1144890330560162,
+        "return1Y": 0.2575742870872079,
+        "reasons": [
+          "Fcf yield of 7.7% \u2014 top 5% of the universe",
+          "Operating margin of 25.2% \u2014 top 10% of the universe",
+          "Free-cash-flow margin of 22.4% \u2014 top 11% of the universe",
+          "Net margin of 20.4% \u2014 top 12% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 40.0 vs sector median 15.1"
+        ],
+        "fundWeight": 0.0103
+      },
+      {
+        "rank": 38,
+        "ticker": "SYN141",
+        "name": "Synthetic Company 141",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 344.85,
+        "score": 75.89,
+        "healthScore": 77.96,
+        "valuationScore": 62.04,
+        "momentumScore": 89.12,
+        "peRatio": 18.324690387273925,
+        "dividendYield": 0.016750433706199434,
+        "grossMargin": 0.5837248799104653,
+        "operatingMargin": 0.2605237469464175,
+        "netMargin": 0.25866406174686374,
+        "returnOnEquity": 0.3167918006884085,
+        "fcfMargin": 0.22894655303098155,
+        "fcfYield": 0.0465458838443046,
+        "revenueGrowth": 0.1330452577977276,
+        "debtToEquity": 1.2093735023283754,
+        "marketCap": 27083821637.17231,
+        "return1W": 0.03209342884133572,
+        "return1M": -0.064818527720176,
+        "return3M": 0.11039369710375735,
+        "return6M": 0.4462927435566609,
+        "return1Y": 0.8621163150912837,
+        "reasons": [
+          "Net margin of 25.9% \u2014 top 5% of the universe",
+          "Return on equity of 31.7% \u2014 top 6% of the universe",
+          "Operating margin of 26.1% \u2014 top 8% of the universe",
+          "Free-cash-flow margin of 22.9% \u2014 top 10% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.0103
+      },
+      {
+        "rank": 39,
+        "ticker": "SYN081",
+        "name": "Synthetic Company 81",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 160.37,
+        "score": 75.24,
+        "healthScore": 79.88,
+        "valuationScore": 53.72,
+        "momentumScore": 85.88,
+        "peRatio": 17.74426201383295,
+        "dividendYield": 0.0165683115222292,
+        "grossMargin": 0.4685555929183746,
+        "operatingMargin": 0.2185765490928367,
+        "netMargin": 0.1816115636090935,
+        "returnOnEquity": 0.21175607802207508,
+        "fcfMargin": 0.25262535775676725,
+        "fcfYield": 0.05414388568507339,
+        "revenueGrowth": 0.06373203423806995,
+        "debtToEquity": 0.3916294051615408,
+        "marketCap": 54267036579.29786,
+        "return1W": -0.025167325422422712,
+        "return1M": 0.0531927455543575,
+        "return3M": 0.22939722779256502,
+        "return6M": 0.13248598751544366,
+        "return1Y": 0.4403964201884746,
+        "reasons": [
+          "Free-cash-flow margin of 25.3% \u2014 top 8% of the universe",
+          "Operating margin of 21.9% \u2014 top 15% of the universe",
+          "Net margin of 18.2% \u2014 top 16% of the universe",
+          "Return on equity of 21.2% \u2014 top 18% of the universe",
+          "Low leverage \u2014 debt/equity of 0.39"
+        ],
+        "flags": [],
+        "fundWeight": 0.01021
+      },
+      {
+        "rank": 40,
+        "ticker": "SYN090",
+        "name": "Synthetic Company 90",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 188.97,
+        "score": 75.1,
+        "healthScore": 85.94,
+        "valuationScore": 49.36,
+        "momentumScore": 50.75,
+        "peRatio": 36.2416725178898,
+        "dividendYield": 0.0,
+        "grossMargin": 0.575584460067193,
+        "operatingMargin": 0.1659281913092343,
+        "netMargin": 0.1564938405582299,
+        "returnOnEquity": 0.3863746244984402,
+        "fcfMargin": 0.1621354939015402,
+        "fcfYield": 0.06531892271221476,
+        "revenueGrowth": 0.20073034154573474,
+        "debtToEquity": 0.0,
+        "marketCap": 4672944577.994108,
+        "return1W": 0.022048887211314788,
+        "return1M": 0.025564234940226513,
+        "return3M": -0.15608981087447324,
+        "return6M": 0.21063649964277392,
+        "return1Y": 0.35923520266766173,
+        "reasons": [
+          "Return on equity of 38.6% \u2014 top 2% of the universe",
+          "Revenue growth of 20.1% \u2014 top 7% of the universe",
+          "Fcf yield of 6.5% \u2014 top 12% of the universe",
+          "Low leverage \u2014 debt/equity of 0.00"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 36.2 vs sector median 17.7"
+        ],
+        "fundWeight": 0.01019
+      },
+      {
+        "rank": 41,
+        "ticker": "SYN228",
+        "name": "Synthetic Company 228",
+        "sector": "Consumer Discretionary",
+        "subIndustry": "",
+        "price": 557.82,
+        "score": 75.07,
+        "healthScore": 85.21,
+        "valuationScore": 74.33,
+        "momentumScore": 5.62,
+        "peRatio": 14.29033490780751,
+        "dividendYield": 0.007438601666014266,
+        "grossMargin": 0.528169346451878,
+        "operatingMargin": 0.2902414981974053,
+        "netMargin": 0.26846990969484325,
+        "returnOnEquity": 0.2083484397047929,
+        "fcfMargin": 0.25200864709475906,
+        "fcfYield": 0.07095179471771373,
+        "revenueGrowth": 0.09925940902235049,
+        "debtToEquity": 0.41028320576941,
+        "marketCap": 7047652675.267311,
+        "return1W": 0.011814011903982307,
+        "return1M": 0.04450574692033246,
+        "return3M": -0.28801583404223985,
+        "return6M": -0.2548210379756799,
+        "return1Y": -0.1478112170127427,
+        "reasons": [
+          "Net margin of 26.8% \u2014 top 4% of the universe",
+          "Operating margin of 29.0% \u2014 top 5% of the universe",
+          "Free-cash-flow margin of 25.2% \u2014 top 8% of the universe",
+          "Fcf yield of 7.1% \u2014 top 8% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.01018
+      },
+      {
+        "rank": 42,
+        "ticker": "SYN039",
+        "name": "Synthetic Company 39",
+        "sector": "Real Estate",
+        "subIndustry": "",
+        "price": 447.55,
+        "score": 74.86,
+        "healthScore": 80.71,
+        "valuationScore": 44.25,
+        "momentumScore": 95.12,
+        "peRatio": 29.061137717185645,
+        "dividendYield": 0.008558969271709122,
+        "grossMargin": 0.43188139898945577,
+        "operatingMargin": 0.21500818535330926,
+        "netMargin": 0.17692082889105204,
+        "returnOnEquity": 0.15016506868910706,
+        "fcfMargin": 0.2126636378503837,
+        "fcfYield": 0.05310689263561167,
+        "revenueGrowth": 0.12293702524866247,
+        "debtToEquity": 0.2841674653343027,
+        "marketCap": 13895306559.603014,
+        "return1W": -0.0064268106966584885,
+        "return1M": 0.02266520001314292,
+        "return3M": 0.2392307698507633,
+        "return6M": 0.3343433068068208,
+        "return1Y": 0.3607662129153596,
+        "reasons": [
+          "Free-cash-flow margin of 21.3% \u2014 top 13% of the universe",
+          "Operating margin of 21.5% \u2014 top 16% of the universe",
+          "Net margin of 17.7% \u2014 top 17% of the universe",
+          "Low leverage \u2014 debt/equity of 0.28"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 29.1 vs sector median 14.5"
+        ],
+        "fundWeight": 0.01016
+      },
+      {
+        "rank": 43,
+        "ticker": "SYN398",
+        "name": "Synthetic Company 398",
+        "sector": "Utilities",
+        "subIndustry": "",
+        "price": 403.92,
+        "score": 74.72,
+        "healthScore": 74.25,
+        "valuationScore": 98.5,
+        "momentumScore": 30.5,
+        "peRatio": -1.0,
+        "dividendYield": 0.0008768945108442762,
+        "grossMargin": 0.50664831521646,
+        "operatingMargin": 0.1815134371985198,
+        "netMargin": 0.15891341872163842,
+        "returnOnEquity": 0.10287431800693056,
+        "fcfMargin": 0.15128477702167564,
+        "fcfYield": 0.08733034666095586,
+        "revenueGrowth": 0.08506192080482994,
+        "debtToEquity": 0.003943919479226121,
+        "marketCap": 6245214584.563276,
+        "return1W": -0.018244914883906675,
+        "return1M": 0.09761542203737551,
+        "return3M": 0.0030992170360166355,
+        "return6M": -0.2390906256781884,
+        "return1Y": -0.5233464070555588,
+        "reasons": [
+          "Fcf yield of 8.7% \u2014 top 2% of the universe",
+          "Low leverage \u2014 debt/equity of 0.00",
+          "Trades at a 107% discount to its sector (P/E -1.0 vs 15.1 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.01014
+      },
+      {
+        "rank": 44,
+        "ticker": "SYN200",
+        "name": "Synthetic Company 200",
+        "sector": "Industrials",
+        "subIndustry": "",
+        "price": 555.97,
+        "score": 74.56,
+        "healthScore": 81.62,
+        "valuationScore": 46.97,
+        "momentumScore": 80.25,
+        "peRatio": 21.858863507217336,
+        "dividendYield": 0.001481083986456709,
+        "grossMargin": 0.4022022008853801,
+        "operatingMargin": 0.2128869135494664,
+        "netMargin": 0.1793418844040548,
+        "returnOnEquity": 0.14463072138091493,
+        "fcfMargin": 0.19625738989521863,
+        "fcfYield": 0.022110249286479255,
+        "revenueGrowth": 0.18500041444664728,
+        "debtToEquity": 0.4120736511584353,
+        "marketCap": 93576554272.7763,
+        "return1W": 0.0283464288491479,
+        "return1M": -0.012422903373695879,
+        "return3M": 0.07746177520279807,
+        "return6M": 0.2389650528845324,
+        "return1Y": 0.046479943322168316,
+        "reasons": [
+          "Revenue growth of 18.5% \u2014 top 9% of the universe",
+          "Free-cash-flow margin of 19.6% \u2014 top 15% of the universe",
+          "Operating margin of 21.3% \u2014 top 16% of the universe",
+          "Net margin of 17.9% \u2014 top 16% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.01012
+      },
+      {
+        "rank": 45,
+        "ticker": "SYN007",
+        "name": "Synthetic Company 7",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 154.36,
+        "score": 74.39,
+        "healthScore": 86.58,
+        "valuationScore": 38.61,
+        "momentumScore": 60.62,
+        "peRatio": 39.020636008226376,
+        "dividendYield": 0.0,
+        "grossMargin": 0.4129374193868015,
+        "operatingMargin": 0.32645282877176895,
+        "netMargin": 0.2982916043947743,
+        "returnOnEquity": 0.24585089153905162,
+        "fcfMargin": 0.28063418062354545,
+        "fcfYield": 0.07118550965899673,
+        "revenueGrowth": 0.10208608160236027,
+        "debtToEquity": 0.4805370286320947,
+        "marketCap": 9130572160.43298,
+        "return1W": 0.011206577482408804,
+        "return1M": 0.015590891164851978,
+        "return3M": 0.09783274550805568,
+        "return6M": -0.04981354024292525,
+        "return1Y": 0.1728498314504674,
+        "reasons": [
+          "Operating margin of 32.6% \u2014 top 2% of the universe",
+          "Net margin of 29.8% \u2014 top 2% of the universe",
+          "Free-cash-flow margin of 28.1% \u2014 top 6% of the universe",
+          "Fcf yield of 7.1% \u2014 top 8% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 39.0 vs sector median 18.9"
+        ],
+        "fundWeight": 0.01009
+      },
+      {
+        "rank": 46,
+        "ticker": "SYN357",
+        "name": "Synthetic Company 357",
+        "sector": "Materials",
+        "subIndustry": "",
+        "price": 211.21,
+        "score": 74.38,
+        "healthScore": 85.92,
+        "valuationScore": 51.39,
+        "momentumScore": 39.62,
+        "peRatio": 26.370961923579333,
+        "dividendYield": 0.012260160317228543,
+        "grossMargin": 0.3961602136495084,
+        "operatingMargin": 0.2755910374061526,
+        "netMargin": 0.21790884531934163,
+        "returnOnEquity": 0.22400359251348767,
+        "fcfMargin": 0.30114058104575003,
+        "fcfYield": 0.043457551172987025,
+        "revenueGrowth": 0.2013797678020049,
+        "debtToEquity": 0.6956986416516336,
+        "marketCap": 6516625330.666108,
+        "return1W": -0.007354082418095088,
+        "return1M": 0.023705078295935312,
+        "return3M": -0.14860860875830167,
+        "return6M": 0.06805839573310965,
+        "return1Y": 0.0011195331222224048,
+        "reasons": [
+          "Free-cash-flow margin of 30.1% \u2014 top 3% of the universe",
+          "Operating margin of 27.6% \u2014 top 7% of the universe",
+          "Revenue growth of 20.1% \u2014 top 7% of the universe",
+          "Net margin of 21.8% \u2014 top 10% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.4 vs sector median 14.8"
+        ],
+        "fundWeight": 0.01009
+      },
+      {
+        "rank": 47,
+        "ticker": "SYN397",
+        "name": "Synthetic Company 397",
+        "sector": "Real Estate",
+        "subIndustry": "",
+        "price": 506.17,
+        "score": 74.33,
+        "healthScore": 79.92,
+        "valuationScore": 75.74,
+        "momentumScore": 32.38,
+        "peRatio": 10.55549224019411,
+        "dividendYield": 0.0,
+        "grossMargin": 0.43482019380718623,
+        "operatingMargin": 0.26931844704711877,
+        "netMargin": 0.23210545001248253,
+        "returnOnEquity": 0.1377370529482427,
+        "fcfMargin": 0.22877006908359748,
+        "fcfYield": 0.044677197431503175,
+        "revenueGrowth": 0.1150361207821389,
+        "debtToEquity": 0.5766282361305701,
+        "marketCap": 6477245630.584693,
+        "return1W": -0.005958062864029117,
+        "return1M": 0.05043444300029132,
+        "return3M": -0.07907792157612326,
+        "return6M": -0.0829048373595826,
+        "return1Y": -0.09301178719736607,
+        "reasons": [
+          "Operating margin of 26.9% \u2014 top 8% of the universe",
+          "Net margin of 23.2% \u2014 top 8% of the universe",
+          "Free-cash-flow margin of 22.9% \u2014 top 10% of the universe",
+          "Trades at a 27% discount to its sector (P/E 10.6 vs 14.5 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.01008
+      },
+      {
+        "rank": 48,
+        "ticker": "SYN206",
+        "name": "Synthetic Company 206",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 275.38,
+        "score": 74.32,
+        "healthScore": 80.17,
+        "valuationScore": 42.45,
+        "momentumScore": 97.12,
+        "peRatio": 41.28856932268373,
+        "dividendYield": 0.006834353314028811,
+        "grossMargin": 0.49983321242404954,
+        "operatingMargin": 0.20447847072671446,
+        "netMargin": 0.1765743815408865,
+        "returnOnEquity": 0.25435675432269506,
+        "fcfMargin": 0.1578014961033064,
+        "fcfYield": 0.06265941378631501,
+        "revenueGrowth": 0.1613756468457835,
+        "debtToEquity": 0.5709606522907561,
+        "marketCap": 762313207.0964749,
+        "return1W": 0.047393233792162294,
+        "return1M": -0.05163186086675903,
+        "return3M": 0.2588656183806787,
+        "return6M": 0.38625692338675227,
+        "return1Y": 0.45848609435131876,
+        "reasons": [
+          "Return on equity of 25.4% \u2014 top 12% of the universe",
+          "Revenue growth of 16.1% \u2014 top 14% of the universe",
+          "Fcf yield of 6.3% \u2014 top 15% of the universe",
+          "Net margin of 17.7% \u2014 top 17% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 41.3 vs sector median 17.7"
+        ],
+        "fundWeight": 0.01008
+      },
+      {
+        "rank": 49,
+        "ticker": "SYN245",
+        "name": "Synthetic Company 245",
+        "sector": "Materials",
+        "subIndustry": "",
+        "price": 279.05,
+        "score": 74.04,
+        "healthScore": 76.21,
+        "valuationScore": 81.31,
+        "momentumScore": 44.38,
+        "peRatio": 14.193261097504447,
+        "dividendYield": 0.01978977777712275,
+        "grossMargin": 0.4021324845512464,
+        "operatingMargin": 0.1590564137732764,
+        "netMargin": 0.1185871499819936,
+        "returnOnEquity": 0.2230883273364936,
+        "fcfMargin": 0.11645351196412038,
+        "fcfYield": 0.07183381716051618,
+        "revenueGrowth": 0.14720221617882184,
+        "debtToEquity": 0.11328919546022365,
+        "marketCap": 7968306882.450511,
+        "return1W": -0.014713488128261943,
+        "return1M": -0.051283109771215085,
+        "return3M": -0.0468854847680306,
+        "return6M": -0.000964982696742625,
+        "return1Y": 0.0629569654765489,
+        "reasons": [
+          "Fcf yield of 7.2% \u2014 top 7% of the universe",
+          "Return on equity of 22.3% \u2014 top 17% of the universe",
+          "Revenue growth of 14.7% \u2014 top 18% of the universe",
+          "Low leverage \u2014 debt/equity of 0.11"
+        ],
+        "flags": [],
+        "fundWeight": 0.01005
+      },
+      {
+        "rank": 50,
+        "ticker": "SYN383",
+        "name": "Synthetic Company 383",
+        "sector": "Consumer Staples",
+        "subIndustry": "",
+        "price": 489.33,
+        "score": 73.5,
+        "healthScore": 77.92,
+        "valuationScore": 52.1,
+        "momentumScore": 85.38,
+        "peRatio": 14.165709430663972,
+        "dividendYield": 0.017864712487945203,
+        "grossMargin": 0.38179614039204185,
+        "operatingMargin": 0.2261194380643282,
+        "netMargin": 0.21405808445779628,
+        "returnOnEquity": 0.1964405483978978,
+        "fcfMargin": 0.17932395060421577,
+        "fcfYield": 0.0705798216118019,
+        "revenueGrowth": 0.004077726969240039,
+        "debtToEquity": 0.008436100131992252,
+        "marketCap": 11480602007.694225,
+        "return1W": 0.040166163265214626,
+        "return1M": -0.035930513456805466,
+        "return3M": 0.17942286312131103,
+        "return6M": 0.14561488498959313,
+        "return1Y": 0.25255441469203915,
+        "reasons": [
+          "Fcf yield of 7.1% \u2014 top 9% of the universe",
+          "Net margin of 21.4% \u2014 top 10% of the universe",
+          "Operating margin of 22.6% \u2014 top 14% of the universe",
+          "Low leverage \u2014 debt/equity of 0.01",
+          "Trades at a 18% discount to its sector (P/E 14.2 vs 17.4 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.00997
+      },
+      {
+        "rank": 51,
+        "ticker": "SYN122",
+        "name": "Synthetic Company 122",
+        "sector": "Industrials",
+        "subIndustry": "",
+        "price": 599.65,
+        "score": 73.49,
+        "healthScore": 76.42,
+        "valuationScore": 57.94,
+        "momentumScore": 84.12,
+        "peRatio": 20.882530699375287,
+        "dividendYield": 0.021246741507124883,
+        "grossMargin": 0.4213162089767845,
+        "operatingMargin": 0.21141728976583518,
+        "netMargin": 0.16878603485360352,
+        "returnOnEquity": 0.19550519375442854,
+        "fcfMargin": 0.2005955859581927,
+        "fcfYield": 0.05884531663076138,
+        "revenueGrowth": 0.11204297583831337,
+        "debtToEquity": 0.6869651307169481,
+        "marketCap": 5995212036.708291,
+        "return1W": 0.024018135312302843,
+        "return1M": -0.00023687577737103449,
+        "return3M": 0.13059302677722387,
+        "return6M": 0.19599166641479593,
+        "return1Y": 0.05282316562817596,
+        "reasons": [
+          "Free-cash-flow margin of 20.1% \u2014 top 14% of the universe",
+          "Operating margin of 21.1% \u2014 top 16% of the universe",
+          "Fcf yield of 5.9% \u2014 top 17% of the universe",
+          "Net margin of 16.9% \u2014 top 19% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.00997
+      },
+      {
+        "rank": 52,
+        "ticker": "SYN374",
+        "name": "Synthetic Company 374",
+        "sector": "Industrials",
+        "subIndustry": "",
+        "price": 534.8,
+        "score": 73.46,
+        "healthScore": 81.83,
+        "valuationScore": 50.05,
+        "momentumScore": 61.62,
+        "peRatio": 38.45283375610968,
+        "dividendYield": 0.004582899320281502,
+        "grossMargin": 0.43964253230985667,
+        "operatingMargin": 0.2453652915154012,
+        "netMargin": 0.1933144494617464,
+        "returnOnEquity": 0.40631995404191484,
+        "fcfMargin": 0.21792821076947758,
+        "fcfYield": 0.06819074764224714,
+        "revenueGrowth": 0.22643863889173227,
+        "debtToEquity": 0.9957710662379695,
+        "marketCap": 8495025643.620099,
+        "return1W": 0.016325847345088507,
+        "return1M": -0.033556793171102876,
+        "return3M": -0.003973421572544558,
+        "return6M": 0.12344826913256551,
+        "return1Y": 0.19708800385248693,
+        "reasons": [
+          "Return on equity of 40.6% \u2014 top 1% of the universe",
+          "Revenue growth of 22.6% \u2014 top 4% of the universe",
+          "Fcf yield of 6.8% \u2014 top 10% of the universe",
+          "Operating margin of 24.5% \u2014 top 10% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 38.5 vs sector median 17.6"
+        ],
+        "fundWeight": 0.00997
+      },
+      {
+        "rank": 53,
+        "ticker": "SYN221",
+        "name": "Synthetic Company 221",
+        "sector": "Materials",
+        "subIndustry": "",
+        "price": 467.25,
+        "score": 73.41,
+        "healthScore": 84.12,
+        "valuationScore": 36.38,
+        "momentumScore": 72.5,
+        "peRatio": 33.774081042503155,
+        "dividendYield": 0.00914565835066112,
+        "grossMargin": 0.5098916331631391,
+        "operatingMargin": 0.23571079705675219,
+        "netMargin": 0.18501252824047282,
+        "returnOnEquity": 0.26630702470939355,
+        "fcfMargin": 0.22277576955225176,
+        "fcfYield": 0.061691453573390065,
+        "revenueGrowth": 0.07204236212188755,
+        "debtToEquity": 0.09774466030778012,
+        "marketCap": 6751012452.018484,
+        "return1W": 0.012889704246599937,
+        "return1M": -0.04430929907378292,
+        "return3M": 0.05481731709914184,
+        "return6M": 0.15699626688790827,
+        "return1Y": -0.054085833310781234,
+        "reasons": [
+          "Return on equity of 26.6% \u2014 top 11% of the universe",
+          "Operating margin of 23.6% \u2014 top 11% of the universe",
+          "Free-cash-flow margin of 22.3% \u2014 top 12% of the universe",
+          "Net margin of 18.5% \u2014 top 15% of the universe",
+          "Low leverage \u2014 debt/equity of 0.10"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 33.8 vs sector median 14.8"
+        ],
+        "fundWeight": 0.00996
+      },
+      {
+        "rank": 54,
+        "ticker": "SYN101",
+        "name": "Synthetic Company 101",
+        "sector": "Consumer Discretionary",
+        "subIndustry": "",
+        "price": 278.96,
+        "score": 73.4,
+        "healthScore": 77.79,
+        "valuationScore": 69.71,
+        "momentumScore": 50.0,
+        "peRatio": 5.0,
+        "dividendYield": 0.011623338180586681,
+        "grossMargin": 0.35926115468163156,
+        "operatingMargin": 0.21509883985245948,
+        "netMargin": 0.17711885955245038,
+        "returnOnEquity": 0.1553081129379355,
+        "fcfMargin": 0.19253037135329892,
+        "fcfYield": 0.0131663316136796,
+        "revenueGrowth": 0.08659992402057254,
+        "debtToEquity": 0.3754403115032227,
+        "marketCap": 11739308573.272915,
+        "return1W": -0.0011900744317643707,
+        "return1M": -0.05691584225994806,
+        "return3M": -0.00858171536219337,
+        "return6M": 0.00025626581449506025,
+        "return1Y": 0.061480890948558846,
+        "reasons": [
+          "Operating margin of 21.5% \u2014 top 15% of the universe",
+          "Net margin of 17.7% \u2014 top 17% of the universe",
+          "Free-cash-flow margin of 19.3% \u2014 top 17% of the universe",
+          "Low leverage \u2014 debt/equity of 0.38",
+          "Trades at a 68% discount to its sector (P/E 5.0 vs 15.5 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.00996
+      },
+      {
+        "rank": 55,
+        "ticker": "SYN197",
+        "name": "Synthetic Company 197",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 429.55,
+        "score": 73.32,
+        "healthScore": 86.0,
+        "valuationScore": 27.35,
+        "momentumScore": 76.5,
+        "peRatio": 40.081041666484765,
+        "dividendYield": 0.011068936331280407,
+        "grossMargin": 0.5298034910985621,
+        "operatingMargin": 0.25811785571880413,
+        "netMargin": 0.22961815980035377,
+        "returnOnEquity": 0.24965065237819406,
+        "fcfMargin": 0.24104510884509256,
+        "fcfYield": 0.04651645032304903,
+        "revenueGrowth": 0.06894373055675032,
+        "debtToEquity": 0.00523067297406421,
+        "marketCap": 24557791628.862503,
+        "return1W": -0.021588006098355053,
+        "return1M": 0.05737020043993389,
+        "return3M": 0.10306694185246605,
+        "return6M": 0.12376845489272396,
+        "return1Y": 0.017030986226276523,
+        "reasons": [
+          "Operating margin of 25.8% \u2014 top 8% of the universe",
+          "Net margin of 23.0% \u2014 top 8% of the universe",
+          "Free-cash-flow margin of 24.1% \u2014 top 9% of the universe",
+          "Return on equity of 25.0% \u2014 top 12% of the universe",
+          "Low leverage \u2014 debt/equity of 0.01"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 40.1 vs sector median 17.7"
+        ],
+        "fundWeight": 0.00995
+      },
+      {
+        "rank": 56,
+        "ticker": "SYN070",
+        "name": "Synthetic Company 70",
+        "sector": "Utilities",
+        "subIndustry": "",
+        "price": 150.82,
+        "score": 72.99,
+        "healthScore": 81.08,
+        "valuationScore": 47.42,
+        "momentumScore": 67.5,
+        "peRatio": 30.56079807994023,
+        "dividendYield": 0.00515229482324484,
+        "grossMargin": 0.472119550097328,
+        "operatingMargin": 0.19788303259981996,
+        "netMargin": 0.16947803774836184,
+        "returnOnEquity": 0.3261355183009857,
+        "fcfMargin": 0.23885027717174337,
+        "fcfYield": 0.05300703778325709,
+        "revenueGrowth": 0.17689294415550583,
+        "debtToEquity": 0.831001701616883,
+        "marketCap": 2508239057.7652197,
+        "return1W": 0.015474520604789588,
+        "return1M": 0.03462229523987546,
+        "return3M": 0.11539865919123797,
+        "return6M": 0.018892956439344244,
+        "return1Y": 0.040916856515002153,
+        "reasons": [
+          "Return on equity of 32.6% \u2014 top 5% of the universe",
+          "Free-cash-flow margin of 23.9% \u2014 top 10% of the universe",
+          "Revenue growth of 17.7% \u2014 top 10% of the universe",
+          "Net margin of 16.9% \u2014 top 19% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 30.6 vs sector median 15.1"
+        ],
+        "fundWeight": 0.0099
+      },
+      {
+        "rank": 57,
+        "ticker": "SYN301",
+        "name": "Synthetic Company 301",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 167.22,
+        "score": 72.36,
+        "healthScore": 74.46,
+        "valuationScore": 80.97,
+        "momentumScore": 40.5,
+        "peRatio": 14.255007539820344,
+        "dividendYield": 0.001442904181847296,
+        "grossMargin": 0.575887990737652,
+        "operatingMargin": 0.2189182015934574,
+        "netMargin": 0.16902838082804758,
+        "returnOnEquity": 0.23347214462697785,
+        "fcfMargin": 0.19853888926919452,
+        "fcfYield": 0.06384909930018606,
+        "revenueGrowth": 0.16864778165478012,
+        "debtToEquity": 1.166550351126971,
+        "marketCap": 46859116830.43225,
+        "return1W": 0.008932036426936947,
+        "return1M": 0.07874774934457923,
+        "return3M": 0.0064561637597291,
+        "return6M": -0.11799330472320421,
+        "return1Y": -0.19773173749469872,
+        "reasons": [
+          "Revenue growth of 16.9% \u2014 top 12% of the universe",
+          "Fcf yield of 6.4% \u2014 top 13% of the universe",
+          "Operating margin of 21.9% \u2014 top 14% of the universe",
+          "Free-cash-flow margin of 19.9% \u2014 top 15% of the universe",
+          "Trades at a 25% discount to its sector (P/E 14.3 vs 18.9 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.00982
+      },
+      {
+        "rank": 58,
+        "ticker": "SYN210",
+        "name": "Synthetic Company 210",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 138.49,
+        "score": 72.31,
+        "healthScore": 76.71,
+        "valuationScore": 56.49,
+        "momentumScore": 73.12,
+        "peRatio": 26.84132267584683,
+        "dividendYield": 0.02398340934570302,
+        "grossMargin": 0.3331500388006564,
+        "operatingMargin": 0.24496976475414267,
+        "netMargin": 0.21036894045225296,
+        "returnOnEquity": 0.19453518528349942,
+        "fcfMargin": 0.18358021699560415,
+        "fcfYield": 0.07301729200716896,
+        "revenueGrowth": 0.16454572924764027,
+        "debtToEquity": 0.970198578692828,
+        "marketCap": 38369983983.48124,
+        "return1W": 0.007962995609539964,
+        "return1M": 0.022482864076333115,
+        "return3M": 0.13770981289912404,
+        "return6M": 0.0421574670214986,
+        "return1Y": 0.05221688346022511,
+        "reasons": [
+          "Fcf yield of 7.3% \u2014 top 6% of the universe",
+          "Net margin of 21.0% \u2014 top 10% of the universe",
+          "Operating margin of 24.5% \u2014 top 11% of the universe",
+          "Revenue growth of 16.5% \u2014 top 13% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.8 vs sector median 19.2"
+        ],
+        "fundWeight": 0.00981
+      },
+      {
+        "rank": 59,
+        "ticker": "SYN002",
+        "name": "Synthetic Company 2",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 415.41,
+        "score": 72.1,
+        "healthScore": 78.71,
+        "valuationScore": 60.79,
+        "momentumScore": 48.5,
+        "peRatio": 19.99722599033028,
+        "dividendYield": 0.009041507792639073,
+        "grossMargin": 0.5619965218877919,
+        "operatingMargin": 0.2302236696552755,
+        "netMargin": 0.19979954299103245,
+        "returnOnEquity": 0.1911580983590489,
+        "fcfMargin": 0.17823431691665365,
+        "fcfYield": 0.05896725394482449,
+        "revenueGrowth": 0.12128968255574307,
+        "debtToEquity": 0.5861262782992517,
+        "marketCap": 15239794276.578,
+        "return1W": 0.000541670667065756,
+        "return1M": 0.046531811555667116,
+        "return3M": 0.005138052252588284,
+        "return6M": -0.03356818626498305,
+        "return1Y": -0.11505425845577599,
+        "reasons": [
+          "Operating margin of 23.0% \u2014 top 12% of the universe",
+          "Net margin of 20.0% \u2014 top 13% of the universe",
+          "Fcf yield of 5.9% \u2014 top 16% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.00978
+      },
+      {
+        "rank": 60,
+        "ticker": "SYN159",
+        "name": "Synthetic Company 159",
+        "sector": "Health Care",
+        "subIndustry": "",
+        "price": 569.79,
+        "score": 70.98,
+        "healthScore": 74.25,
+        "valuationScore": 52.01,
+        "momentumScore": 86.0,
+        "peRatio": 18.291829398016674,
+        "dividendYield": 0.02228868432493691,
+        "grossMargin": 0.35531466813006185,
+        "operatingMargin": 0.20717450742630206,
+        "netMargin": 0.20880554339928684,
+        "returnOnEquity": 0.2904699026460511,
+        "fcfMargin": 0.19582261254002617,
+        "fcfYield": 0.040892521469048815,
+        "revenueGrowth": -0.06664528736602568,
+        "debtToEquity": 0.4780950280741136,
+        "marketCap": 8430707910.644284,
+        "return1W": -0.061802121924249956,
+        "return1M": -0.08641727661674899,
+        "return3M": 0.13646968174516688,
+        "return6M": 0.2066345356015016,
+        "return1Y": 0.12362829253542357,
+        "reasons": [
+          "Return on equity of 29.0% \u2014 top 8% of the universe",
+          "Net margin of 20.9% \u2014 top 11% of the universe",
+          "Free-cash-flow margin of 19.6% \u2014 top 16% of the universe",
+          "Operating margin of 20.7% \u2014 top 16% of the universe"
+        ],
+        "flags": [
+          "Revenue declined 7% YoY"
+        ],
+        "fundWeight": 0.00963
+      },
+      {
+        "rank": 61,
+        "ticker": "SYN171",
+        "name": "Synthetic Company 171",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 458.26,
+        "score": 70.55,
+        "healthScore": 65.04,
+        "valuationScore": 80.25,
+        "momentumScore": 89.75,
+        "peRatio": -1.0,
+        "dividendYield": 0.02138378266098636,
+        "grossMargin": 0.4986445796593908,
+        "operatingMargin": 0.15469222550156858,
+        "netMargin": 0.12569509891581723,
+        "returnOnEquity": 0.31836471041336944,
+        "fcfMargin": 0.08717025054496697,
+        "fcfYield": 0.056823461403703306,
+        "revenueGrowth": 0.2597853387355752,
+        "debtToEquity": 1.3820375835005425,
+        "marketCap": 5651261253.321401,
+        "return1W": -0.004876938944700127,
+        "return1M": -0.0887818586894093,
+        "return3M": 0.13657075061843446,
+        "return6M": 0.3337132510780387,
+        "return1Y": 0.4069623492036439,
+        "reasons": [
+          "Revenue growth of 26.0% \u2014 top 2% of the universe",
+          "Return on equity of 31.8% \u2014 top 6% of the universe",
+          "Fcf yield of 5.7% \u2014 top 20% of the universe",
+          "Trades at a 105% discount to its sector (P/E -1.0 vs 19.2 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.00957
+      },
+      {
+        "rank": 62,
+        "ticker": "SYN108",
+        "name": "Synthetic Company 108",
+        "sector": "Consumer Staples",
+        "subIndustry": "",
+        "price": 174.66,
+        "score": 70.4,
+        "healthScore": 82.67,
+        "valuationScore": 49.36,
+        "momentumScore": 26.62,
+        "peRatio": 34.98941252518945,
+        "dividendYield": 0.0022725208377966195,
+        "grossMargin": 0.5779577276001672,
+        "operatingMargin": 0.25321078682341297,
+        "netMargin": 0.2530035058616788,
+        "returnOnEquity": 0.26247624967536043,
+        "fcfMargin": 0.20636474492417564,
+        "fcfYield": 0.07156403091515541,
+        "revenueGrowth": 0.16961270917480253,
+        "debtToEquity": 0.8597548294202558,
+        "marketCap": 3745587858.613692,
+        "return1W": 0.003283428156996075,
+        "return1M": 0.045978165326530644,
+        "return3M": -0.015680098671475864,
+        "return6M": -0.26114895719972,
+        "return1Y": -0.5387759866273262,
+        "reasons": [
+          "Net margin of 25.3% \u2014 top 6% of the universe",
+          "Fcf yield of 7.2% \u2014 top 8% of the universe",
+          "Operating margin of 25.3% \u2014 top 9% of the universe",
+          "Revenue growth of 17.0% \u2014 top 12% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 35.0 vs sector median 17.4"
+        ],
+        "fundWeight": 0.00955
+      },
+      {
+        "rank": 63,
+        "ticker": "SYN213",
+        "name": "Synthetic Company 213",
+        "sector": "Consumer Staples",
+        "subIndustry": "",
+        "price": 403.02,
+        "score": 70.31,
+        "healthScore": 82.6,
+        "valuationScore": 38.2,
+        "momentumScore": 48.5,
+        "peRatio": 38.32939725378201,
+        "dividendYield": 0.0,
+        "grossMargin": 0.5616157417710897,
+        "operatingMargin": 0.2453068125247924,
+        "netMargin": 0.20480677896541663,
+        "returnOnEquity": 0.2251566576152587,
+        "fcfMargin": 0.17677715776877984,
+        "fcfYield": 0.08315060929109992,
+        "revenueGrowth": 0.06824021098074327,
+        "debtToEquity": 0.0,
+        "marketCap": 209105470193.7474,
+        "return1W": -0.02502733813580489,
+        "return1M": 0.012808354430039625,
+        "return3M": 0.017677891428156157,
+        "return6M": -0.05548548422268383,
+        "return1Y": 0.12499358906656692,
+        "reasons": [
+          "Fcf yield of 8.3% \u2014 top 2% of the universe",
+          "Operating margin of 24.5% \u2014 top 11% of the universe",
+          "Net margin of 20.5% \u2014 top 12% of the universe",
+          "Return on equity of 22.5% \u2014 top 17% of the universe",
+          "Low leverage \u2014 debt/equity of 0.00"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 38.3 vs sector median 17.4"
+        ],
+        "fundWeight": 0.00954
+      },
+      {
+        "rank": 64,
+        "ticker": "SYN297",
+        "name": "Synthetic Company 297",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 223.33,
+        "score": 70.12,
+        "healthScore": 85.04,
+        "valuationScore": 42.88,
+        "momentumScore": 20.12,
+        "peRatio": 37.85343779395664,
+        "dividendYield": 0.0237554819351701,
+        "grossMargin": 0.6809267997156552,
+        "operatingMargin": 0.3207044660582538,
+        "netMargin": 0.2705828327539677,
+        "returnOnEquity": 0.367134081290229,
+        "fcfMargin": 0.29693154542046496,
+        "fcfYield": 0.09083638993795787,
+        "revenueGrowth": 0.1117509244643054,
+        "debtToEquity": 0.7968629801595059,
+        "marketCap": 14027402395.575808,
+        "return1W": -0.011434636047183476,
+        "return1M": 0.09125823818356867,
+        "return3M": -0.14478487698958453,
+        "return6M": -0.1369853706129707,
+        "return1Y": -0.2586196167156064,
+        "reasons": [
+          "Fcf yield of 9.1% \u2014 top 1% of the universe",
+          "Return on equity of 36.7% \u2014 top 2% of the universe",
+          "Operating margin of 32.1% \u2014 top 3% of the universe",
+          "Free-cash-flow margin of 29.7% \u2014 top 4% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 37.9 vs sector median 14.4"
+        ],
+        "fundWeight": 0.00951
+      },
+      {
+        "rank": 65,
+        "ticker": "SYN257",
+        "name": "Synthetic Company 257",
+        "sector": "Health Care",
+        "subIndustry": "",
+        "price": 497.98,
+        "score": 69.51,
+        "healthScore": 69.21,
+        "valuationScore": 71.52,
+        "momentumScore": 67.62,
+        "peRatio": 15.238934312771583,
+        "dividendYield": 0.010256241632171436,
+        "grossMargin": 0.3780009600714688,
+        "operatingMargin": 0.16940318232367638,
+        "netMargin": 0.15151481229262534,
+        "returnOnEquity": 0.1571003375945489,
+        "fcfMargin": 0.19310072929089062,
+        "fcfYield": 0.048387246028100746,
+        "revenueGrowth": 0.15566069902304153,
+        "debtToEquity": 1.043016083209186,
+        "marketCap": 8402184896.75565,
+        "return1W": 0.010795085304035655,
+        "return1M": 0.03236966685627678,
+        "return3M": 0.11334434916707463,
+        "return6M": 0.021252399870921063,
+        "return1Y": -0.02947178522452572,
+        "reasons": [
+          "Revenue growth of 15.6% \u2014 top 16% of the universe",
+          "Free-cash-flow margin of 19.3% \u2014 top 17% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.00943
+      },
+      {
+        "rank": 66,
+        "ticker": "SYN307",
+        "name": "Synthetic Company 307",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 301.5,
+        "score": 69.4,
+        "healthScore": 75.92,
+        "valuationScore": 57.31,
+        "momentumScore": 48.0,
+        "peRatio": 22.23297610205859,
+        "dividendYield": 0.009446260401776851,
+        "grossMargin": 0.5974016838358388,
+        "operatingMargin": 0.2825238716891256,
+        "netMargin": 0.24282777418333235,
+        "returnOnEquity": 0.0729725483352803,
+        "fcfMargin": 0.2536368116462667,
+        "fcfYield": 0.04033160714684737,
+        "revenueGrowth": 0.191273798888256,
+        "debtToEquity": 0.9596141264807303,
+        "marketCap": 9261019313.394709,
+        "return1W": -0.003117101316769209,
+        "return1M": -0.09460994544889391,
+        "return3M": 0.08594188576951112,
+        "return6M": -0.1514786476618034,
+        "return1Y": -0.08014588890135435,
+        "reasons": [
+          "Operating margin of 28.3% \u2014 top 6% of the universe",
+          "Net margin of 24.3% \u2014 top 7% of the universe",
+          "Free-cash-flow margin of 25.4% \u2014 top 7% of the universe",
+          "Revenue growth of 19.1% \u2014 top 8% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.00942
+      },
+      {
+        "rank": 67,
+        "ticker": "SYN026",
+        "name": "Synthetic Company 26",
+        "sector": "Real Estate",
+        "subIndustry": "",
+        "price": 164.8,
+        "score": 69.35,
+        "healthScore": 73.33,
+        "valuationScore": 42.29,
+        "momentumScore": 95.62,
+        "peRatio": 30.401207842215072,
+        "dividendYield": 0.019340154131381272,
+        "grossMargin": 0.38788260817137166,
+        "operatingMargin": 0.11726481356433699,
+        "netMargin": 0.06427383469952921,
+        "returnOnEquity": 0.34294604617581104,
+        "fcfMargin": 0.13344414635894203,
+        "fcfYield": 0.044478923234404714,
+        "revenueGrowth": 0.16352373497889566,
+        "debtToEquity": 0.13134498142955864,
+        "marketCap": 11291272610.552382,
+        "return1W": 0.013645731360401843,
+        "return1M": 0.12724477075207746,
+        "return3M": 0.18087389960694963,
+        "return6M": 0.45460037084146643,
+        "return1Y": 0.6139347781058506,
+        "reasons": [
+          "Return on equity of 34.3% \u2014 top 4% of the universe",
+          "Revenue growth of 16.4% \u2014 top 14% of the universe",
+          "Low leverage \u2014 debt/equity of 0.13"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 30.4 vs sector median 14.5"
+        ],
+        "fundWeight": 0.00941
+      },
+      {
+        "rank": 68,
+        "ticker": "SYN089",
+        "name": "Synthetic Company 89",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 188.57,
+        "score": 69.35,
+        "healthScore": 77.62,
+        "valuationScore": 29.4,
+        "momentumScore": 91.38,
+        "peRatio": 37.11609869634117,
+        "dividendYield": 0.01023897400123373,
+        "grossMargin": 0.3725404664971711,
+        "operatingMargin": 0.1762888129182307,
+        "netMargin": 0.14428850468321877,
+        "returnOnEquity": 0.15105473371959813,
+        "fcfMargin": 0.1742488866496976,
+        "fcfYield": 0.03437289370020147,
+        "revenueGrowth": 0.13998587428868697,
+        "debtToEquity": 0.23347216565556272,
+        "marketCap": 6653430044.42528,
+        "return1W": 0.02365736045516235,
+        "return1M": 0.06327620001957783,
+        "return3M": 0.17844010495531765,
+        "return6M": 0.2489805476767563,
+        "return1Y": 0.185298497096536,
+        "reasons": [
+          "Revenue growth of 14.0% \u2014 top 20% of the universe",
+          "Low leverage \u2014 debt/equity of 0.23"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 37.1 vs sector median 19.2"
+        ],
+        "fundWeight": 0.00941
+      },
+      {
+        "rank": 69,
+        "ticker": "SYN104",
+        "name": "Synthetic Company 104",
+        "sector": "Health Care",
+        "subIndustry": "",
+        "price": 69.51,
+        "score": 69.23,
+        "healthScore": 81.38,
+        "valuationScore": 39.17,
+        "momentumScore": 44.38,
+        "peRatio": 26.540079675393322,
+        "dividendYield": 0.02100606123278409,
+        "grossMargin": 0.43912516713938354,
+        "operatingMargin": 0.30101851196242746,
+        "netMargin": 0.3039100245463675,
+        "returnOnEquity": 0.10786948902072536,
+        "fcfMargin": 0.28473333789328575,
+        "fcfYield": 0.05188757704633951,
+        "revenueGrowth": 0.07625572265300305,
+        "debtToEquity": 0.37714144519584203,
+        "marketCap": 30148869140.82657,
+        "return1W": 0.012583447580911952,
+        "return1M": 0.0362828577908152,
+        "return3M": -0.08892196287892593,
+        "return6M": 0.06244469995050424,
+        "return1Y": -0.04638491700967293,
+        "reasons": [
+          "Net margin of 30.4% \u2014 top 2% of the universe",
+          "Operating margin of 30.1% \u2014 top 4% of the universe",
+          "Free-cash-flow margin of 28.5% \u2014 top 5% of the universe",
+          "Low leverage \u2014 debt/equity of 0.38"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.5 vs sector median 15.1"
+        ],
+        "fundWeight": 0.00939
+      },
+      {
+        "rank": 70,
+        "ticker": "SYN168",
+        "name": "Synthetic Company 168",
+        "sector": "Industrials",
+        "subIndustry": "",
+        "price": 229.53,
+        "score": 68.85,
+        "healthScore": 63.17,
+        "valuationScore": 81.23,
+        "momentumScore": 83.88,
+        "peRatio": 15.188444546339873,
+        "dividendYield": 0.03645837543446024,
+        "grossMargin": 0.3854397441177331,
+        "operatingMargin": 0.11248548376137785,
+        "netMargin": 0.10776805237032243,
+        "returnOnEquity": 0.19362282955220575,
+        "fcfMargin": 0.0570641821942783,
+        "fcfYield": 0.08356731474887655,
+        "revenueGrowth": 0.1622577758763014,
+        "debtToEquity": 0.6346266978558393,
+        "marketCap": 30346373347.55369,
+        "return1W": -0.0027393594887696387,
+        "return1M": 0.06296669773104081,
+        "return3M": 0.11116474749500478,
+        "return6M": 0.2216153665797483,
+        "return1Y": 0.20748442421200508,
+        "reasons": [
+          "Fcf yield of 8.4% \u2014 top 2% of the universe",
+          "Revenue growth of 16.2% \u2014 top 14% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.00934
+      },
+      {
+        "rank": 71,
+        "ticker": "SYN240",
+        "name": "Synthetic Company 240",
+        "sector": "Real Estate",
+        "subIndustry": "",
+        "price": 216.81,
+        "score": 68.67,
+        "healthScore": 80.71,
+        "valuationScore": 45.11,
+        "momentumScore": 31.5,
+        "peRatio": 26.33538358534115,
+        "dividendYield": 0.011705271037693898,
+        "grossMargin": 0.314893651862017,
+        "operatingMargin": 0.20173921107977594,
+        "netMargin": 0.19448513390085023,
+        "returnOnEquity": 0.3006461757013031,
+        "fcfMargin": 0.20599671656053684,
+        "fcfYield": 0.07943391880871288,
+        "revenueGrowth": 0.06170141917072233,
+        "debtToEquity": 0.37177291064090007,
+        "marketCap": 14902427440.893282,
+        "return1W": -0.004923100084578938,
+        "return1M": 0.000955351012466936,
+        "return3M": -0.06011914997733708,
+        "return6M": -0.11782694510620473,
+        "return1Y": -0.004555394193285878,
+        "reasons": [
+          "Fcf yield of 7.9% \u2014 top 4% of the universe",
+          "Return on equity of 30.1% \u2014 top 8% of the universe",
+          "Net margin of 19.4% \u2014 top 13% of the universe",
+          "Free-cash-flow margin of 20.6% \u2014 top 14% of the universe",
+          "Low leverage \u2014 debt/equity of 0.37"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.3 vs sector median 14.5"
+        ],
+        "fundWeight": 0.00932
+      },
+      {
+        "rank": 72,
+        "ticker": "SYN144",
+        "name": "Synthetic Company 144",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 285.71,
+        "score": 68.6,
+        "healthScore": 74.62,
+        "valuationScore": 45.42,
+        "momentumScore": 72.75,
+        "peRatio": 24.487335196249838,
+        "dividendYield": 0.0,
+        "grossMargin": 0.477395780418605,
+        "operatingMargin": 0.2642708170634166,
+        "netMargin": 0.2643099101019819,
+        "returnOnEquity": 0.35466277570243543,
+        "fcfMargin": 0.2897493184795575,
+        "fcfYield": 0.06908238964501236,
+        "revenueGrowth": 0.05634142481274846,
+        "debtToEquity": 1.2295641467043938,
+        "marketCap": 11592304175.63413,
+        "return1W": 0.012504853435878604,
+        "return1M": 0.12469246465862402,
+        "return3M": 0.16123696928851097,
+        "return6M": 0.02475477518536523,
+        "return1Y": -0.013244010725963692,
+        "reasons": [
+          "Return on equity of 35.5% \u2014 top 3% of the universe",
+          "Free-cash-flow margin of 29.0% \u2014 top 5% of the universe",
+          "Net margin of 26.4% \u2014 top 5% of the universe",
+          "Operating margin of 26.4% \u2014 top 8% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 24.5 vs sector median 14.4"
+        ],
+        "fundWeight": 0.00931
+      },
+      {
+        "rank": 73,
+        "ticker": "SYN109",
+        "name": "Synthetic Company 109",
+        "sector": "Consumer Discretionary",
+        "subIndustry": "",
+        "price": 401.36,
+        "score": 68.34,
+        "healthScore": 74.04,
+        "valuationScore": 62.36,
+        "momentumScore": 40.38,
+        "peRatio": 25.634107610592807,
+        "dividendYield": 0.01033428189437089,
+        "grossMargin": 0.36953078640766895,
+        "operatingMargin": 0.16004299529172358,
+        "netMargin": 0.12507324478282425,
+        "returnOnEquity": 0.09953604686856016,
+        "fcfMargin": 0.12496324237522465,
+        "fcfYield": 0.05623085122768971,
+        "revenueGrowth": 0.2546049810101298,
+        "debtToEquity": 0.2832089347966815,
+        "marketCap": 42057724855.22162,
+        "return1W": 0.013300944872555787,
+        "return1M": -0.004236078991871689,
+        "return3M": 0.013258735956213893,
+        "return6M": -0.12890816033958047,
+        "return1Y": -0.3174573651819689,
+        "reasons": [
+          "Revenue growth of 25.5% \u2014 top 2% of the universe",
+          "Low leverage \u2014 debt/equity of 0.28"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 25.6 vs sector median 15.5"
+        ],
+        "fundWeight": 0.00927
+      },
+      {
+        "rank": 74,
+        "ticker": "SYN327",
+        "name": "Synthetic Company 327",
+        "sector": "Health Care",
+        "subIndustry": "",
+        "price": 558.51,
+        "score": 68.07,
+        "healthScore": 74.67,
+        "valuationScore": 59.29,
+        "momentumScore": 39.5,
+        "peRatio": 21.82367134872261,
+        "dividendYield": 0.02362760629115654,
+        "grossMargin": 0.4841460312362026,
+        "operatingMargin": 0.25216800994167626,
+        "netMargin": 0.17803816603319692,
+        "returnOnEquity": 0.12533633206000244,
+        "fcfMargin": 0.21970078462643447,
+        "fcfYield": 0.041900910861919036,
+        "revenueGrowth": 0.19351433666388074,
+        "debtToEquity": 1.0210861252300425,
+        "marketCap": 25202482871.767952,
+        "return1W": -0.04547514177741028,
+        "return1M": -0.014673121838094433,
+        "return3M": -0.0780638143124323,
+        "return6M": -0.011010773689528297,
+        "return1Y": -0.14142410353853935,
+        "reasons": [
+          "Revenue growth of 19.4% \u2014 top 8% of the universe",
+          "Operating margin of 25.2% \u2014 top 10% of the universe",
+          "Free-cash-flow margin of 22.0% \u2014 top 12% of the universe",
+          "Net margin of 17.8% \u2014 top 16% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 21.8 vs sector median 15.1"
+        ],
+        "fundWeight": 0.00924
+      },
+      {
+        "rank": 75,
+        "ticker": "SYN391",
+        "name": "Synthetic Company 391",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 494.12,
+        "score": 67.7,
+        "healthScore": 65.94,
+        "valuationScore": 59.73,
+        "momentumScore": 96.0,
+        "peRatio": 15.631729703808812,
+        "dividendYield": 0.0,
+        "grossMargin": 0.4797187623572059,
+        "operatingMargin": 0.10150219304656852,
+        "netMargin": 0.09200819193970886,
+        "returnOnEquity": 0.1787775977264081,
+        "fcfMargin": 0.10328124694859364,
+        "fcfYield": 0.04874656271114743,
+        "revenueGrowth": 0.08210999770260032,
+        "debtToEquity": 0.0,
+        "marketCap": 30417728595.807743,
+        "return1W": -0.03385387664340493,
+        "return1M": 0.01704788948350299,
+        "return3M": 0.31860369589280324,
+        "return6M": 0.3081317501224899,
+        "return1Y": 0.217301204671822,
+        "reasons": [
+          "Low leverage \u2014 debt/equity of 0.00",
+          "Trades at a 19% discount to its sector (P/E 15.6 vs 19.2 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.00918
+      },
+      {
+        "rank": 76,
+        "ticker": "SYN247",
+        "name": "Synthetic Company 247",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 352.69,
+        "score": 67.54,
+        "healthScore": 75.88,
+        "valuationScore": 30.14,
+        "momentumScore": 84.0,
+        "peRatio": 33.865679860240384,
+        "dividendYield": 0.014253881055290152,
+        "grossMargin": 0.5579916684909695,
+        "operatingMargin": 0.30313038379680485,
+        "netMargin": 0.2649493809700744,
+        "returnOnEquity": 0.30396733824819816,
+        "fcfMargin": 0.2519283057738781,
+        "fcfYield": 0.04844481973068983,
+        "revenueGrowth": 0.05791267271933642,
+        "debtToEquity": 1.0594676083250234,
+        "marketCap": 74343562376.3188,
+        "return1W": 0.005928977412709468,
+        "return1M": 0.03969069452061135,
+        "return3M": 0.11590323820270575,
+        "return6M": 0.20707850989301516,
+        "return1Y": 0.16792865863620857,
+        "reasons": [
+          "Operating margin of 30.3% \u2014 top 4% of the universe",
+          "Net margin of 26.5% \u2014 top 5% of the universe",
+          "Return on equity of 30.4% \u2014 top 7% of the universe",
+          "Free-cash-flow margin of 25.2% \u2014 top 8% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 33.9 vs sector median 14.4"
+        ],
+        "fundWeight": 0.00916
+      },
+      {
+        "rank": 77,
+        "ticker": "SYN004",
+        "name": "Synthetic Company 4",
+        "sector": "Consumer Staples",
+        "subIndustry": "",
+        "price": 229.65,
+        "score": 67.49,
+        "healthScore": 74.38,
+        "valuationScore": 44.87,
+        "momentumScore": 64.5,
+        "peRatio": 28.47355358083842,
+        "dividendYield": 0.009886029526569763,
+        "grossMargin": 0.4620002776000675,
+        "operatingMargin": 0.22575195848688165,
+        "netMargin": 0.19220570234960893,
+        "returnOnEquity": 0.09072888810401825,
+        "fcfMargin": 0.20351294051144983,
+        "fcfYield": 0.04055088475793541,
+        "revenueGrowth": 0.18262605017113906,
+        "debtToEquity": 0.8833310031213962,
+        "marketCap": 2385457338.318017,
+        "return1W": -0.021411035468165054,
+        "return1M": 0.03427582999785999,
+        "return3M": 0.020909453602962674,
+        "return6M": 0.12139441684428959,
+        "return1Y": 0.1239039996090239,
+        "reasons": [
+          "Revenue growth of 18.3% \u2014 top 10% of the universe",
+          "Operating margin of 22.6% \u2014 top 14% of the universe",
+          "Free-cash-flow margin of 20.4% \u2014 top 14% of the universe",
+          "Net margin of 19.2% \u2014 top 14% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 28.5 vs sector median 17.4"
+        ],
+        "fundWeight": 0.00916
+      },
+      {
+        "rank": 78,
+        "ticker": "SYN189",
+        "name": "Synthetic Company 189",
+        "sector": "Consumer Discretionary",
+        "subIndustry": "",
+        "price": 118.95,
+        "score": 67.17,
+        "healthScore": 75.58,
+        "valuationScore": 35.7,
+        "momentumScore": 71.25,
+        "peRatio": 31.08987198752024,
+        "dividendYield": 0.0,
+        "grossMargin": 0.5446660973732748,
+        "operatingMargin": 0.22110494513187226,
+        "netMargin": 0.2044631949818691,
+        "returnOnEquity": 0.19492315896143048,
+        "fcfMargin": 0.25598004867308416,
+        "fcfYield": 0.039451368583847075,
+        "revenueGrowth": 0.12885764741583125,
+        "debtToEquity": 1.0206407611555424,
+        "marketCap": 8311035701.594617,
+        "return1W": 0.0044907640566760835,
+        "return1M": 0.03348844461073356,
+        "return3M": 0.09445237032673369,
+        "return6M": 0.0735929735150216,
+        "return1Y": 0.014107911505966936,
+        "reasons": [
+          "Free-cash-flow margin of 25.6% \u2014 top 7% of the universe",
+          "Net margin of 20.4% \u2014 top 12% of the universe",
+          "Operating margin of 22.1% \u2014 top 14% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 31.1 vs sector median 15.5"
+        ],
+        "fundWeight": 0.00911
+      },
+      {
+        "rank": 79,
+        "ticker": "SYN367",
+        "name": "Synthetic Company 367",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 362.85,
+        "score": 67.07,
+        "healthScore": 65.25,
+        "valuationScore": 76.47,
+        "momentumScore": 61.0,
+        "peRatio": 13.062871831187177,
+        "dividendYield": 0.01792480135894989,
+        "grossMargin": 0.467227669772288,
+        "operatingMargin": 0.1574559926599615,
+        "netMargin": 0.10311308924408849,
+        "returnOnEquity": 0.24477751120998367,
+        "fcfMargin": 0.08139512861975673,
+        "fcfYield": 0.054117555278306126,
+        "revenueGrowth": 0.12381630940781221,
+        "debtToEquity": 0.8155819881312079,
+        "marketCap": 12231128998.19229,
+        "return1W": 0.0042250185935400015,
+        "return1M": 0.08788759176310364,
+        "return3M": 0.0634050079771401,
+        "return6M": 0.021989202584339958,
+        "return1Y": -0.1322755918584063,
+        "reasons": [
+          "Return on equity of 24.5% \u2014 top 14% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.0091
+      },
+      {
+        "rank": 80,
+        "ticker": "SYN275",
+        "name": "Synthetic Company 275",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 57.07,
+        "score": 67.01,
+        "healthScore": 69.42,
+        "valuationScore": 70.74,
+        "momentumScore": 42.75,
+        "peRatio": 12.226276388625756,
+        "dividendYield": 0.015923747848523115,
+        "grossMargin": 0.4539970751985634,
+        "operatingMargin": 0.14290255581007655,
+        "netMargin": 0.09621406174667801,
+        "returnOnEquity": 0.20063303111372377,
+        "fcfMargin": 0.10317004684236004,
+        "fcfYield": 0.034032343816634336,
+        "revenueGrowth": 0.2136657507628441,
+        "debtToEquity": 0.6053265701086386,
+        "marketCap": 40124653499.64265,
+        "return1W": 0.00023253472677344468,
+        "return1M": 0.021620010987752465,
+        "return3M": -0.08622420042032944,
+        "return6M": 0.0367242741285541,
+        "return1Y": 0.2263431734754623,
+        "reasons": [
+          "Revenue growth of 21.4% \u2014 top 5% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.00909
+      },
+      {
+        "rank": 81,
+        "ticker": "SYN151",
+        "name": "Synthetic Company 151",
+        "sector": "Utilities",
+        "subIndustry": "",
+        "price": 51.05,
+        "score": 67.01,
+        "healthScore": 81.0,
+        "valuationScore": 45.93,
+        "momentumScore": 11.25,
+        "peRatio": 28.98291383976117,
+        "dividendYield": 0.010020451213772942,
+        "grossMargin": 0.6636379694311212,
+        "operatingMargin": 0.23369394693932768,
+        "netMargin": 0.22163257234593917,
+        "returnOnEquity": 0.24649780017781425,
+        "fcfMargin": 0.1825061814649726,
+        "fcfYield": 0.08071966368549714,
+        "revenueGrowth": 0.09184112821368749,
+        "debtToEquity": 0.5202306435590011,
+        "marketCap": 15535810339.251472,
+        "return1W": 0.01077723019507565,
+        "return1M": 0.04627164330177953,
+        "return3M": -0.2025416801598532,
+        "return6M": -0.2042548471841398,
+        "return1Y": -0.026380120571973698,
+        "reasons": [
+          "Fcf yield of 8.1% \u2014 top 4% of the universe",
+          "Net margin of 22.2% \u2014 top 9% of the universe",
+          "Operating margin of 23.4% \u2014 top 12% of the universe",
+          "Return on equity of 24.6% \u2014 top 14% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 29.0 vs sector median 15.1"
+        ],
+        "fundWeight": 0.00909
+      },
+      {
+        "rank": 82,
+        "ticker": "SYN165",
+        "name": "Synthetic Company 165",
+        "sector": "Consumer Staples",
+        "subIndustry": "",
+        "price": 392.5,
+        "score": 66.01,
+        "healthScore": 71.96,
+        "valuationScore": 71.24,
+        "momentumScore": 13.88,
+        "peRatio": 19.08449659794829,
+        "dividendYield": 0.017026017054024865,
+        "grossMargin": 0.41751978371650766,
+        "operatingMargin": 0.1546730533957503,
+        "netMargin": 0.13132520087806812,
+        "returnOnEquity": 0.1568787639906783,
+        "fcfMargin": 0.18109160626878582,
+        "fcfYield": 0.0669093136788431,
+        "revenueGrowth": 0.16584697421336003,
+        "debtToEquity": 0.7279137521057182,
+        "marketCap": 93609752825.57605,
+        "return1W": 0.010247432999111974,
+        "return1M": -0.030846900237801768,
+        "return3M": -0.21484349167227834,
+        "return6M": -0.16394330454151265,
+        "return1Y": -0.3575948092322734,
+        "reasons": [
+          "Fcf yield of 6.7% \u2014 top 12% of the universe",
+          "Revenue growth of 16.6% \u2014 top 12% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.00896
+      },
+      {
+        "rank": 83,
+        "ticker": "SYN396",
+        "name": "Synthetic Company 396",
+        "sector": "Consumer Staples",
+        "subIndustry": "",
+        "price": 115.28,
+        "score": 65.89,
+        "healthScore": 80.04,
+        "valuationScore": 39.2,
+        "momentumScore": 20.25,
+        "peRatio": 29.467690638607223,
+        "dividendYield": 0.0,
+        "grossMargin": 0.5033040036998023,
+        "operatingMargin": 0.2285293999475147,
+        "netMargin": 0.17539762310800255,
+        "returnOnEquity": 0.2224921226445051,
+        "fcfMargin": 0.25057971387419836,
+        "fcfYield": 0.04669055364452479,
+        "revenueGrowth": 0.11025778647349409,
+        "debtToEquity": 0.6046025631833291,
+        "marketCap": 2316072605.5538316,
+        "return1W": -0.0005433064466807107,
+        "return1M": -0.05350216942839427,
+        "return3M": -0.12542293018765563,
+        "return6M": -0.15902471649139532,
+        "return1Y": -0.14219136293047738,
+        "reasons": [
+          "Free-cash-flow margin of 25.1% \u2014 top 8% of the universe",
+          "Operating margin of 22.9% \u2014 top 13% of the universe",
+          "Return on equity of 22.2% \u2014 top 18% of the universe",
+          "Net margin of 17.5% \u2014 top 18% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 29.5 vs sector median 17.4"
+        ],
+        "fundWeight": 0.00894
+      },
+      {
+        "rank": 84,
+        "ticker": "SYN161",
+        "name": "Synthetic Company 161",
+        "sector": "Financials",
+        "subIndustry": "",
+        "price": 512.14,
+        "score": 65.5,
+        "healthScore": 64.92,
+        "valuationScore": 67.47,
+        "momentumScore": 65.62,
+        "peRatio": 19.989329591572563,
+        "dividendYield": 0.022889767642225417,
+        "grossMargin": 0.504554762796303,
+        "operatingMargin": 0.13456979112305667,
+        "netMargin": 0.08277078260852487,
+        "returnOnEquity": 0.07736311687679277,
+        "fcfMargin": 0.14411753904206334,
+        "fcfYield": 0.04644401017562283,
+        "revenueGrowth": 0.2531037553175892,
+        "debtToEquity": 0.6488599344957178,
+        "marketCap": 51489276712.40934,
+        "return1W": -0.0021271291231561955,
+        "return1M": -0.023045221771228835,
+        "return3M": -0.005215141060223652,
+        "return6M": 0.18326178524330647,
+        "return1Y": 0.3742565914714924,
+        "reasons": [
+          "Revenue growth of 25.3% \u2014 top 3% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.00889
+      },
+      {
+        "rank": 85,
+        "ticker": "SYN118",
+        "name": "Synthetic Company 118",
+        "sector": "Industrials",
+        "subIndustry": "",
+        "price": 408.46,
+        "score": 65.0,
+        "healthScore": 74.92,
+        "valuationScore": 47.49,
+        "momentumScore": 30.62,
+        "peRatio": 16.268865412787896,
+        "dividendYield": 0.03550148373090783,
+        "grossMargin": 0.43604688946153386,
+        "operatingMargin": 0.18305021443589348,
+        "netMargin": 0.13964431111658412,
+        "returnOnEquity": 0.20361482333755973,
+        "fcfMargin": 0.2287731393198698,
+        "fcfYield": 0.05134682762160371,
+        "revenueGrowth": 0.03365609535115484,
+        "debtToEquity": 0.34049281067109444,
+        "marketCap": 3346827711.378506,
+        "return1W": 0.025434277126339014,
+        "return1M": 0.017191242404606573,
+        "return3M": -0.029849847127332338,
+        "return6M": -0.17056360631782294,
+        "return1Y": 0.02058653882196465,
+        "reasons": [
+          "Free-cash-flow margin of 22.9% \u2014 top 10% of the universe",
+          "Return on equity of 20.4% \u2014 top 20% of the universe",
+          "Low leverage \u2014 debt/equity of 0.34"
+        ],
+        "flags": [],
+        "fundWeight": 0.00882
+      },
+      {
+        "rank": 86,
+        "ticker": "SYN125",
+        "name": "Synthetic Company 125",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 324.19,
+        "score": 64.96,
+        "healthScore": 74.96,
+        "valuationScore": 38.36,
+        "momentumScore": 48.12,
+        "peRatio": 26.560671975478417,
+        "dividendYield": 0.02944506019437223,
+        "grossMargin": 0.500802332231955,
+        "operatingMargin": 0.3103995957143296,
+        "netMargin": 0.2896602590547016,
+        "returnOnEquity": 0.2090208171590739,
+        "fcfMargin": 0.35337934043604713,
+        "fcfYield": 0.07262138733502159,
+        "revenueGrowth": 0.017682068691400654,
+        "debtToEquity": 0.9687713363374686,
+        "marketCap": 7931375637.836157,
+        "return1W": -0.02700515728201799,
+        "return1M": -0.0001414935317831739,
+        "return3M": 0.040844096304929016,
+        "return6M": -0.08492793469979733,
+        "return1Y": 0.04414830676618095,
+        "reasons": [
+          "Free-cash-flow margin of 35.3% \u2014 top 1% of the universe",
+          "Net margin of 29.0% \u2014 top 3% of the universe",
+          "Operating margin of 31.0% \u2014 top 4% of the universe",
+          "Fcf yield of 7.3% \u2014 top 6% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.6 vs sector median 19.2"
+        ],
+        "fundWeight": 0.00881
+      },
+      {
+        "rank": 87,
+        "ticker": "SYN293",
+        "name": "Synthetic Company 293",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 563.01,
+        "score": 64.95,
+        "healthScore": 69.38,
+        "valuationScore": 52.02,
+        "momentumScore": 59.88,
+        "peRatio": 26.20130455183861,
+        "dividendYield": 0.00023239249744758106,
+        "grossMargin": 0.4493225449934591,
+        "operatingMargin": 0.14307396662874672,
+        "netMargin": 0.09985695452424032,
+        "returnOnEquity": 0.27408758917533016,
+        "fcfMargin": 0.08554612753049672,
+        "fcfYield": 0.06804804260026891,
+        "revenueGrowth": 0.12147049772386403,
+        "debtToEquity": 0.3886416977615635,
+        "marketCap": 24333237253.984097,
+        "return1W": 0.027013373675358412,
+        "return1M": -0.028364269597899606,
+        "return3M": -0.032002075387657605,
+        "return6M": 0.14168091791047277,
+        "return1Y": 0.23048657274776163,
+        "reasons": [
+          "Fcf yield of 6.8% \u2014 top 10% of the universe",
+          "Return on equity of 27.4% \u2014 top 11% of the universe",
+          "Low leverage \u2014 debt/equity of 0.39"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.2 vs sector median 17.7"
+        ],
+        "fundWeight": 0.00881
+      },
+      {
+        "rank": 88,
+        "ticker": "SYN044",
+        "name": "Synthetic Company 44",
+        "sector": "Utilities",
+        "subIndustry": "",
+        "price": 96.46,
+        "score": 64.76,
+        "healthScore": 70.75,
+        "valuationScore": 56.98,
+        "momentumScore": 38.38,
+        "peRatio": 23.096339063514165,
+        "dividendYield": 0.024569660106632665,
+        "grossMargin": 0.49623902701260747,
+        "operatingMargin": 0.19213440382014677,
+        "netMargin": 0.14298178483242163,
+        "returnOnEquity": 0.12446283358914695,
+        "fcfMargin": 0.1829441469810244,
+        "fcfYield": 0.05270283683548023,
+        "revenueGrowth": 0.15126792464651237,
+        "debtToEquity": 0.8767806483902759,
+        "marketCap": 4491751542.290288,
+        "return1W": -0.0026488719658873798,
+        "return1M": -0.013057556215249767,
+        "return3M": -0.0700558218182506,
+        "return6M": -0.032613515117292456,
+        "return1Y": -0.02328469999967552,
+        "reasons": [
+          "Revenue growth of 15.1% \u2014 top 18% of the universe",
+          "Free-cash-flow margin of 18.3% \u2014 top 19% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 23.1 vs sector median 15.1"
+        ],
+        "fundWeight": 0.00879
+      },
+      {
+        "rank": 89,
+        "ticker": "SYN095",
+        "name": "Synthetic Company 95",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 199.79,
+        "score": 64.48,
+        "healthScore": 68.83,
+        "valuationScore": 36.12,
+        "momentumScore": 90.75,
+        "peRatio": 26.783968711731276,
+        "dividendYield": 0.005166913448233667,
+        "grossMargin": 0.46237005837867134,
+        "operatingMargin": 0.1708417929947034,
+        "netMargin": 0.12370791058542008,
+        "returnOnEquity": 0.1795473035513417,
+        "fcfMargin": 0.18134283181505204,
+        "fcfYield": 0.06361405240205628,
+        "revenueGrowth": 0.018782342564623994,
+        "debtToEquity": 0.47087795758075235,
+        "marketCap": 40118608366.305,
+        "return1W": 0.01245010214031046,
+        "return1M": 0.0787081724567607,
+        "return3M": 0.3927152137894322,
+        "return6M": 0.16874569123087252,
+        "return1Y": 0.2037942470452107,
+        "reasons": [
+          "Fcf yield of 6.4% \u2014 top 13% of the universe",
+          "Free-cash-flow margin of 18.1% \u2014 top 20% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.8 vs sector median 14.4"
+        ],
+        "fundWeight": 0.00875
+      },
+      {
+        "rank": 90,
+        "ticker": "SYN000",
+        "name": "Synthetic Company 0",
+        "sector": "Real Estate",
+        "subIndustry": "",
+        "price": 314.52,
+        "score": 64.42,
+        "healthScore": 71.0,
+        "valuationScore": 38.98,
+        "momentumScore": 69.25,
+        "peRatio": 37.466065137515585,
+        "dividendYield": 0.00701122710433864,
+        "grossMargin": 0.5374177062040802,
+        "operatingMargin": 0.19211786573573042,
+        "netMargin": 0.19391524889871034,
+        "returnOnEquity": 0.28053200907112313,
+        "fcfMargin": 0.1946830609742711,
+        "fcfYield": 0.06134428842613194,
+        "revenueGrowth": 0.11738614287690054,
+        "debtToEquity": 1.3233913359681801,
+        "marketCap": 35741417498.65085,
+        "return1W": -0.01137484714282206,
+        "return1M": -0.007883682948227572,
+        "return3M": 0.11942486972432728,
+        "return6M": 0.026312688791366175,
+        "return1Y": -0.2456762159406381,
+        "reasons": [
+          "Return on equity of 28.1% \u2014 top 9% of the universe",
+          "Net margin of 19.4% \u2014 top 14% of the universe",
+          "Fcf yield of 6.1% \u2014 top 16% of the universe",
+          "Free-cash-flow margin of 19.5% \u2014 top 16% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 37.5 vs sector median 14.5"
+        ],
+        "fundWeight": 0.00874
+      },
+      {
+        "rank": 91,
+        "ticker": "SYN204",
+        "name": "Synthetic Company 204",
+        "sector": "Materials",
+        "subIndustry": "",
+        "price": 579.89,
+        "score": 64.37,
+        "healthScore": 64.58,
+        "valuationScore": 49.83,
+        "momentumScore": 92.0,
+        "peRatio": 22.93452389717407,
+        "dividendYield": 0.0,
+        "grossMargin": 0.30517736702431875,
+        "operatingMargin": 0.16968093102997434,
+        "netMargin": 0.13238793066495286,
+        "returnOnEquity": 0.20625902879176694,
+        "fcfMargin": 0.15993528006394273,
+        "fcfYield": 0.060543008279366026,
+        "revenueGrowth": 0.08029535317002075,
+        "debtToEquity": 1.1162946238454694,
+        "marketCap": 3685331915.766513,
+        "return1W": 0.0238583818700717,
+        "return1M": -0.014686675660394262,
+        "return3M": 0.15882358856136597,
+        "return6M": 0.3349404611353422,
+        "return1Y": 0.5655564405736857,
+        "reasons": [
+          "Fcf yield of 6.1% \u2014 top 16% of the universe",
+          "Return on equity of 20.6% \u2014 top 20% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 22.9 vs sector median 14.8"
+        ],
+        "fundWeight": 0.00873
+      },
+      {
+        "rank": 92,
+        "ticker": "SYN187",
+        "name": "Synthetic Company 187",
+        "sector": "Consumer Staples",
+        "subIndustry": "",
+        "price": 65.67,
+        "score": 64.29,
+        "healthScore": 75.92,
+        "valuationScore": 42.92,
+        "momentumScore": 25.62,
+        "peRatio": 26.714200850566005,
+        "dividendYield": 0.022114335632228206,
+        "grossMargin": 0.35253550313881055,
+        "operatingMargin": 0.22710485692633509,
+        "netMargin": 0.20481453560418938,
+        "returnOnEquity": 0.2100067788297642,
+        "fcfMargin": 0.2285114075471188,
+        "fcfYield": 0.05760769535065472,
+        "revenueGrowth": 0.08759956055407819,
+        "debtToEquity": 0.8948205853815416,
+        "marketCap": 20585697225.12852,
+        "return1W": -0.025524112764356264,
+        "return1M": 0.03175410463167025,
+        "return3M": -0.17585239036440456,
+        "return6M": -0.06027449614902197,
+        "return1Y": 0.18465385588108188,
+        "reasons": [
+          "Free-cash-flow margin of 22.9% \u2014 top 11% of the universe",
+          "Net margin of 20.5% \u2014 top 11% of the universe",
+          "Operating margin of 22.7% \u2014 top 13% of the universe",
+          "Return on equity of 21.0% \u2014 top 19% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.7 vs sector median 17.4"
+        ],
+        "fundWeight": 0.00872
+      },
+      {
+        "rank": 93,
+        "ticker": "SYN114",
+        "name": "Synthetic Company 114",
+        "sector": "Industrials",
+        "subIndustry": "",
+        "price": 369.12,
+        "score": 64.26,
+        "healthScore": 69.17,
+        "valuationScore": 62.59,
+        "momentumScore": 33.25,
+        "peRatio": 16.679490642868245,
+        "dividendYield": 0.01980619427574702,
+        "grossMargin": 0.48263155524061474,
+        "operatingMargin": 0.14725776910556607,
+        "netMargin": 0.15121665347380478,
+        "returnOnEquity": -0.08804758068011925,
+        "fcfMargin": 0.18737650247643522,
+        "fcfYield": 0.03373198148986703,
+        "revenueGrowth": 0.18838258692679677,
+        "debtToEquity": 0.22811661945373013,
+        "marketCap": 29473941853.163128,
+        "return1W": 0.004195341799020167,
+        "return1M": -0.032001954928528746,
+        "return3M": -0.05535940610035784,
+        "return6M": -0.0994644146371783,
+        "return1Y": -0.19060689018426621,
+        "reasons": [
+          "Revenue growth of 18.8% \u2014 top 9% of the universe",
+          "Free-cash-flow margin of 18.7% \u2014 top 18% of the universe",
+          "Low leverage \u2014 debt/equity of 0.23"
+        ],
+        "flags": [],
+        "fundWeight": 0.00872
+      },
+      {
+        "rank": 94,
+        "ticker": "SYN158",
+        "name": "Synthetic Company 158",
+        "sector": "Consumer Discretionary",
+        "subIndustry": "",
+        "price": 553.32,
+        "score": 64.22,
+        "healthScore": 69.88,
+        "valuationScore": 42.92,
+        "momentumScore": 67.25,
+        "peRatio": 24.96851105676236,
+        "dividendYield": 0.005613407973221353,
+        "grossMargin": 0.3483099577278986,
+        "operatingMargin": 0.15448008980414926,
+        "netMargin": 0.11534445955227482,
+        "returnOnEquity": 0.22782190790945822,
+        "fcfMargin": 0.1523520021021473,
+        "fcfYield": 0.05600431891941089,
+        "revenueGrowth": 0.07297136425469623,
+        "debtToEquity": 0.5323017943285892,
+        "marketCap": 12784810248.447325,
+        "return1W": 0.018098177771645015,
+        "return1M": -0.01937102018889584,
+        "return3M": -0.005149590238610807,
+        "return6M": 0.2050731890252779,
+        "return1Y": 0.14648189686108967,
+        "reasons": [
+          "Return on equity of 22.8% \u2014 top 16% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 25.0 vs sector median 15.5"
+        ],
+        "fundWeight": 0.00871
+      },
+      {
+        "rank": 95,
+        "ticker": "SYN370",
+        "name": "Synthetic Company 370",
+        "sector": "Consumer Discretionary",
+        "subIndustry": "",
+        "price": 104.0,
+        "score": 64.06,
+        "healthScore": 72.79,
+        "valuationScore": 54.39,
+        "momentumScore": 22.25,
+        "peRatio": 24.949676433886104,
+        "dividendYield": 0.011454273344393882,
+        "grossMargin": 0.5193948417569462,
+        "operatingMargin": 0.18767728631299507,
+        "netMargin": 0.14781246733246917,
+        "returnOnEquity": 0.23687357904644318,
+        "fcfMargin": 0.18250250569681592,
+        "fcfYield": 0.05225708099108191,
+        "revenueGrowth": 0.1612778729454432,
+        "debtToEquity": 1.006685618271281,
+        "marketCap": 18159033679.08875,
+        "return1W": 0.0027272742154296546,
+        "return1M": -0.012994659686923541,
+        "return3M": -0.17560000065028847,
+        "return6M": -0.09673123932628921,
+        "return1Y": 0.08475845479066355,
+        "reasons": [
+          "Return on equity of 23.7% \u2014 top 14% of the universe",
+          "Revenue growth of 16.1% \u2014 top 15% of the universe",
+          "Free-cash-flow margin of 18.3% \u2014 top 20% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 24.9 vs sector median 15.5"
+        ],
+        "fundWeight": 0.00869
+      },
+      {
+        "rank": 96,
+        "ticker": "SYN049",
+        "name": "Synthetic Company 49",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 428.37,
+        "score": 64.0,
+        "healthScore": 58.75,
+        "valuationScore": 75.8,
+        "momentumScore": 77.12,
+        "peRatio": 9.526014886170744,
+        "dividendYield": 0.007246351287657046,
+        "grossMargin": 0.3452284266786267,
+        "operatingMargin": 0.10031813344140116,
+        "netMargin": 0.051451895404693505,
+        "returnOnEquity": 0.06320470306356903,
+        "fcfMargin": 0.1271300422642859,
+        "fcfYield": 0.045662322962270914,
+        "revenueGrowth": 0.0873069430445103,
+        "debtToEquity": 0.24743011718945784,
+        "marketCap": 3562370716.6690097,
+        "return1W": 0.012368100479904666,
+        "return1M": -0.01277019545072557,
+        "return3M": 0.17601089679878362,
+        "return6M": 0.0634988927714396,
+        "return1Y": 0.1806049394915585,
+        "reasons": [
+          "Low leverage \u2014 debt/equity of 0.25",
+          "Trades at a 46% discount to its sector (P/E 9.5 vs 17.7 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.00868
+      },
+      {
+        "rank": 97,
+        "ticker": "SYN079",
+        "name": "Synthetic Company 79",
+        "sector": "Health Care",
+        "subIndustry": "",
+        "price": 420.59,
+        "score": 63.94,
+        "healthScore": 64.5,
+        "valuationScore": 55.54,
+        "momentumScore": 76.88,
+        "peRatio": 23.01390150182595,
+        "dividendYield": 0.021464534056173865,
+        "grossMargin": 0.3966406970951029,
+        "operatingMargin": 0.1523830121000941,
+        "netMargin": 0.12114759495306614,
+        "returnOnEquity": 0.1763636987022613,
+        "fcfMargin": 0.14296126079292854,
+        "fcfYield": 0.05276653737962953,
+        "revenueGrowth": 0.14110194970080753,
+        "debtToEquity": 1.035136806219535,
+        "marketCap": 12933035887.557045,
+        "return1W": -0.019666063022816344,
+        "return1M": -0.06741804796474664,
+        "return3M": 0.09602593976599856,
+        "return6M": 0.13446468301385903,
+        "return1Y": 0.2545637238309606,
+        "reasons": [
+          "Revenue growth of 14.1% \u2014 top 19% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 23.0 vs sector median 15.1"
+        ],
+        "fundWeight": 0.00867
+      },
+      {
+        "rank": 98,
+        "ticker": "SYN249",
+        "name": "Synthetic Company 249",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 228.99,
+        "score": 63.83,
+        "healthScore": 68.38,
+        "valuationScore": 50.58,
+        "momentumScore": 58.5,
+        "peRatio": 23.860371707323086,
+        "dividendYield": 0.024998063987620764,
+        "grossMargin": 0.49285622182160954,
+        "operatingMargin": 0.20498565393557522,
+        "netMargin": 0.16372178336603244,
+        "returnOnEquity": 0.08378593541071928,
+        "fcfMargin": 0.19657653799933075,
+        "fcfYield": 0.04350896201196482,
+        "revenueGrowth": 0.15252521060307736,
+        "debtToEquity": 1.027710527230104,
+        "marketCap": 88070467260.46576,
+        "return1W": 0.020476883436178227,
+        "return1M": -0.031178010218338666,
+        "return3M": 0.033496344848847365,
+        "return6M": 0.03446561122633002,
+        "return1Y": -0.14837601810717152,
+        "reasons": [
+          "Free-cash-flow margin of 19.7% \u2014 top 15% of the universe",
+          "Revenue growth of 15.3% \u2014 top 17% of the universe",
+          "Operating margin of 20.5% \u2014 top 18% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.00866
+      },
+      {
+        "rank": 99,
+        "ticker": "SYN214",
+        "name": "Synthetic Company 214",
+        "sector": "Consumer Discretionary",
+        "subIndustry": "",
+        "price": 330.65,
+        "score": 63.8,
+        "healthScore": 67.29,
+        "valuationScore": 41.94,
+        "momentumScore": 83.12,
+        "peRatio": 26.484106515067765,
+        "dividendYield": 0.0025491870487557786,
+        "grossMargin": 0.48841672283864956,
+        "operatingMargin": 0.13826874375857173,
+        "netMargin": 0.13033580530532324,
+        "returnOnEquity": 0.08482992390860018,
+        "fcfMargin": 0.11613353291956041,
+        "fcfYield": 0.049045017909953796,
+        "revenueGrowth": 0.09663184296509116,
+        "debtToEquity": 0.10026801487815373,
+        "marketCap": 11981911776.19722,
+        "return1W": -0.02292105609068011,
+        "return1M": -0.01416411593731396,
+        "return3M": 0.1469868617042205,
+        "return6M": 0.13990293273702492,
+        "return1Y": 0.32810877838699803,
+        "reasons": [
+          "Low leverage \u2014 debt/equity of 0.10"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 26.5 vs sector median 15.5"
+        ],
+        "fundWeight": 0.00866
+      },
+      {
+        "rank": 100,
+        "ticker": "SYN395",
+        "name": "Synthetic Company 395",
+        "sector": "Consumer Discretionary",
+        "subIndustry": "",
+        "price": 562.47,
+        "score": 63.3,
+        "healthScore": 69.25,
+        "valuationScore": 45.51,
+        "momentumScore": 57.25,
+        "peRatio": 17.98188502168549,
+        "dividendYield": 0.0,
+        "grossMargin": 0.44788317283542856,
+        "operatingMargin": 0.2558372796674671,
+        "netMargin": 0.1993267279273647,
+        "returnOnEquity": 0.027777514286193045,
+        "fcfMargin": 0.23857317592367236,
+        "fcfYield": 0.055181871423316015,
+        "revenueGrowth": 0.024891418225176813,
+        "debtToEquity": 0.5923347928130929,
+        "marketCap": 25906140951.28348,
+        "return1W": -0.015924456789930343,
+        "return1M": 0.0360729397819334,
+        "return3M": -0.05642614381296279,
+        "return6M": 0.15850115052070546,
+        "return1Y": -0.10963100047926483,
+        "reasons": [
+          "Operating margin of 25.6% \u2014 top 9% of the universe",
+          "Free-cash-flow margin of 23.9% \u2014 top 10% of the universe",
+          "Net margin of 19.9% \u2014 top 13% of the universe"
+        ],
+        "flags": [],
+        "fundWeight": 0.00859
+      }
+    ],
+    "fund": {
+      "name": "US Quality-Tilted Fund",
+      "constituents": 100,
+      "weighting": "score-weighted",
+      "benchmark": "SPTM",
+      "blended": {
+        "pe": 24.6,
+        "fcfYield": 0.0609,
+        "revenueGrowth": 0.1542,
+        "returnOnEquity": 0.2438,
+        "netMargin": 0.2061
+      },
+      "metrics3Y": {
+        "annualReturn": 0.396,
+        "annualVolatility": 0.1384,
+        "sharpeRatio": 2.573,
+        "maximumDrawdown": -0.098,
+        "alpha": 0.0511,
+        "alphaTStat": 3.77,
+        "beta": 0.988,
+        "benchmarkReturn": 0.3487
+      },
+      "metrics5Y": {
+        "annualReturn": 0.1666,
+        "annualVolatility": 0.1349,
+        "sharpeRatio": 0.938,
+        "maximumDrawdown": -0.3045,
+        "alpha": 0.0308,
+        "alphaTStat": 3.24,
+        "beta": 0.988,
+        "benchmarkReturn": 0.1369
+      },
+      "navSeries": [
+        {
+          "date": "2021-07-26",
+          "fund": 1.0,
+          "benchmark": 1.0
+        },
+        {
+          "date": "2021-08-04",
+          "fund": 1.0008,
+          "benchmark": 1.0013
+        },
+        {
+          "date": "2021-08-13",
+          "fund": 0.9848,
+          "benchmark": 0.9819
+        },
+        {
+          "date": "2021-08-24",
+          "fund": 0.9985,
+          "benchmark": 0.9902
+        },
+        {
+          "date": "2021-09-02",
+          "fund": 1.0201,
+          "benchmark": 1.0096
+        },
+        {
+          "date": "2021-09-13",
+          "fund": 1.0427,
+          "benchmark": 1.0292
+        },
+        {
+          "date": "2021-09-22",
+          "fund": 1.0159,
+          "benchmark": 1.0018
+        },
+        {
+          "date": "2021-10-01",
+          "fund": 1.0125,
+          "benchmark": 0.9952
+        },
+        {
+          "date": "2021-10-12",
+          "fund": 1.0254,
+          "benchmark": 1.0004
+        },
+        {
+          "date": "2021-10-21",
+          "fund": 1.0188,
+          "benchmark": 0.9874
+        },
+        {
+          "date": "2021-11-01",
+          "fund": 1.0032,
+          "benchmark": 0.9717
+        },
+        {
+          "date": "2021-11-10",
+          "fund": 0.9801,
+          "benchmark": 0.9475
+        },
+        {
+          "date": "2021-11-19",
+          "fund": 0.9888,
+          "benchmark": 0.958
+        },
+        {
+          "date": "2021-11-30",
+          "fund": 0.9367,
+          "benchmark": 0.9085
+        },
+        {
+          "date": "2021-12-09",
+          "fund": 0.9168,
+          "benchmark": 0.8899
+        },
+        {
+          "date": "2021-12-20",
+          "fund": 0.9208,
+          "benchmark": 0.8914
+        },
+        {
+          "date": "2021-12-29",
+          "fund": 0.9131,
+          "benchmark": 0.8826
+        },
+        {
+          "date": "2022-01-07",
+          "fund": 0.9144,
+          "benchmark": 0.8855
+        },
+        {
+          "date": "2022-01-18",
+          "fund": 0.8873,
+          "benchmark": 0.8608
+        },
+        {
+          "date": "2022-01-27",
+          "fund": 0.8733,
+          "benchmark": 0.8525
+        },
+        {
+          "date": "2022-02-07",
+          "fund": 0.8588,
+          "benchmark": 0.8393
+        },
+        {
+          "date": "2022-02-16",
+          "fund": 0.8436,
+          "benchmark": 0.8258
+        },
+        {
+          "date": "2022-02-25",
+          "fund": 0.8194,
+          "benchmark": 0.7947
+        },
+        {
+          "date": "2022-03-08",
+          "fund": 0.8471,
+          "benchmark": 0.8208
+        },
+        {
+          "date": "2022-03-17",
+          "fund": 0.8619,
+          "benchmark": 0.8328
+        },
+        {
+          "date": "2022-03-28",
+          "fund": 0.8337,
+          "benchmark": 0.7986
+        },
+        {
+          "date": "2022-04-06",
+          "fund": 0.8634,
+          "benchmark": 0.8285
+        },
+        {
+          "date": "2022-04-15",
+          "fund": 0.862,
+          "benchmark": 0.8292
+        },
+        {
+          "date": "2022-04-26",
+          "fund": 0.8651,
+          "benchmark": 0.833
+        },
+        {
+          "date": "2022-05-05",
+          "fund": 0.8287,
+          "benchmark": 0.7955
+        },
+        {
+          "date": "2022-05-16",
+          "fund": 0.8549,
+          "benchmark": 0.8219
+        },
+        {
+          "date": "2022-05-25",
+          "fund": 0.8792,
+          "benchmark": 0.8452
+        },
+        {
+          "date": "2022-06-03",
+          "fund": 0.8668,
+          "benchmark": 0.8376
+        },
+        {
+          "date": "2022-06-14",
+          "fund": 0.8328,
+          "benchmark": 0.8046
+        },
+        {
+          "date": "2022-06-23",
+          "fund": 0.8243,
+          "benchmark": 0.7964
+        },
+        {
+          "date": "2022-07-04",
+          "fund": 0.808,
+          "benchmark": 0.7804
+        },
+        {
+          "date": "2022-07-13",
+          "fund": 0.8024,
+          "benchmark": 0.7736
+        },
+        {
+          "date": "2022-07-22",
+          "fund": 0.7824,
+          "benchmark": 0.7555
+        },
+        {
+          "date": "2022-08-02",
+          "fund": 0.7655,
+          "benchmark": 0.7423
+        },
+        {
+          "date": "2022-08-11",
+          "fund": 0.7711,
+          "benchmark": 0.7494
+        },
+        {
+          "date": "2022-08-22",
+          "fund": 0.783,
+          "benchmark": 0.7604
+        },
+        {
+          "date": "2022-08-31",
+          "fund": 0.7428,
+          "benchmark": 0.7199
+        },
+        {
+          "date": "2022-09-09",
+          "fund": 0.7475,
+          "benchmark": 0.7262
+        },
+        {
+          "date": "2022-09-20",
+          "fund": 0.7303,
+          "benchmark": 0.7086
+        },
+        {
+          "date": "2022-09-29",
+          "fund": 0.7687,
+          "benchmark": 0.745
+        },
+        {
+          "date": "2022-10-10",
+          "fund": 0.766,
+          "benchmark": 0.7427
+        },
+        {
+          "date": "2022-10-19",
+          "fund": 0.7821,
+          "benchmark": 0.7564
+        },
+        {
+          "date": "2022-10-28",
+          "fund": 0.7909,
+          "benchmark": 0.7674
+        },
+        {
+          "date": "2022-11-08",
+          "fund": 0.787,
+          "benchmark": 0.7637
+        },
+        {
+          "date": "2022-11-17",
+          "fund": 0.8132,
+          "benchmark": 0.7814
+        },
+        {
+          "date": "2022-11-28",
+          "fund": 0.8207,
+          "benchmark": 0.7936
+        },
+        {
+          "date": "2022-12-07",
+          "fund": 0.7937,
+          "benchmark": 0.7668
+        },
+        {
+          "date": "2022-12-16",
+          "fund": 0.7908,
+          "benchmark": 0.764
+        },
+        {
+          "date": "2022-12-27",
+          "fund": 0.7903,
+          "benchmark": 0.7635
+        },
+        {
+          "date": "2023-01-05",
+          "fund": 0.8104,
+          "benchmark": 0.7846
+        },
+        {
+          "date": "2023-01-16",
+          "fund": 0.8337,
+          "benchmark": 0.8057
+        },
+        {
+          "date": "2023-01-25",
+          "fund": 0.83,
+          "benchmark": 0.8044
+        },
+        {
+          "date": "2023-02-03",
+          "fund": 0.8532,
+          "benchmark": 0.826
+        },
+        {
+          "date": "2023-02-14",
+          "fund": 0.8396,
+          "benchmark": 0.8152
+        },
+        {
+          "date": "2023-02-23",
+          "fund": 0.8331,
+          "benchmark": 0.808
+        },
+        {
+          "date": "2023-03-06",
+          "fund": 0.8179,
+          "benchmark": 0.7945
+        },
+        {
+          "date": "2023-03-15",
+          "fund": 0.83,
+          "benchmark": 0.8072
+        },
+        {
+          "date": "2023-03-24",
+          "fund": 0.8221,
+          "benchmark": 0.7945
+        },
+        {
+          "date": "2023-04-04",
+          "fund": 0.835,
+          "benchmark": 0.8019
+        },
+        {
+          "date": "2023-04-13",
+          "fund": 0.8466,
+          "benchmark": 0.8128
+        },
+        {
+          "date": "2023-04-24",
+          "fund": 0.8486,
+          "benchmark": 0.8161
+        },
+        {
+          "date": "2023-05-03",
+          "fund": 0.8471,
+          "benchmark": 0.8159
+        },
+        {
+          "date": "2023-05-12",
+          "fund": 0.8346,
+          "benchmark": 0.8024
+        },
+        {
+          "date": "2023-05-23",
+          "fund": 0.8255,
+          "benchmark": 0.7957
+        },
+        {
+          "date": "2023-06-01",
+          "fund": 0.8437,
+          "benchmark": 0.8163
+        },
+        {
+          "date": "2023-06-12",
+          "fund": 0.8575,
+          "benchmark": 0.8333
+        },
+        {
+          "date": "2023-06-21",
+          "fund": 0.8276,
+          "benchmark": 0.8032
+        },
+        {
+          "date": "2023-06-30",
+          "fund": 0.8217,
+          "benchmark": 0.8
+        },
+        {
+          "date": "2023-07-11",
+          "fund": 0.8222,
+          "benchmark": 0.8036
+        },
+        {
+          "date": "2023-07-20",
+          "fund": 0.8383,
+          "benchmark": 0.8113
+        },
+        {
+          "date": "2023-07-31",
+          "fund": 0.8453,
+          "benchmark": 0.8225
+        },
+        {
+          "date": "2023-08-09",
+          "fund": 0.8452,
+          "benchmark": 0.8198
+        },
+        {
+          "date": "2023-08-18",
+          "fund": 0.8599,
+          "benchmark": 0.8335
+        },
+        {
+          "date": "2023-08-29",
+          "fund": 0.8668,
+          "benchmark": 0.8403
+        },
+        {
+          "date": "2023-09-07",
+          "fund": 0.9033,
+          "benchmark": 0.8738
+        },
+        {
+          "date": "2023-09-18",
+          "fund": 0.923,
+          "benchmark": 0.8896
+        },
+        {
+          "date": "2023-09-27",
+          "fund": 0.9293,
+          "benchmark": 0.8954
+        },
+        {
+          "date": "2023-10-06",
+          "fund": 0.9394,
+          "benchmark": 0.9066
+        },
+        {
+          "date": "2023-10-17",
+          "fund": 0.9456,
+          "benchmark": 0.914
+        },
+        {
+          "date": "2023-10-26",
+          "fund": 0.9597,
+          "benchmark": 0.9285
+        },
+        {
+          "date": "2023-11-06",
+          "fund": 0.945,
+          "benchmark": 0.9132
+        },
+        {
+          "date": "2023-11-15",
+          "fund": 0.9166,
+          "benchmark": 0.8894
+        },
+        {
+          "date": "2023-11-24",
+          "fund": 0.9301,
+          "benchmark": 0.8968
+        },
+        {
+          "date": "2023-12-05",
+          "fund": 0.9369,
+          "benchmark": 0.9012
+        },
+        {
+          "date": "2023-12-14",
+          "fund": 0.9294,
+          "benchmark": 0.8897
+        },
+        {
+          "date": "2023-12-25",
+          "fund": 0.9617,
+          "benchmark": 0.9225
+        },
+        {
+          "date": "2024-01-03",
+          "fund": 0.9248,
+          "benchmark": 0.8828
+        },
+        {
+          "date": "2024-01-12",
+          "fund": 0.9191,
+          "benchmark": 0.8765
+        },
+        {
+          "date": "2024-01-23",
+          "fund": 0.9304,
+          "benchmark": 0.8862
+        },
+        {
+          "date": "2024-02-01",
+          "fund": 0.9294,
+          "benchmark": 0.8897
+        },
+        {
+          "date": "2024-02-12",
+          "fund": 0.944,
+          "benchmark": 0.8992
+        },
+        {
+          "date": "2024-02-21",
+          "fund": 0.9722,
+          "benchmark": 0.9264
+        },
+        {
+          "date": "2024-03-01",
+          "fund": 0.9452,
+          "benchmark": 0.9001
+        },
+        {
+          "date": "2024-03-12",
+          "fund": 0.9324,
+          "benchmark": 0.8845
+        },
+        {
+          "date": "2024-03-21",
+          "fund": 0.9614,
+          "benchmark": 0.9134
+        },
+        {
+          "date": "2024-04-01",
+          "fund": 0.9251,
+          "benchmark": 0.8794
+        },
+        {
+          "date": "2024-04-10",
+          "fund": 0.9196,
+          "benchmark": 0.8751
+        },
+        {
+          "date": "2024-04-19",
+          "fund": 0.9675,
+          "benchmark": 0.9177
+        },
+        {
+          "date": "2024-04-30",
+          "fund": 0.9934,
+          "benchmark": 0.9381
+        },
+        {
+          "date": "2024-05-09",
+          "fund": 1.0163,
+          "benchmark": 0.9599
+        },
+        {
+          "date": "2024-05-20",
+          "fund": 1.0362,
+          "benchmark": 0.9771
+        },
+        {
+          "date": "2024-05-29",
+          "fund": 1.009,
+          "benchmark": 0.9477
+        },
+        {
+          "date": "2024-06-07",
+          "fund": 1.0295,
+          "benchmark": 0.9646
+        },
+        {
+          "date": "2024-06-18",
+          "fund": 1.0535,
+          "benchmark": 0.9822
+        },
+        {
+          "date": "2024-06-27",
+          "fund": 1.0773,
+          "benchmark": 1.0004
+        },
+        {
+          "date": "2024-07-08",
+          "fund": 1.0673,
+          "benchmark": 0.9915
+        },
+        {
+          "date": "2024-07-17",
+          "fund": 1.0676,
+          "benchmark": 0.9944
+        },
+        {
+          "date": "2024-07-26",
+          "fund": 1.0338,
+          "benchmark": 0.9609
+        },
+        {
+          "date": "2024-08-06",
+          "fund": 1.0498,
+          "benchmark": 0.9782
+        },
+        {
+          "date": "2024-08-15",
+          "fund": 1.0923,
+          "benchmark": 1.0151
+        },
+        {
+          "date": "2024-08-26",
+          "fund": 1.1024,
+          "benchmark": 1.0226
+        },
+        {
+          "date": "2024-09-04",
+          "fund": 1.0907,
+          "benchmark": 1.0137
+        },
+        {
+          "date": "2024-09-13",
+          "fund": 1.0817,
+          "benchmark": 0.9999
+        },
+        {
+          "date": "2024-09-24",
+          "fund": 1.118,
+          "benchmark": 1.0308
+        },
+        {
+          "date": "2024-10-03",
+          "fund": 1.1685,
+          "benchmark": 1.0796
+        },
+        {
+          "date": "2024-10-14",
+          "fund": 1.2139,
+          "benchmark": 1.1198
+        },
+        {
+          "date": "2024-10-23",
+          "fund": 1.2383,
+          "benchmark": 1.1343
+        },
+        {
+          "date": "2024-11-01",
+          "fund": 1.2675,
+          "benchmark": 1.1673
+        },
+        {
+          "date": "2024-11-12",
+          "fund": 1.2934,
+          "benchmark": 1.1886
+        },
+        {
+          "date": "2024-11-21",
+          "fund": 1.3455,
+          "benchmark": 1.2317
+        },
+        {
+          "date": "2024-12-02",
+          "fund": 1.3857,
+          "benchmark": 1.2646
+        },
+        {
+          "date": "2024-12-11",
+          "fund": 1.4009,
+          "benchmark": 1.2764
+        },
+        {
+          "date": "2024-12-20",
+          "fund": 1.3751,
+          "benchmark": 1.2529
+        },
+        {
+          "date": "2024-12-31",
+          "fund": 1.3569,
+          "benchmark": 1.2327
+        },
+        {
+          "date": "2025-01-09",
+          "fund": 1.3706,
+          "benchmark": 1.2411
+        },
+        {
+          "date": "2025-01-20",
+          "fund": 1.372,
+          "benchmark": 1.2466
+        },
+        {
+          "date": "2025-01-29",
+          "fund": 1.4066,
+          "benchmark": 1.2739
+        },
+        {
+          "date": "2025-02-07",
+          "fund": 1.3642,
+          "benchmark": 1.2349
+        },
+        {
+          "date": "2025-02-18",
+          "fund": 1.402,
+          "benchmark": 1.2683
+        },
+        {
+          "date": "2025-02-27",
+          "fund": 1.4008,
+          "benchmark": 1.2674
+        },
+        {
+          "date": "2025-03-10",
+          "fund": 1.4577,
+          "benchmark": 1.3148
+        },
+        {
+          "date": "2025-03-19",
+          "fund": 1.4145,
+          "benchmark": 1.2789
+        },
+        {
+          "date": "2025-03-28",
+          "fund": 1.464,
+          "benchmark": 1.32
+        },
+        {
+          "date": "2025-04-08",
+          "fund": 1.4669,
+          "benchmark": 1.3245
+        },
+        {
+          "date": "2025-04-17",
+          "fund": 1.4479,
+          "benchmark": 1.3032
+        },
+        {
+          "date": "2025-04-28",
+          "fund": 1.43,
+          "benchmark": 1.2824
+        },
+        {
+          "date": "2025-05-07",
+          "fund": 1.4752,
+          "benchmark": 1.3189
+        },
+        {
+          "date": "2025-05-16",
+          "fund": 1.5792,
+          "benchmark": 1.412
+        },
+        {
+          "date": "2025-05-27",
+          "fund": 1.6559,
+          "benchmark": 1.4917
+        },
+        {
+          "date": "2025-06-05",
+          "fund": 1.7208,
+          "benchmark": 1.5433
+        },
+        {
+          "date": "2025-06-16",
+          "fund": 1.7085,
+          "benchmark": 1.5295
+        },
+        {
+          "date": "2025-06-25",
+          "fund": 1.726,
+          "benchmark": 1.5435
+        },
+        {
+          "date": "2025-07-04",
+          "fund": 1.7102,
+          "benchmark": 1.5362
+        },
+        {
+          "date": "2025-07-15",
+          "fund": 1.7212,
+          "benchmark": 1.5392
+        },
+        {
+          "date": "2025-07-24",
+          "fund": 1.7825,
+          "benchmark": 1.5907
+        },
+        {
+          "date": "2025-08-04",
+          "fund": 1.7652,
+          "benchmark": 1.5704
+        },
+        {
+          "date": "2025-08-13",
+          "fund": 1.7846,
+          "benchmark": 1.5846
+        },
+        {
+          "date": "2025-08-22",
+          "fund": 1.7775,
+          "benchmark": 1.5854
+        },
+        {
+          "date": "2025-09-02",
+          "fund": 1.7987,
+          "benchmark": 1.6055
+        },
+        {
+          "date": "2025-09-11",
+          "fund": 1.7915,
+          "benchmark": 1.5983
+        },
+        {
+          "date": "2025-09-22",
+          "fund": 1.8267,
+          "benchmark": 1.6251
+        },
+        {
+          "date": "2025-10-01",
+          "fund": 1.8676,
+          "benchmark": 1.6655
+        },
+        {
+          "date": "2025-10-10",
+          "fund": 1.9251,
+          "benchmark": 1.7214
+        },
+        {
+          "date": "2025-10-21",
+          "fund": 1.8879,
+          "benchmark": 1.69
+        },
+        {
+          "date": "2025-10-30",
+          "fund": 1.9917,
+          "benchmark": 1.783
+        },
+        {
+          "date": "2025-11-10",
+          "fund": 2.0015,
+          "benchmark": 1.7964
+        },
+        {
+          "date": "2025-11-19",
+          "fund": 2.0411,
+          "benchmark": 1.8332
+        },
+        {
+          "date": "2025-11-28",
+          "fund": 2.0454,
+          "benchmark": 1.846
+        },
+        {
+          "date": "2025-12-09",
+          "fund": 2.0677,
+          "benchmark": 1.8624
+        },
+        {
+          "date": "2025-12-18",
+          "fund": 2.096,
+          "benchmark": 1.8864
+        },
+        {
+          "date": "2025-12-29",
+          "fund": 2.1299,
+          "benchmark": 1.9152
+        },
+        {
+          "date": "2026-01-07",
+          "fund": 2.1916,
+          "benchmark": 1.9579
+        },
+        {
+          "date": "2026-01-16",
+          "fund": 2.1358,
+          "benchmark": 1.9082
+        },
+        {
+          "date": "2026-01-27",
+          "fund": 2.1439,
+          "benchmark": 1.9066
+        },
+        {
+          "date": "2026-02-05",
+          "fund": 2.1955,
+          "benchmark": 1.951
+        },
+        {
+          "date": "2026-02-16",
+          "fund": 2.1773,
+          "benchmark": 1.9211
+        },
+        {
+          "date": "2026-02-25",
+          "fund": 2.0644,
+          "benchmark": 1.8202
+        },
+        {
+          "date": "2026-03-06",
+          "fund": 2.0477,
+          "benchmark": 1.8046
+        },
+        {
+          "date": "2026-03-17",
+          "fund": 2.0343,
+          "benchmark": 1.8023
+        },
+        {
+          "date": "2026-03-26",
+          "fund": 2.0751,
+          "benchmark": 1.8302
+        },
+        {
+          "date": "2026-04-06",
+          "fund": 2.0352,
+          "benchmark": 1.7893
+        },
+        {
+          "date": "2026-04-15",
+          "fund": 2.0442,
+          "benchmark": 1.7942
+        },
+        {
+          "date": "2026-04-24",
+          "fund": 2.1142,
+          "benchmark": 1.8463
+        },
+        {
+          "date": "2026-05-05",
+          "fund": 2.1745,
+          "benchmark": 1.9045
+        },
+        {
+          "date": "2026-05-14",
+          "fund": 2.1209,
+          "benchmark": 1.8585
+        },
+        {
+          "date": "2026-05-25",
+          "fund": 2.1677,
+          "benchmark": 1.9079
+        },
+        {
+          "date": "2026-06-03",
+          "fund": 2.2178,
+          "benchmark": 1.9486
+        },
+        {
+          "date": "2026-06-05",
+          "fund": 2.1934,
+          "benchmark": 1.9267
+        }
+      ],
+      "sectorBreakdown": [
+        {
+          "sector": "Information Technology",
+          "weight": 0.1344
+        },
+        {
+          "sector": "Financials",
+          "weight": 0.1252
+        },
+        {
+          "sector": "Communication Services",
+          "weight": 0.1103
+        },
+        {
+          "sector": "Consumer Staples",
+          "weight": 0.0988
+        },
+        {
+          "sector": "Energy",
+          "weight": 0.097
+        },
+        {
+          "sector": "Consumer Discretionary",
+          "weight": 0.0954
+        },
+        {
+          "sector": "Utilities",
+          "weight": 0.094
+        },
+        {
+          "sector": "Industrials",
+          "weight": 0.0683
+        },
+        {
+          "sector": "Health Care",
+          "weight": 0.0673
+        },
+        {
+          "sector": "Real Estate",
+          "weight": 0.0582
+        },
+        {
+          "sector": "Materials",
+          "weight": 0.051
+        }
+      ]
+    },
+    "marketConditions": {
+      "date": "2026-06-06",
+      "vix": 15.8,
+      "volatilityLevel": "low",
+      "riskSentiment": "risk-on",
+      "sp500Return": 0.014,
+      "nasdaqReturn": 0.021,
+      "treasuryYield": 4.18,
+      "marketSummary": {
+        "Russell 2000": {
+          "weeklyReturn": 0.009
+        },
+        "Gold": {
+          "weeklyReturn": 0.004
+        }
+      }
+    }
+  }
+}

@@ -190,3 +190,62 @@ def summary(daily: pd.Series, market_daily: pd.Series | None = None) -> dict:
         out["informationRatio"] = None
 
     return out
+
+
+def alpha_newey_west(
+    daily: pd.Series,
+    benchmark_daily: pd.Series,
+    rf: float = settings.RISK_FREE_RATE,
+) -> tuple[float | None, float | None]:
+    """
+    CAPM regression alpha with a Newey-West (HAC) t-statistic.
+
+    Regresses daily fund excess returns on daily benchmark excess returns:
+        (r_f - rf_d) = alpha_d + beta * (r_b - rf_d) + eps
+    and tests H0: alpha_d = 0 with heteroskedasticity-and-autocorrelation-
+    consistent standard errors (Bartlett kernel, lag = floor(4*(n/100)^(2/9)),
+    the standard Newey-West plug-in choice).
+
+    Returns (alpha_annualized, t_stat), both None when fewer than 60 aligned
+    observations exist. NOTE: this is the arithmetic OLS alpha (the quantity
+    the t-stat actually tests); the headline 'alpha' elsewhere is the
+    geometric CAPM gap, which is the more intuitive display number. The two
+    are close for daily data; the t-stat is reported so the display alpha can
+    be read with a significance context instead of as a bare point estimate.
+    """
+    aligned = pd.concat([daily, benchmark_daily], axis=1).dropna()
+    # Drop any residual non-finite rows (±inf can survive dropna when
+    # pct_change had a zero denominator and was clipped imperfectly).
+    aligned = aligned[np.isfinite(aligned.values).all(axis=1)]
+    n = len(aligned)
+    if n < 60:
+        return None, None
+
+    rf_d = rf / TD
+    y = aligned.iloc[:, 0].to_numpy(dtype=float) - rf_d
+    x = aligned.iloc[:, 1].to_numpy(dtype=float) - rf_d
+    X = np.column_stack([np.ones(n), x])
+
+    with np.errstate(divide="ignore", over="ignore", invalid="ignore"):
+        coef, *_ = np.linalg.lstsq(X, y, rcond=None)
+        resid = y - X @ coef
+    if not np.isfinite(coef).all() or not np.isfinite(resid).all():
+        return None, None
+
+    lags = int(np.floor(4.0 * (n / 100.0) ** (2.0 / 9.0)))
+    Xu = X * resid[:, None]
+    S = Xu.T @ Xu
+    for lag in range(1, lags + 1):
+        w = 1.0 - lag / (lags + 1.0)          # Bartlett kernel
+        gamma = Xu[lag:].T @ Xu[:-lag]
+        S += w * (gamma + gamma.T)
+
+    try:
+        XtX_inv = np.linalg.inv(X.T @ X)
+    except np.linalg.LinAlgError:
+        return None, None
+    V = XtX_inv @ S @ XtX_inv
+    se_alpha = float(np.sqrt(max(V[0, 0], 0.0)))
+    if se_alpha == 0.0:
+        return float(coef[0] * TD), None
+    return float(coef[0] * TD), float(coef[0] / se_alpha)

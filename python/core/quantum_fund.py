@@ -40,6 +40,8 @@ CONFIG (env vars, all optional)
     QUANTUM_NUM_READS       default 200   reads for sim/qpu (hybrid ignores it)
     QUANTUM_L1..QUANTUM_L4  default tuned  the lambda hyperparameters
     DWAVE_API_TOKEN         (none)        presence enables the quantum arm
+    COV_METHOD / EWMA_HALFLIFE / LOOKBACK_YEARS   covariance estimator for the
+                            risk term (core/covariance.py; EWMA by default)
 """
 from __future__ import annotations
 
@@ -134,14 +136,25 @@ def build_qubo(candidates: list[dict], returns: pd.DataFrame,
         raise ValueError("need >=2 candidates with available returns to build a QUBO")
     by_t = {c["ticker"]: c for c in candidates}
 
+    # Covariance via the configured estimator (settings.COV_METHOD: EWMA by
+    # default, Ledoit-Wolf optional), windowed to settings.LOOKBACK_YEARS and
+    # coverage-filtered — see core/covariance.py. This replaces the v2.0 raw
+    # sample covariance whose global dropna let one short-history candidate
+    # truncate the estimation window for all names. Candidates that fail the
+    # coverage filter are excluded from the QUBO (logged), so every array
+    # below stays aligned with the covariance matrix ordering.
+    from core import covariance
+    cov, cov_info = covariance.estimate(returns[tickers])
+    if cov_info["dropped"]:
+        logger.info("QUBO: %d candidates excluded for sparse return history: %s",
+                    len(cov_info["dropped"]), cov_info["dropped"][:10])
+    tickers = cov_info["tickers"]
+
     n = len(tickers)
     scores = np.array([max(float(by_t[t].get("score") or 0.0), 0.0) for t in tickers])
     s = scores / 100.0  # normalise scores to ~[0,1]
     sectors = [by_t[t].get("sector", "Unknown") for t in tickers]
 
-    # Covariance over the candidates, aligned on common history.
-    sub = returns[tickers].dropna(how="any")
-    cov = sub.cov().values if len(sub) > 2 else np.eye(n) * 1e-6
     cmax = np.max(np.abs(cov)) or 1.0
     c = cov / cmax  # normalise so lambdas are scale-stable across universes
     try:

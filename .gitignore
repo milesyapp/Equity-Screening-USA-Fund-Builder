@@ -10,3 +10,4 @@ python/**/__pycache__/
 .env.local
 .env*.local
 python/test_output.json
+*.tsbuildinfo

@@ -70,6 +70,9 @@ def _window_metrics(fund_daily: pd.Series, bench_daily: pd.Series, years: int) -
     bench_ann = metrics.annual_return(b)
     # CAPM alpha: actual return minus what beta would predict for the bench's excess.
     alpha = fund_ann - (rf + beta * (bench_ann - rf)) if not np.isnan(beta) else None
+    # Newey-West t-stat of the daily OLS alpha — a bare alpha point estimate is
+    # not interpretable; this says whether it is distinguishable from zero.
+    _, alpha_t = metrics.alpha_newey_west(f, b, rf)
 
     return {
         "annualReturn":     round(fund_ann, 4),
@@ -77,6 +80,7 @@ def _window_metrics(fund_daily: pd.Series, bench_daily: pd.Series, years: int) -
         "sharpeRatio":      round(metrics.sharpe_ratio(f), 3),
         "maximumDrawdown":  round(metrics.maximum_drawdown(f), 4),
         "alpha":            round(alpha, 4) if alpha is not None else None,
+        "alphaTStat":       round(alpha_t, 2) if alpha_t is not None else None,
         "beta":             round(beta, 3) if not np.isnan(beta) else None,
         "benchmarkReturn":  round(bench_ann, 4),
     }

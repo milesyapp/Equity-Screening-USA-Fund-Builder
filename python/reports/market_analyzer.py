@@ -1,6 +1,8 @@
 """
-Market-conditions analysis used to (a) auto-detect the risk regime that drives
-the sector tilt, and (b) feed the AI report writer.
+Market-conditions snapshot for the dashboard: weekly moves across headline
+gauges (S&P, Nasdaq, Russell, VIX, 10Y, gold) plus a VIX-threshold regime
+label (risk-on / neutral / risk-off). DISPLAY ONLY — the regime annotates the
+page and the run record; it does not alter selection, scoring, or weights.
 """
 from __future__ import annotations
 

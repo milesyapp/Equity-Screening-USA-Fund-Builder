@@ -45,6 +45,9 @@ export interface FundWindow {
   sharpeRatio: number;
   maximumDrawdown: number;
   alpha: number | null;
+  // Newey-West t-statistic of the daily OLS alpha (|t| >= ~2 ≈ significant at
+  // 5%). Optional: absent from JSON produced by backend versions < 2.1.
+  alphaTStat?: number | null;
   beta: number | null;
   benchmarkReturn: number;
 }
@@ -83,6 +86,9 @@ export interface Methodology {
   healthFactors: string[];
   valuationFactors: string[];
   momentumFactors: string[];
+  // Known, disclosed limitations of the data/methodology, written by the
+  // backend and rendered verbatim. Optional: absent before backend v2.1.
+  limitations?: string[];
 }
 
 // --- Classical-vs-quantum research instrumentation -------------------------
@@ -134,7 +140,9 @@ export interface ForwardArmStat {
   arm: string;
   vsBaseline: string;
   nDays: number;
+  activeReturnCumulative?: number | null;
   activeReturnAnnualised: number | null;
+  minDaysForAnnualised?: number;
   trackingError: number | null;
   informationRatio: number | null;
   sharpe: { arm: number | null; baseline: number | null };
