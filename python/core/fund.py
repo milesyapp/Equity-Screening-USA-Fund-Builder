@@ -51,7 +51,8 @@ def score_weights(stocks: list[dict], max_weight: float | None = None) -> dict:
         under_total = sum(under.values()) or 1.0
         for t in under:
             w[t] += excess * (under[t] / under_total)
-    return w
+    total = sum(w.values()) or 1.0
+    return {t: v / total for t, v in w.items()}
 
 
 def _window_metrics(fund_daily: pd.Series, bench_daily: pd.Series, years: int) -> dict | None:

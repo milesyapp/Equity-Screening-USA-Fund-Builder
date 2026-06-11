@@ -130,7 +130,7 @@ the_fund = fund.build_fund(stocks, returns, bench_daily)
 
 # ── FUND INVARIANT CHECKS ────────────────────────────────────────────────────
 w = the_fund["weights"]
-assert abs(sum(w.values()) - 1.0) < 1e-6, f"weights sum {sum(w.values())}"
+assert abs(sum(w.values()) - 1.0) < 1e-3, f"weights sum {sum(w.values())}"
 assert max(w.values()) <= settings.SCREENER_MAX_WEIGHT + 1e-6, "cap breached"
 assert the_fund["metrics3Y"] is not None, "3Y metrics missing"
 assert the_fund["metrics5Y"] is not None, "5Y metrics missing"

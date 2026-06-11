@@ -15,7 +15,6 @@ settings.SCORE_WEIGHTS (default 70 / 20 / 10):
   VALUATION (is the price attractive for what you get?)
     - P/E ratio                (lower is better -> inverted; only if P/E > 0)
     + FCF yield                (higher is better)
-    - PEG  = P/E / growth%     (lower is better -> inverted; only if growth > 0)
 
   MOMENTUM (is the market already confirming the thesis?)
     + 6-month price return     (higher is better)
@@ -55,7 +54,6 @@ HEALTH_FACTORS = {
 VALUATION_FACTORS = {
     "peRatio":  "lower",
     "fcfYield": "higher",
-    "peg":      "lower",
 }
 MOMENTUM_FACTORS = {
     "return6M": "higher",
@@ -102,14 +100,6 @@ def score_universe(fundamentals: pd.DataFrame, momentum: pd.DataFrame) -> pd.Dat
     used to generate plain-English reasons downstream.
     """
     df = fundamentals.copy()
-
-    # Derive PEG where possible (growth expressed as a percentage).
-    if "peRatio" in df and "revenueGrowth" in df:
-        growth_pct = df["revenueGrowth"] * 100.0
-        peg = df["peRatio"] / growth_pct
-        # PEG only meaningful for positive P/E and positive growth.
-        peg = peg.where((df["peRatio"] > 0) & (growth_pct > 0))
-        df["peg"] = peg
 
     # A negative or zero P/E is "no earnings" — not a cheap valuation. Exclude
     # it from the valuation ranking rather than rewarding it as ultra-low.

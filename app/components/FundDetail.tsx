@@ -461,8 +461,7 @@ function Methodology({ armKey, diag, color }: { armKey: string; diag: QuboDiagno
       <P>
         <b style={B}>Health</b> blends return on equity, operating margin, net margin, free-cash-flow
         margin, year-over-year revenue growth, and debt/equity (inverted, so less leverage scores
-        higher). <b style={B}>Valuation</b> uses P/E (inverted, negatives excluded), FCF yield, and PEG
-        (inverted, positive growth only). <b style={B}>Momentum</b> reads 6-month and 3-month price
+        higher). <b style={B}>Valuation</b> uses P/E (inverted, negatives excluded) and FCF yield. <b style={B}>Momentum</b> reads 6-month and 3-month price
         return. Each raw metric is converted to a percentile rank across the universe before it is
         blended — this makes the composite robust to outliers and to the inconsistent scales between,
         say, a margin and a debt ratio.
