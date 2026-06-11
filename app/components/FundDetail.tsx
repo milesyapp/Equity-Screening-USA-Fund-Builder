@@ -464,7 +464,9 @@ function Methodology({ armKey, diag, color }: { armKey: string; diag: QuboDiagno
         higher). <b style={B}>Valuation</b> uses P/E (inverted, negatives excluded) and FCF yield. <b style={B}>Momentum</b> reads 6-month and 3-month price
         return. Each raw metric is converted to a percentile rank across the universe before it is
         blended — this makes the composite robust to outliers and to the inconsistent scales between,
-        say, a margin and a debt ratio.
+        say, a margin and a debt ratio. Missing factors are imputed at the universe median: each
+        pillar score is shrunk toward the neutral 50 in proportion to factor coverage, so a name
+        reporting one of six health factors cannot post an extreme health score from a single ratio.
       </P>
 
       {!isQubo && (

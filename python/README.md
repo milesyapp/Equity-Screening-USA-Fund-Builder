@@ -12,9 +12,12 @@ three pillars, ranks the top 100, and builds a score-weighted mini-fund.
 | **Momentum** | 10% | 6-month and 3-month price return |
 
 Each factor is converted to a **percentile rank** across the scored universe
-(robust to outliers and to the different scales of the factors). A stock missing
-a factor is excluded from that factor's average rather than penalised to zero.
-The composite is the weighted average of the three pillar scores.
+(robust to outliers and to the different scales of the factors). Missing factors
+are imputed at the universe median: each pillar mean is shrunk toward the
+neutral 50 in proportion to factor coverage (a name with 1 of 6 health factors
+keeps only 1/6 of its distance from the median), so sparse names cannot post
+extreme pillar scores from a single ratio. The composite is the weighted
+average of the three pillar scores.
 
 ## Data sources
 

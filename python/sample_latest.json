@@ -45,49 +45,11 @@
     "stocks": [
       {
         "rank": 1,
-        "ticker": "SYN215",
-        "name": "Synthetic Company 215",
-        "sector": "Energy",
-        "subIndustry": "",
-        "price": 127.99,
-        "score": 89.17,
-        "healthScore": 91.54,
-        "valuationScore": 86.0,
-        "momentumScore": 78.88,
-        "peRatio": -1.0,
-        "dividendYield": 0.003611580345768863,
-        "grossMargin": 0.5110302832549521,
-        "operatingMargin": 0.27445212361845683,
-        "netMargin": 0.2365578537221072,
-        "returnOnEquity": 0.2746117954830587,
-        "fcfMargin": 0.27598387431670324,
-        "fcfYield": 0.0629980289850039,
-        "revenueGrowth": 0.16358897960569002,
-        "debtToEquity": 0.12635042307724415,
-        "marketCap": 12913219021.321144,
-        "return1W": 0.018693630808068854,
-        "return1M": 0.08585794750220455,
-        "return3M": 0.14288473056496703,
-        "return6M": 0.11011848208489357,
-        "return1Y": -0.023720157353468718,
-        "reasons": [
-          "Free-cash-flow margin of 27.6% \u2014 top 6% of the universe",
-          "Operating margin of 27.4% \u2014 top 7% of the universe",
-          "Net margin of 23.7% \u2014 top 8% of the universe",
-          "Return on equity of 27.5% \u2014 top 10% of the universe",
-          "Low leverage \u2014 debt/equity of 0.13",
-          "Trades at a 105% discount to its sector (P/E -1.0 vs 19.2 median)"
-        ],
-        "flags": [],
-        "fundWeight": 0.01214
-      },
-      {
-        "rank": 2,
         "ticker": "SYN219",
         "name": "Synthetic Company 219",
         "sector": "Communication Services",
         "subIndustry": "",
-        "price": 348.54,
+        "price": 127.99,
         "score": 88.58,
         "healthScore": 98.71,
         "valuationScore": 49.63,
@@ -118,15 +80,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 40.3 vs sector median 14.4"
         ],
-        "fundWeight": 0.01206
+        "fundWeight": 0.01209
       },
       {
-        "rank": 3,
+        "rank": 2,
         "ticker": "SYN281",
         "name": "Synthetic Company 281",
         "sector": "Materials",
         "subIndustry": "",
-        "price": 61.34,
+        "price": 348.54,
         "score": 87.52,
         "healthScore": 97.88,
         "valuationScore": 46.47,
@@ -157,15 +119,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 37.0 vs sector median 14.8"
         ],
-        "fundWeight": 0.01192
+        "fundWeight": 0.01194
       },
       {
-        "rank": 4,
+        "rank": 3,
         "ticker": "SYN287",
         "name": "Synthetic Company 287",
         "sector": "Utilities",
         "subIndustry": "",
-        "price": 56.8,
+        "price": 61.34,
         "score": 87.47,
         "healthScore": 95.04,
         "valuationScore": 55.34,
@@ -195,7 +157,45 @@
         "flags": [
           "Premium valuation \u2014 P/E 24.8 vs sector median 15.1"
         ],
-        "fundWeight": 0.01191
+        "fundWeight": 0.01194
+      },
+      {
+        "rank": 4,
+        "ticker": "SYN215",
+        "name": "Synthetic Company 215",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 56.8,
+        "score": 85.57,
+        "healthScore": 91.54,
+        "valuationScore": 68.0,
+        "momentumScore": 78.88,
+        "peRatio": -1.0,
+        "dividendYield": 0.003611580345768863,
+        "grossMargin": 0.5110302832549521,
+        "operatingMargin": 0.27445212361845683,
+        "netMargin": 0.2365578537221072,
+        "returnOnEquity": 0.2746117954830587,
+        "fcfMargin": 0.27598387431670324,
+        "fcfYield": 0.0629980289850039,
+        "revenueGrowth": 0.16358897960569002,
+        "debtToEquity": 0.12635042307724415,
+        "marketCap": 12913219021.321144,
+        "return1W": 0.018693630808068854,
+        "return1M": 0.08585794750220455,
+        "return3M": 0.14288473056496703,
+        "return6M": 0.11011848208489357,
+        "return1Y": -0.023720157353468718,
+        "reasons": [
+          "Free-cash-flow margin of 27.6% \u2014 top 6% of the universe",
+          "Operating margin of 27.4% \u2014 top 7% of the universe",
+          "Net margin of 23.7% \u2014 top 8% of the universe",
+          "Return on equity of 27.5% \u2014 top 10% of the universe",
+          "Low leverage \u2014 debt/equity of 0.13",
+          "Trades at a 105% discount to its sector (P/E -1.0 vs 19.2 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.01168
       },
       {
         "rank": 5,
@@ -234,7 +234,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 24.3 vs sector median 15.5"
         ],
-        "fundWeight": 0.01165
+        "fundWeight": 0.01167
       },
       {
         "rank": 6,
@@ -273,7 +273,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 36.2 vs sector median 18.9"
         ],
-        "fundWeight": 0.01146
+        "fundWeight": 0.01148
       },
       {
         "rank": 7,
@@ -312,7 +312,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 28.0 vs sector median 17.4"
         ],
-        "fundWeight": 0.01144
+        "fundWeight": 0.01146
       },
       {
         "rank": 8,
@@ -351,7 +351,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 34.6 vs sector median 17.4"
         ],
-        "fundWeight": 0.01138
+        "fundWeight": 0.0114
       },
       {
         "rank": 9,
@@ -389,7 +389,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 25.2 vs sector median 17.7"
         ],
-        "fundWeight": 0.01136
+        "fundWeight": 0.01138
       },
       {
         "rank": 10,
@@ -428,7 +428,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.5 vs sector median 17.7"
         ],
-        "fundWeight": 0.01133
+        "fundWeight": 0.01136
       },
       {
         "rank": 11,
@@ -467,7 +467,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 37.6 vs sector median 17.4"
         ],
-        "fundWeight": 0.01131
+        "fundWeight": 0.01133
       },
       {
         "rank": 12,
@@ -506,7 +506,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 38.9 vs sector median 18.9"
         ],
-        "fundWeight": 0.01126
+        "fundWeight": 0.01128
       },
       {
         "rank": 13,
@@ -545,7 +545,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 28.3 vs sector median 15.1"
         ],
-        "fundWeight": 0.01121
+        "fundWeight": 0.01124
       },
       {
         "rank": 14,
@@ -584,7 +584,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.4 vs sector median 17.6"
         ],
-        "fundWeight": 0.01119
+        "fundWeight": 0.01121
       },
       {
         "rank": 15,
@@ -620,7 +620,7 @@
           "Net margin of 24.4% \u2014 top 7% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.01112
+        "fundWeight": 0.01114
       },
       {
         "rank": 16,
@@ -658,7 +658,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 33.1 vs sector median 15.1"
         ],
-        "fundWeight": 0.01103
+        "fundWeight": 0.01105
       },
       {
         "rank": 17,
@@ -697,7 +697,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 33.5 vs sector median 18.9"
         ],
-        "fundWeight": 0.011
+        "fundWeight": 0.01102
       },
       {
         "rank": 18,
@@ -736,7 +736,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.7 vs sector median 17.7"
         ],
-        "fundWeight": 0.01088
+        "fundWeight": 0.0109
       },
       {
         "rank": 19,
@@ -775,7 +775,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 24.6 vs sector median 14.4"
         ],
-        "fundWeight": 0.01074
+        "fundWeight": 0.01076
       },
       {
         "rank": 20,
@@ -811,7 +811,7 @@
           "Free-cash-flow margin of 27.8% \u2014 top 6% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.01072
+        "fundWeight": 0.01074
       },
       {
         "rank": 21,
@@ -849,53 +849,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 24.5 vs sector median 17.7"
         ],
-        "fundWeight": 0.0107
+        "fundWeight": 0.01072
       },
       {
         "rank": 22,
-        "ticker": "SYN319",
-        "name": "Synthetic Company 319",
-        "sector": "Information Technology",
-        "subIndustry": "",
-        "price": 456.02,
-        "score": 78.47,
-        "healthScore": 92.21,
-        "valuationScore": 60.75,
-        "momentumScore": 17.75,
-        "peRatio": -1.0,
-        "dividendYield": 0.0032474619463636763,
-        "grossMargin": 0.5627319669799496,
-        "operatingMargin": 0.3157957502340597,
-        "netMargin": 0.28753361464010024,
-        "returnOnEquity": 0.17128408804985004,
-        "fcfMargin": 0.31808750341497766,
-        "fcfYield": 0.042693214636653695,
-        "revenueGrowth": 0.23953443936413174,
-        "debtToEquity": 0.11651924052989004,
-        "marketCap": 49164015751.29365,
-        "return1W": 0.0017725438966898993,
-        "return1M": 0.11544359803486386,
-        "return3M": -0.0909162542482449,
-        "return6M": -0.24711220640760556,
-        "return1Y": -0.4788367940429411,
-        "reasons": [
-          "Free-cash-flow margin of 31.8% \u2014 top 2% of the universe",
-          "Revenue growth of 24.0% \u2014 top 3% of the universe",
-          "Operating margin of 31.6% \u2014 top 3% of the universe",
-          "Net margin of 28.8% \u2014 top 4% of the universe",
-          "Low leverage \u2014 debt/equity of 0.12",
-          "Trades at a 106% discount to its sector (P/E -1.0 vs 17.7 median)"
-        ],
-        "flags": [],
-        "fundWeight": 0.01069
-      },
-      {
-        "rank": 23,
         "ticker": "SYN383",
         "name": "Synthetic Company 383",
         "sector": "Consumer Staples",
         "subIndustry": "",
-        "price": 202.22,
+        "price": 456.02,
         "score": 78.47,
         "healthScore": 77.92,
         "valuationScore": 76.94,
@@ -924,15 +886,15 @@
           "Trades at a 18% discount to its sector (P/E 14.2 vs 17.4 median)"
         ],
         "flags": [],
-        "fundWeight": 0.01069
+        "fundWeight": 0.01071
       },
       {
-        "rank": 24,
+        "rank": 23,
         "ticker": "SYN132",
         "name": "Synthetic Company 132",
         "sector": "Information Technology",
         "subIndustry": "",
-        "price": 111.79,
+        "price": 202.22,
         "score": 78.19,
         "healthScore": 91.0,
         "valuationScore": 51.32,
@@ -962,53 +924,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 32.3 vs sector median 17.7"
         ],
-        "fundWeight": 0.01065
+        "fundWeight": 0.01067
       },
       {
-        "rank": 25,
-        "ticker": "SYN097",
-        "name": "Synthetic Company 97",
-        "sector": "Communication Services",
-        "subIndustry": "",
-        "price": 586.4,
-        "score": 78.0,
-        "healthScore": 83.04,
-        "valuationScore": 60.25,
-        "momentumScore": 78.25,
-        "peRatio": -1.0,
-        "dividendYield": 0.001938574990452158,
-        "grossMargin": 0.45881416106014744,
-        "operatingMargin": 0.22651918080728595,
-        "netMargin": 0.17645087059726444,
-        "returnOnEquity": 0.2429058074501764,
-        "fcfMargin": 0.1908919772775953,
-        "fcfYield": 0.04236636787110232,
-        "revenueGrowth": 0.08664126452009398,
-        "debtToEquity": 0.09001209208718908,
-        "marketCap": 1485435972.7319384,
-        "return1W": -0.006355866301109143,
-        "return1M": 0.10265895275701564,
-        "return3M": 0.051552712521587774,
-        "return6M": 0.2970314443937834,
-        "return1Y": 0.4344269133292065,
-        "reasons": [
-          "Operating margin of 22.7% \u2014 top 13% of the universe",
-          "Return on equity of 24.3% \u2014 top 14% of the universe",
-          "Free-cash-flow margin of 19.1% \u2014 top 17% of the universe",
-          "Net margin of 17.6% \u2014 top 18% of the universe",
-          "Low leverage \u2014 debt/equity of 0.09",
-          "Trades at a 107% discount to its sector (P/E -1.0 vs 14.4 median)"
-        ],
-        "flags": [],
-        "fundWeight": 0.01062
-      },
-      {
-        "rank": 26,
+        "rank": 24,
         "ticker": "SYN399",
         "name": "Synthetic Company 399",
         "sector": "Communication Services",
         "subIndustry": "",
-        "price": 161.95,
+        "price": 111.79,
         "score": 77.99,
         "healthScore": 75.42,
         "valuationScore": 76.84,
@@ -1036,15 +960,15 @@
           "Free-cash-flow margin of 18.9% \u2014 top 18% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.01062
+        "fundWeight": 0.01064
       },
       {
-        "rank": 27,
+        "rank": 25,
         "ticker": "SYN384",
         "name": "Synthetic Company 384",
         "sector": "Financials",
         "subIndustry": "",
-        "price": 162.86,
+        "price": 586.4,
         "score": 77.86,
         "healthScore": 83.27,
         "valuationScore": 50.75,
@@ -1074,15 +998,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 36.0 vs sector median 18.9"
         ],
-        "fundWeight": 0.0106
+        "fundWeight": 0.01062
       },
       {
-        "rank": 28,
+        "rank": 26,
         "ticker": "SYN055",
         "name": "Synthetic Company 55",
         "sector": "Real Estate",
         "subIndustry": "",
-        "price": 232.2,
+        "price": 161.95,
         "score": 77.79,
         "healthScore": 90.04,
         "valuationScore": 47.01,
@@ -1113,15 +1037,53 @@
         "flags": [
           "Premium valuation \u2014 P/E 29.7 vs sector median 14.5"
         ],
-        "fundWeight": 0.01059
+        "fundWeight": 0.01061
       },
       {
-        "rank": 29,
+        "rank": 27,
+        "ticker": "SYN319",
+        "name": "Synthetic Company 319",
+        "sector": "Information Technology",
+        "subIndustry": "",
+        "price": 162.86,
+        "score": 77.4,
+        "healthScore": 92.21,
+        "valuationScore": 55.38,
+        "momentumScore": 17.75,
+        "peRatio": -1.0,
+        "dividendYield": 0.0032474619463636763,
+        "grossMargin": 0.5627319669799496,
+        "operatingMargin": 0.3157957502340597,
+        "netMargin": 0.28753361464010024,
+        "returnOnEquity": 0.17128408804985004,
+        "fcfMargin": 0.31808750341497766,
+        "fcfYield": 0.042693214636653695,
+        "revenueGrowth": 0.23953443936413174,
+        "debtToEquity": 0.11651924052989004,
+        "marketCap": 49164015751.29365,
+        "return1W": 0.0017725438966898993,
+        "return1M": 0.11544359803486386,
+        "return3M": -0.0909162542482449,
+        "return6M": -0.24711220640760556,
+        "return1Y": -0.4788367940429411,
+        "reasons": [
+          "Free-cash-flow margin of 31.8% \u2014 top 2% of the universe",
+          "Revenue growth of 24.0% \u2014 top 3% of the universe",
+          "Operating margin of 31.6% \u2014 top 3% of the universe",
+          "Net margin of 28.8% \u2014 top 4% of the universe",
+          "Low leverage \u2014 debt/equity of 0.12",
+          "Trades at a 106% discount to its sector (P/E -1.0 vs 17.7 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.01056
+      },
+      {
+        "rank": 28,
         "ticker": "SYN081",
         "name": "Synthetic Company 81",
         "sector": "Financials",
         "subIndustry": "",
-        "price": 159.18,
+        "price": 232.2,
         "score": 77.01,
         "healthScore": 79.88,
         "valuationScore": 62.57,
@@ -1150,7 +1112,45 @@
           "Low leverage \u2014 debt/equity of 0.39"
         ],
         "flags": [],
-        "fundWeight": 0.01049
+        "fundWeight": 0.01051
+      },
+      {
+        "rank": 29,
+        "ticker": "SYN097",
+        "name": "Synthetic Company 97",
+        "sector": "Communication Services",
+        "subIndustry": "",
+        "price": 159.18,
+        "score": 76.98,
+        "healthScore": 83.04,
+        "valuationScore": 55.12,
+        "momentumScore": 78.25,
+        "peRatio": -1.0,
+        "dividendYield": 0.001938574990452158,
+        "grossMargin": 0.45881416106014744,
+        "operatingMargin": 0.22651918080728595,
+        "netMargin": 0.17645087059726444,
+        "returnOnEquity": 0.2429058074501764,
+        "fcfMargin": 0.1908919772775953,
+        "fcfYield": 0.04236636787110232,
+        "revenueGrowth": 0.08664126452009398,
+        "debtToEquity": 0.09001209208718908,
+        "marketCap": 1485435972.7319384,
+        "return1W": -0.006355866301109143,
+        "return1M": 0.10265895275701564,
+        "return3M": 0.051552712521587774,
+        "return6M": 0.2970314443937834,
+        "return1Y": 0.4344269133292065,
+        "reasons": [
+          "Operating margin of 22.7% \u2014 top 13% of the universe",
+          "Return on equity of 24.3% \u2014 top 14% of the universe",
+          "Free-cash-flow margin of 19.1% \u2014 top 17% of the universe",
+          "Net margin of 17.6% \u2014 top 18% of the universe",
+          "Low leverage \u2014 debt/equity of 0.09",
+          "Trades at a 107% discount to its sector (P/E -1.0 vs 14.4 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.0105
       },
       {
         "rank": 30,
@@ -1188,7 +1188,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 40.0 vs sector median 15.1"
         ],
-        "fundWeight": 0.01046
+        "fundWeight": 0.01048
       },
       {
         "rank": 31,
@@ -1227,7 +1227,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.4 vs sector median 18.9"
         ],
-        "fundWeight": 0.01038
+        "fundWeight": 0.0104
       },
       {
         "rank": 32,
@@ -1265,7 +1265,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.8 vs sector median 18.9"
         ],
-        "fundWeight": 0.01038
+        "fundWeight": 0.01039
       },
       {
         "rank": 33,
@@ -1303,7 +1303,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 39.0 vs sector median 18.9"
         ],
-        "fundWeight": 0.01036
+        "fundWeight": 0.01037
       },
       {
         "rank": 34,
@@ -1339,7 +1339,7 @@
           "Fcf yield of 7.1% \u2014 top 8% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.01028
+        "fundWeight": 0.0103
       },
       {
         "rank": 35,
@@ -1377,7 +1377,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 28.6 vs sector median 15.5"
         ],
-        "fundWeight": 0.01027
+        "fundWeight": 0.01029
       },
       {
         "rank": 36,
@@ -1415,7 +1415,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 28.6 vs sector median 15.1"
         ],
-        "fundWeight": 0.01026
+        "fundWeight": 0.01028
       },
       {
         "rank": 37,
@@ -1454,7 +1454,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 33.8 vs sector median 14.8"
         ],
-        "fundWeight": 0.01025
+        "fundWeight": 0.01027
       },
       {
         "rank": 38,
@@ -1488,7 +1488,7 @@
           "Trades at a 47% discount to its sector (P/E 10.1 vs 18.9 median)"
         ],
         "flags": [],
-        "fundWeight": 0.0102
+        "fundWeight": 0.01022
       },
       {
         "rank": 39,
@@ -1526,7 +1526,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 39.9 vs sector median 17.7"
         ],
-        "fundWeight": 0.01019
+        "fundWeight": 0.01021
       },
       {
         "rank": 40,
@@ -1562,7 +1562,7 @@
           "Free-cash-flow margin of 22.9% \u2014 top 10% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.01019
+        "fundWeight": 0.01021
       },
       {
         "rank": 41,
@@ -1600,7 +1600,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 29.1 vs sector median 14.5"
         ],
-        "fundWeight": 0.01019
+        "fundWeight": 0.01021
       },
       {
         "rank": 42,
@@ -1634,50 +1634,15 @@
           "Return on equity of 24.8% \u2014 top 13% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.01018
+        "fundWeight": 0.0102
       },
       {
         "rank": 43,
-        "ticker": "SYN398",
-        "name": "Synthetic Company 398",
-        "sector": "Utilities",
-        "subIndustry": "",
-        "price": 403.92,
-        "score": 74.72,
-        "healthScore": 74.25,
-        "valuationScore": 98.5,
-        "momentumScore": 30.5,
-        "peRatio": -1.0,
-        "dividendYield": 0.0008768945108442762,
-        "grossMargin": 0.50664831521646,
-        "operatingMargin": 0.1815134371985198,
-        "netMargin": 0.15891341872163842,
-        "returnOnEquity": 0.10287431800693056,
-        "fcfMargin": 0.15128477702167564,
-        "fcfYield": 0.08733034666095586,
-        "revenueGrowth": 0.08506192080482994,
-        "debtToEquity": 0.003943919479226121,
-        "marketCap": 6245214584.563276,
-        "return1W": -0.018244914883906675,
-        "return1M": 0.09761542203737551,
-        "return3M": 0.0030992170360166355,
-        "return6M": -0.2390906256781884,
-        "return1Y": -0.5233464070555588,
-        "reasons": [
-          "Fcf yield of 8.7% \u2014 top 2% of the universe",
-          "Low leverage \u2014 debt/equity of 0.00",
-          "Trades at a 107% discount to its sector (P/E -1.0 vs 15.1 median)"
-        ],
-        "flags": [],
-        "fundWeight": 0.01018
-      },
-      {
-        "rank": 44,
         "ticker": "SYN197",
         "name": "Synthetic Company 197",
         "sector": "Information Technology",
         "subIndustry": "",
-        "price": 555.97,
+        "price": 403.92,
         "score": 74.68,
         "healthScore": 86.0,
         "valuationScore": 34.14,
@@ -1708,15 +1673,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 40.1 vs sector median 17.7"
         ],
-        "fundWeight": 0.01017
+        "fundWeight": 0.01019
       },
       {
-        "rank": 45,
+        "rank": 44,
         "ticker": "SYN090",
         "name": "Synthetic Company 90",
         "sector": "Information Technology",
         "subIndustry": "",
-        "price": 154.36,
+        "price": 555.97,
         "score": 74.45,
         "healthScore": 85.94,
         "valuationScore": 46.11,
@@ -1746,15 +1711,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 36.2 vs sector median 17.7"
         ],
-        "fundWeight": 0.01014
+        "fundWeight": 0.01016
       },
       {
-        "rank": 46,
+        "rank": 45,
         "ticker": "SYN094",
         "name": "Synthetic Company 94",
         "sector": "Financials",
         "subIndustry": "",
-        "price": 211.21,
+        "price": 154.36,
         "score": 74.41,
         "healthScore": 85.92,
         "valuationScore": 32.89,
@@ -1784,15 +1749,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 29.6 vs sector median 18.9"
         ],
-        "fundWeight": 0.01013
+        "fundWeight": 0.01015
       },
       {
-        "rank": 47,
+        "rank": 46,
         "ticker": "SYN206",
         "name": "Synthetic Company 206",
         "sector": "Information Technology",
         "subIndustry": "",
-        "price": 506.17,
+        "price": 211.21,
         "score": 74.35,
         "healthScore": 80.17,
         "valuationScore": 42.62,
@@ -1822,15 +1787,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 41.3 vs sector median 17.7"
         ],
-        "fundWeight": 0.01013
+        "fundWeight": 0.01015
       },
       {
-        "rank": 48,
+        "rank": 47,
         "ticker": "SYN393",
         "name": "Synthetic Company 393",
         "sector": "Information Technology",
         "subIndustry": "",
-        "price": 275.38,
+        "price": 506.17,
         "score": 74.17,
         "healthScore": 83.25,
         "valuationScore": 56.86,
@@ -1860,15 +1825,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 24.6 vs sector median 17.7"
         ],
-        "fundWeight": 0.0101
+        "fundWeight": 0.01012
       },
       {
-        "rank": 49,
+        "rank": 48,
         "ticker": "SYN122",
         "name": "Synthetic Company 122",
         "sector": "Industrials",
         "subIndustry": "",
-        "price": 279.05,
+        "price": 275.38,
         "score": 73.86,
         "healthScore": 76.42,
         "valuationScore": 59.78,
@@ -1896,15 +1861,15 @@
           "Net margin of 16.9% \u2014 top 19% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.01006
+        "fundWeight": 0.01008
       },
       {
-        "rank": 50,
+        "rank": 49,
         "ticker": "SYN245",
         "name": "Synthetic Company 245",
         "sector": "Materials",
         "subIndustry": "",
-        "price": 489.33,
+        "price": 279.05,
         "score": 73.27,
         "healthScore": 76.21,
         "valuationScore": 77.43,
@@ -1932,15 +1897,15 @@
           "Low leverage \u2014 debt/equity of 0.11"
         ],
         "flags": [],
-        "fundWeight": 0.00998
+        "fundWeight": 0.01
       },
       {
-        "rank": 51,
+        "rank": 50,
         "ticker": "SYN397",
         "name": "Synthetic Company 397",
         "sector": "Real Estate",
         "subIndustry": "",
-        "price": 599.65,
+        "price": 489.33,
         "score": 72.87,
         "healthScore": 79.92,
         "valuationScore": 68.47,
@@ -1968,7 +1933,45 @@
           "Trades at a 27% discount to its sector (P/E 10.6 vs 14.5 median)"
         ],
         "flags": [],
-        "fundWeight": 0.00992
+        "fundWeight": 0.00994
+      },
+      {
+        "rank": 51,
+        "ticker": "SYN374",
+        "name": "Synthetic Company 374",
+        "sector": "Industrials",
+        "subIndustry": "",
+        "price": 599.65,
+        "score": 72.63,
+        "healthScore": 81.83,
+        "valuationScore": 45.92,
+        "momentumScore": 61.62,
+        "peRatio": 38.45283375610968,
+        "dividendYield": 0.004582899320281502,
+        "grossMargin": 0.43964253230985667,
+        "operatingMargin": 0.2453652915154012,
+        "netMargin": 0.1933144494617464,
+        "returnOnEquity": 0.40631995404191484,
+        "fcfMargin": 0.21792821076947758,
+        "fcfYield": 0.06819074764224714,
+        "revenueGrowth": 0.22643863889173227,
+        "debtToEquity": 0.9957710662379695,
+        "marketCap": 8495025643.620099,
+        "return1W": 0.016325847345088507,
+        "return1M": -0.033556793171102876,
+        "return3M": -0.003973421572544558,
+        "return6M": 0.12344826913256551,
+        "return1Y": 0.19708800385248693,
+        "reasons": [
+          "Return on equity of 40.6% \u2014 top 1% of the universe",
+          "Revenue growth of 22.6% \u2014 top 4% of the universe",
+          "Fcf yield of 6.8% \u2014 top 10% of the universe",
+          "Operating margin of 24.5% \u2014 top 10% of the universe"
+        ],
+        "flags": [
+          "Premium valuation \u2014 P/E 38.5 vs sector median 17.6"
+        ],
+        "fundWeight": 0.00991
       },
       {
         "rank": 52,
@@ -2007,53 +2010,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 38.3 vs sector median 17.4"
         ],
-        "fundWeight": 0.00989
+        "fundWeight": 0.00991
       },
       {
         "rank": 53,
-        "ticker": "SYN374",
-        "name": "Synthetic Company 374",
-        "sector": "Industrials",
-        "subIndustry": "",
-        "price": 467.25,
-        "score": 72.63,
-        "healthScore": 81.83,
-        "valuationScore": 45.92,
-        "momentumScore": 61.62,
-        "peRatio": 38.45283375610968,
-        "dividendYield": 0.004582899320281502,
-        "grossMargin": 0.43964253230985667,
-        "operatingMargin": 0.2453652915154012,
-        "netMargin": 0.1933144494617464,
-        "returnOnEquity": 0.40631995404191484,
-        "fcfMargin": 0.21792821076947758,
-        "fcfYield": 0.06819074764224714,
-        "revenueGrowth": 0.22643863889173227,
-        "debtToEquity": 0.9957710662379695,
-        "marketCap": 8495025643.620099,
-        "return1W": 0.016325847345088507,
-        "return1M": -0.033556793171102876,
-        "return3M": -0.003973421572544558,
-        "return6M": 0.12344826913256551,
-        "return1Y": 0.19708800385248693,
-        "reasons": [
-          "Return on equity of 40.6% \u2014 top 1% of the universe",
-          "Revenue growth of 22.6% \u2014 top 4% of the universe",
-          "Fcf yield of 6.8% \u2014 top 10% of the universe",
-          "Operating margin of 24.5% \u2014 top 10% of the universe"
-        ],
-        "flags": [
-          "Premium valuation \u2014 P/E 38.5 vs sector median 17.6"
-        ],
-        "fundWeight": 0.00989
-      },
-      {
-        "rank": 54,
         "ticker": "SYN002",
         "name": "Synthetic Company 2",
         "sector": "Energy",
         "subIndustry": "",
-        "price": 278.96,
+        "price": 467.25,
         "score": 72.19,
         "healthScore": 78.71,
         "valuationScore": 61.22,
@@ -2080,15 +2045,15 @@
           "Fcf yield of 5.9% \u2014 top 16% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.00983
+        "fundWeight": 0.00985
       },
       {
-        "rank": 55,
+        "rank": 54,
         "ticker": "SYN357",
         "name": "Synthetic Company 357",
         "sector": "Materials",
         "subIndustry": "",
-        "price": 429.55,
+        "price": 278.96,
         "score": 72.07,
         "healthScore": 85.92,
         "valuationScore": 39.84,
@@ -2118,15 +2083,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.4 vs sector median 14.8"
         ],
-        "fundWeight": 0.00982
+        "fundWeight": 0.00983
       },
       {
-        "rank": 56,
+        "rank": 55,
         "ticker": "SYN070",
         "name": "Synthetic Company 70",
         "sector": "Utilities",
         "subIndustry": "",
-        "price": 150.82,
+        "price": 429.55,
         "score": 72.03,
         "healthScore": 81.08,
         "valuationScore": 42.59,
@@ -2156,15 +2121,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 30.6 vs sector median 15.1"
         ],
-        "fundWeight": 0.00981
+        "fundWeight": 0.00983
       },
       {
-        "rank": 57,
+        "rank": 56,
         "ticker": "SYN210",
         "name": "Synthetic Company 210",
         "sector": "Energy",
         "subIndustry": "",
-        "price": 167.22,
+        "price": 150.82,
         "score": 71.88,
         "healthScore": 76.71,
         "valuationScore": 54.38,
@@ -2194,15 +2159,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.8 vs sector median 19.2"
         ],
-        "fundWeight": 0.00979
+        "fundWeight": 0.00981
       },
       {
-        "rank": 58,
+        "rank": 57,
         "ticker": "SYN297",
         "name": "Synthetic Company 297",
         "sector": "Communication Services",
         "subIndustry": "",
-        "price": 138.49,
+        "price": 167.22,
         "score": 71.65,
         "healthScore": 85.04,
         "valuationScore": 50.56,
@@ -2232,15 +2197,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 37.9 vs sector median 14.4"
         ],
-        "fundWeight": 0.00976
+        "fundWeight": 0.00978
       },
       {
-        "rank": 59,
+        "rank": 58,
         "ticker": "SYN200",
         "name": "Synthetic Company 200",
         "sector": "Industrials",
         "subIndustry": "",
-        "price": 415.41,
+        "price": 138.49,
         "score": 71.16,
         "healthScore": 81.62,
         "valuationScore": 29.97,
@@ -2268,15 +2233,15 @@
           "Net margin of 17.9% \u2014 top 16% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.00969
+        "fundWeight": 0.00971
       },
       {
-        "rank": 60,
+        "rank": 59,
         "ticker": "SYN144",
         "name": "Synthetic Company 144",
         "sector": "Communication Services",
         "subIndustry": "",
-        "price": 569.79,
+        "price": 415.41,
         "score": 71.12,
         "healthScore": 74.62,
         "valuationScore": 58.01,
@@ -2306,15 +2271,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 24.5 vs sector median 14.4"
         ],
-        "fundWeight": 0.00969
+        "fundWeight": 0.0097
       },
       {
-        "rank": 61,
+        "rank": 60,
         "ticker": "SYN240",
         "name": "Synthetic Company 240",
         "sector": "Real Estate",
         "subIndustry": "",
-        "price": 458.26,
+        "price": 569.79,
         "score": 71.11,
         "healthScore": 80.71,
         "valuationScore": 57.34,
@@ -2345,15 +2310,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.3 vs sector median 14.5"
         ],
-        "fundWeight": 0.00969
+        "fundWeight": 0.0097
       },
       {
-        "rank": 62,
+        "rank": 61,
         "ticker": "SYN301",
         "name": "Synthetic Company 301",
         "sector": "Financials",
         "subIndustry": "",
-        "price": 174.66,
+        "price": 458.26,
         "score": 71.03,
         "healthScore": 74.46,
         "valuationScore": 74.29,
@@ -2382,15 +2347,15 @@
           "Trades at a 25% discount to its sector (P/E 14.3 vs 18.9 median)"
         ],
         "flags": [],
-        "fundWeight": 0.00967
+        "fundWeight": 0.00969
       },
       {
-        "rank": 63,
+        "rank": 62,
         "ticker": "SYN159",
         "name": "Synthetic Company 159",
         "sector": "Health Care",
         "subIndustry": "",
-        "price": 403.02,
+        "price": 174.66,
         "score": 70.98,
         "healthScore": 74.25,
         "valuationScore": 52.01,
@@ -2420,15 +2385,15 @@
         "flags": [
           "Revenue declined 7% YoY"
         ],
-        "fundWeight": 0.00967
+        "fundWeight": 0.00969
       },
       {
-        "rank": 64,
+        "rank": 63,
         "ticker": "SYN104",
         "name": "Synthetic Company 104",
         "sector": "Health Care",
         "subIndustry": "",
-        "price": 223.33,
+        "price": 403.02,
         "score": 70.56,
         "healthScore": 81.38,
         "valuationScore": 45.8,
@@ -2458,51 +2423,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.5 vs sector median 15.1"
         ],
-        "fundWeight": 0.00961
+        "fundWeight": 0.00963
       },
       {
-        "rank": 65,
-        "ticker": "SYN171",
-        "name": "Synthetic Company 171",
-        "sector": "Energy",
-        "subIndustry": "",
-        "price": 497.98,
-        "score": 70.55,
-        "healthScore": 65.04,
-        "valuationScore": 80.25,
-        "momentumScore": 89.75,
-        "peRatio": -1.0,
-        "dividendYield": 0.02138378266098636,
-        "grossMargin": 0.4986445796593908,
-        "operatingMargin": 0.15469222550156858,
-        "netMargin": 0.12569509891581723,
-        "returnOnEquity": 0.31836471041336944,
-        "fcfMargin": 0.08717025054496697,
-        "fcfYield": 0.056823461403703306,
-        "revenueGrowth": 0.2597853387355752,
-        "debtToEquity": 1.3820375835005425,
-        "marketCap": 5651261253.321401,
-        "return1W": -0.004876938944700127,
-        "return1M": -0.0887818586894093,
-        "return3M": 0.13657075061843446,
-        "return6M": 0.3337132510780387,
-        "return1Y": 0.4069623492036439,
-        "reasons": [
-          "Revenue growth of 26.0% \u2014 top 2% of the universe",
-          "Return on equity of 31.8% \u2014 top 6% of the universe",
-          "Fcf yield of 5.7% \u2014 top 20% of the universe",
-          "Trades at a 105% discount to its sector (P/E -1.0 vs 19.2 median)"
-        ],
-        "flags": [],
-        "fundWeight": 0.00961
-      },
-      {
-        "rank": 66,
+        "rank": 64,
         "ticker": "SYN101",
         "name": "Synthetic Company 101",
         "sector": "Consumer Discretionary",
         "subIndustry": "",
-        "price": 301.5,
+        "price": 223.33,
         "score": 70.53,
         "healthScore": 77.79,
         "valuationScore": 55.37,
@@ -2531,15 +2460,15 @@
           "Trades at a 68% discount to its sector (P/E 5.0 vs 15.5 median)"
         ],
         "flags": [],
-        "fundWeight": 0.00961
+        "fundWeight": 0.00962
       },
       {
-        "rank": 67,
+        "rank": 65,
         "ticker": "SYN108",
         "name": "Synthetic Company 108",
         "sector": "Consumer Staples",
         "subIndustry": "",
-        "price": 164.8,
+        "price": 497.98,
         "score": 70.36,
         "healthScore": 82.67,
         "valuationScore": 49.14,
@@ -2569,15 +2498,50 @@
         "flags": [
           "Premium valuation \u2014 P/E 35.0 vs sector median 17.4"
         ],
-        "fundWeight": 0.00958
+        "fundWeight": 0.0096
       },
       {
-        "rank": 68,
+        "rank": 66,
+        "ticker": "SYN398",
+        "name": "Synthetic Company 398",
+        "sector": "Utilities",
+        "subIndustry": "",
+        "price": 301.5,
+        "score": 69.87,
+        "healthScore": 74.25,
+        "valuationScore": 74.25,
+        "momentumScore": 30.5,
+        "peRatio": -1.0,
+        "dividendYield": 0.0008768945108442762,
+        "grossMargin": 0.50664831521646,
+        "operatingMargin": 0.1815134371985198,
+        "netMargin": 0.15891341872163842,
+        "returnOnEquity": 0.10287431800693056,
+        "fcfMargin": 0.15128477702167564,
+        "fcfYield": 0.08733034666095586,
+        "revenueGrowth": 0.08506192080482994,
+        "debtToEquity": 0.003943919479226121,
+        "marketCap": 6245214584.563276,
+        "return1W": -0.018244914883906675,
+        "return1M": 0.09761542203737551,
+        "return3M": 0.0030992170360166355,
+        "return6M": -0.2390906256781884,
+        "return1Y": -0.5233464070555588,
+        "reasons": [
+          "Fcf yield of 8.7% \u2014 top 2% of the universe",
+          "Low leverage \u2014 debt/equity of 0.00",
+          "Trades at a 107% discount to its sector (P/E -1.0 vs 15.1 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.00953
+      },
+      {
+        "rank": 67,
         "ticker": "SYN247",
         "name": "Synthetic Company 247",
         "sector": "Communication Services",
         "subIndustry": "",
-        "price": 188.57,
+        "price": 164.8,
         "score": 69.22,
         "healthScore": 75.88,
         "valuationScore": 38.53,
@@ -2607,15 +2571,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 33.9 vs sector median 14.4"
         ],
-        "fundWeight": 0.00943
+        "fundWeight": 0.00945
       },
       {
-        "rank": 69,
+        "rank": 68,
         "ticker": "SYN151",
         "name": "Synthetic Company 151",
         "sector": "Utilities",
         "subIndustry": "",
-        "price": 69.51,
+        "price": 188.57,
         "score": 68.61,
         "healthScore": 81.0,
         "valuationScore": 53.91,
@@ -2645,15 +2609,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 29.0 vs sector median 15.1"
         ],
-        "fundWeight": 0.00934
+        "fundWeight": 0.00936
       },
       {
-        "rank": 70,
+        "rank": 69,
         "ticker": "SYN089",
         "name": "Synthetic Company 89",
         "sector": "Energy",
         "subIndustry": "",
-        "price": 229.53,
+        "price": 69.51,
         "score": 68.37,
         "healthScore": 77.62,
         "valuationScore": 24.46,
@@ -2681,15 +2645,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 37.1 vs sector median 19.2"
         ],
-        "fundWeight": 0.00931
+        "fundWeight": 0.00933
       },
       {
-        "rank": 71,
+        "rank": 70,
         "ticker": "SYN391",
         "name": "Synthetic Company 391",
         "sector": "Energy",
         "subIndustry": "",
-        "price": 216.81,
+        "price": 229.53,
         "score": 68.33,
         "healthScore": 65.94,
         "valuationScore": 62.87,
@@ -2715,15 +2679,15 @@
           "Trades at a 19% discount to its sector (P/E 15.6 vs 19.2 median)"
         ],
         "flags": [],
-        "fundWeight": 0.00931
+        "fundWeight": 0.00932
       },
       {
-        "rank": 72,
+        "rank": 71,
         "ticker": "SYN125",
         "name": "Synthetic Company 125",
         "sector": "Energy",
         "subIndustry": "",
-        "price": 285.71,
+        "price": 216.81,
         "score": 68.26,
         "healthScore": 74.96,
         "valuationScore": 54.91,
@@ -2753,15 +2717,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.6 vs sector median 19.2"
         ],
-        "fundWeight": 0.0093
+        "fundWeight": 0.00931
       },
       {
-        "rank": 73,
+        "rank": 72,
         "ticker": "SYN026",
         "name": "Synthetic Company 26",
         "sector": "Real Estate",
         "subIndustry": "",
-        "price": 401.36,
+        "price": 285.71,
         "score": 68.12,
         "healthScore": 73.33,
         "valuationScore": 36.11,
@@ -2790,15 +2754,15 @@
         "flags": [
           "Premium valuation \u2014 P/E 30.4 vs sector median 14.5"
         ],
-        "fundWeight": 0.00928
+        "fundWeight": 0.0093
       },
       {
-        "rank": 74,
+        "rank": 73,
         "ticker": "SYN118",
         "name": "Synthetic Company 118",
         "sector": "Industrials",
         "subIndustry": "",
-        "price": 558.51,
+        "price": 401.36,
         "score": 68.09,
         "healthScore": 74.92,
         "valuationScore": 62.94,
@@ -2825,15 +2789,15 @@
           "Low leverage \u2014 debt/equity of 0.34"
         ],
         "flags": [],
-        "fundWeight": 0.00927
+        "fundWeight": 0.00929
       },
       {
-        "rank": 75,
+        "rank": 74,
         "ticker": "SYN168",
         "name": "Synthetic Company 168",
         "sector": "Industrials",
         "subIndustry": "",
-        "price": 494.12,
+        "price": 558.51,
         "score": 67.98,
         "healthScore": 63.17,
         "valuationScore": 76.9,
@@ -2859,15 +2823,15 @@
           "Revenue growth of 16.2% \u2014 top 14% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.00926
+        "fundWeight": 0.00928
       },
       {
-        "rank": 76,
+        "rank": 75,
         "ticker": "SYN257",
         "name": "Synthetic Company 257",
         "sector": "Health Care",
         "subIndustry": "",
-        "price": 352.69,
+        "price": 494.12,
         "score": 67.84,
         "healthScore": 69.21,
         "valuationScore": 63.14,
@@ -2893,7 +2857,43 @@
           "Free-cash-flow margin of 19.3% \u2014 top 17% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.00924
+        "fundWeight": 0.00926
+      },
+      {
+        "rank": 76,
+        "ticker": "SYN171",
+        "name": "Synthetic Company 171",
+        "sector": "Energy",
+        "subIndustry": "",
+        "price": 352.69,
+        "score": 67.53,
+        "healthScore": 65.04,
+        "valuationScore": 65.12,
+        "momentumScore": 89.75,
+        "peRatio": -1.0,
+        "dividendYield": 0.02138378266098636,
+        "grossMargin": 0.4986445796593908,
+        "operatingMargin": 0.15469222550156858,
+        "netMargin": 0.12569509891581723,
+        "returnOnEquity": 0.31836471041336944,
+        "fcfMargin": 0.08717025054496697,
+        "fcfYield": 0.056823461403703306,
+        "revenueGrowth": 0.2597853387355752,
+        "debtToEquity": 1.3820375835005425,
+        "marketCap": 5651261253.321401,
+        "return1W": -0.004876938944700127,
+        "return1M": -0.0887818586894093,
+        "return3M": 0.13657075061843446,
+        "return6M": 0.3337132510780387,
+        "return1Y": 0.4069623492036439,
+        "reasons": [
+          "Revenue growth of 26.0% \u2014 top 2% of the universe",
+          "Return on equity of 31.8% \u2014 top 6% of the universe",
+          "Fcf yield of 5.7% \u2014 top 20% of the universe",
+          "Trades at a 105% discount to its sector (P/E -1.0 vs 19.2 median)"
+        ],
+        "flags": [],
+        "fundWeight": 0.00921
       },
       {
         "rank": 77,
@@ -2929,7 +2929,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.8 vs sector median 14.4"
         ],
-        "fundWeight": 0.00919
+        "fundWeight": 0.00921
       },
       {
         "rank": 78,
@@ -2965,7 +2965,7 @@
           "Revenue growth of 19.1% \u2014 top 8% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.00912
+        "fundWeight": 0.00914
       },
       {
         "rank": 79,
@@ -3000,7 +3000,7 @@
           "Net margin of 19.9% \u2014 top 13% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.00909
+        "fundWeight": 0.00911
       },
       {
         "rank": 80,
@@ -3038,7 +3038,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 23.2 vs sector median 14.8"
         ],
-        "fundWeight": 0.00908
+        "fundWeight": 0.0091
       },
       {
         "rank": 81,
@@ -3075,7 +3075,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 31.1 vs sector median 15.5"
         ],
-        "fundWeight": 0.00905
+        "fundWeight": 0.00907
       },
       {
         "rank": 82,
@@ -3108,7 +3108,7 @@
           "Return on equity of 24.5% \u2014 top 14% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.00901
+        "fundWeight": 0.00902
       },
       {
         "rank": 83,
@@ -3146,7 +3146,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 29.5 vs sector median 17.4"
         ],
-        "fundWeight": 0.00899
+        "fundWeight": 0.00901
       },
       {
         "rank": 84,
@@ -3182,7 +3182,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 22.9 vs sector median 14.8"
         ],
-        "fundWeight": 0.00897
+        "fundWeight": 0.00898
       },
       {
         "rank": 85,
@@ -3217,7 +3217,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 25.0 vs sector median 15.5"
         ],
-        "fundWeight": 0.00896
+        "fundWeight": 0.00898
       },
       {
         "rank": 86,
@@ -3253,7 +3253,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 25.6 vs sector median 15.5"
         ],
-        "fundWeight": 0.00896
+        "fundWeight": 0.00898
       },
       {
         "rank": 87,
@@ -3291,7 +3291,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 21.8 vs sector median 15.1"
         ],
-        "fundWeight": 0.00894
+        "fundWeight": 0.00896
       },
       {
         "rank": 88,
@@ -3329,7 +3329,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 28.5 vs sector median 17.4"
         ],
-        "fundWeight": 0.00893
+        "fundWeight": 0.00895
       },
       {
         "rank": 89,
@@ -3366,7 +3366,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.2 vs sector median 17.7"
         ],
-        "fundWeight": 0.00891
+        "fundWeight": 0.00893
       },
       {
         "rank": 90,
@@ -3404,7 +3404,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.7 vs sector median 17.4"
         ],
-        "fundWeight": 0.0089
+        "fundWeight": 0.00892
       },
       {
         "rank": 91,
@@ -3442,7 +3442,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 37.5 vs sector median 14.5"
         ],
-        "fundWeight": 0.0089
+        "fundWeight": 0.00892
       },
       {
         "rank": 92,
@@ -3476,7 +3476,7 @@
           "Revenue growth of 16.6% \u2014 top 12% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.00884
+        "fundWeight": 0.00885
       },
       {
         "rank": 93,
@@ -3511,7 +3511,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 29.0 vs sector median 14.5"
         ],
-        "fundWeight": 0.0088
+        "fundWeight": 0.00881
       },
       {
         "rank": 94,
@@ -3546,7 +3546,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.5 vs sector median 15.5"
         ],
-        "fundWeight": 0.00876
+        "fundWeight": 0.00878
       },
       {
         "rank": 95,
@@ -3579,7 +3579,7 @@
           "Revenue growth of 21.4% \u2014 top 5% of the universe"
         ],
         "flags": [],
-        "fundWeight": 0.00875
+        "fundWeight": 0.00876
       },
       {
         "rank": 96,
@@ -3615,7 +3615,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 23.1 vs sector median 15.1"
         ],
-        "fundWeight": 0.0087
+        "fundWeight": 0.00871
       },
       {
         "rank": 97,
@@ -3649,7 +3649,7 @@
           "Trades at a 21% discount to its sector (P/E 13.7 vs 17.4 median)"
         ],
         "flags": [],
-        "fundWeight": 0.00869
+        "fundWeight": 0.00871
       },
       {
         "rank": 98,
@@ -3683,7 +3683,7 @@
           "Low leverage \u2014 debt/equity of 0.33"
         ],
         "flags": [],
-        "fundWeight": 0.00867
+        "fundWeight": 0.00868
       },
       {
         "rank": 99,
@@ -3719,7 +3719,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 26.5 vs sector median 17.6"
         ],
-        "fundWeight": 0.00864
+        "fundWeight": 0.00866
       },
       {
         "rank": 100,
@@ -3754,7 +3754,7 @@
         "flags": [
           "Premium valuation \u2014 P/E 23.0 vs sector median 15.1"
         ],
-        "fundWeight": 0.00863
+        "fundWeight": 0.00865
       }
     ],
     "fund": {
@@ -3763,29 +3763,29 @@
       "weighting": "score-weighted",
       "benchmark": "SPTM",
       "blended": {
-        "pe": 24.77,
+        "pe": 24.82,
         "fcfYield": 0.062,
-        "revenueGrowth": 0.1474,
-        "returnOnEquity": 0.248,
-        "netMargin": 0.2061
+        "revenueGrowth": 0.1473,
+        "returnOnEquity": 0.2481,
+        "netMargin": 0.2062
       },
       "metrics3Y": {
-        "annualReturn": 0.395,
+        "annualReturn": 0.3946,
         "annualVolatility": 0.1384,
-        "sharpeRatio": 2.566,
+        "sharpeRatio": 2.562,
         "maximumDrawdown": -0.0981,
-        "alpha": 0.0502,
-        "alphaTStat": 3.71,
+        "alpha": 0.0497,
+        "alphaTStat": 3.68,
         "beta": 0.987,
         "benchmarkReturn": 0.3487
       },
       "metrics5Y": {
-        "annualReturn": 0.1659,
+        "annualReturn": 0.1655,
         "annualVolatility": 0.1349,
-        "sharpeRatio": 0.933,
-        "maximumDrawdown": -0.3049,
-        "alpha": 0.0301,
-        "alphaTStat": 3.17,
+        "sharpeRatio": 0.93,
+        "maximumDrawdown": -0.3051,
+        "alpha": 0.0297,
+        "alphaTStat": 3.13,
         "beta": 0.988,
         "benchmarkReturn": 0.1369
       },
@@ -3797,7 +3797,7 @@
         },
         {
           "date": "2021-08-04",
-          "fund": 1.0008,
+          "fund": 1.0007,
           "benchmark": 1.0013
         },
         {
@@ -3812,897 +3812,897 @@
         },
         {
           "date": "2021-09-02",
-          "fund": 1.02,
+          "fund": 1.0199,
           "benchmark": 1.0096
         },
         {
           "date": "2021-09-13",
-          "fund": 1.0426,
+          "fund": 1.0425,
           "benchmark": 1.0292
         },
         {
           "date": "2021-09-22",
-          "fund": 1.0158,
+          "fund": 1.0157,
           "benchmark": 1.0018
         },
         {
           "date": "2021-10-01",
-          "fund": 1.0124,
+          "fund": 1.0123,
           "benchmark": 0.9952
         },
         {
           "date": "2021-10-12",
-          "fund": 1.0253,
+          "fund": 1.0252,
           "benchmark": 1.0004
         },
         {
           "date": "2021-10-21",
-          "fund": 1.0187,
+          "fund": 1.0186,
           "benchmark": 0.9874
         },
         {
           "date": "2021-11-01",
-          "fund": 1.0031,
+          "fund": 1.003,
           "benchmark": 0.9717
         },
         {
           "date": "2021-11-10",
-          "fund": 0.9799,
+          "fund": 0.9798,
           "benchmark": 0.9475
         },
         {
           "date": "2021-11-19",
-          "fund": 0.9886,
+          "fund": 0.9885,
           "benchmark": 0.958
         },
         {
           "date": "2021-11-30",
-          "fund": 0.9365,
+          "fund": 0.9364,
           "benchmark": 0.9085
         },
         {
           "date": "2021-12-09",
-          "fund": 0.9165,
+          "fund": 0.9164,
           "benchmark": 0.8899
         },
         {
           "date": "2021-12-20",
-          "fund": 0.9206,
+          "fund": 0.9205,
           "benchmark": 0.8914
         },
         {
           "date": "2021-12-29",
-          "fund": 0.9129,
+          "fund": 0.9127,
           "benchmark": 0.8826
         },
         {
           "date": "2022-01-07",
-          "fund": 0.9141,
+          "fund": 0.914,
           "benchmark": 0.8855
         },
         {
           "date": "2022-01-18",
-          "fund": 0.887,
+          "fund": 0.8869,
           "benchmark": 0.8608
         },
         {
           "date": "2022-01-27",
-          "fund": 0.873,
+          "fund": 0.8728,
           "benchmark": 0.8525
         },
         {
           "date": "2022-02-07",
-          "fund": 0.8585,
+          "fund": 0.8583,
           "benchmark": 0.8393
         },
         {
           "date": "2022-02-16",
-          "fund": 0.8433,
+          "fund": 0.8431,
           "benchmark": 0.8258
         },
         {
           "date": "2022-02-25",
-          "fund": 0.8191,
+          "fund": 0.8189,
           "benchmark": 0.7947
         },
         {
           "date": "2022-03-08",
-          "fund": 0.8467,
+          "fund": 0.8466,
           "benchmark": 0.8208
         },
         {
           "date": "2022-03-17",
-          "fund": 0.8615,
+          "fund": 0.8614,
           "benchmark": 0.8328
         },
         {
           "date": "2022-03-28",
-          "fund": 0.8333,
+          "fund": 0.8331,
           "benchmark": 0.7986
         },
         {
           "date": "2022-04-06",
-          "fund": 0.8629,
+          "fund": 0.8627,
           "benchmark": 0.8285
         },
         {
           "date": "2022-04-15",
-          "fund": 0.8615,
+          "fund": 0.8614,
           "benchmark": 0.8292
         },
         {
           "date": "2022-04-26",
-          "fund": 0.8646,
+          "fund": 0.8644,
           "benchmark": 0.833
         },
         {
           "date": "2022-05-05",
-          "fund": 0.8284,
+          "fund": 0.8281,
           "benchmark": 0.7955
         },
         {
           "date": "2022-05-16",
-          "fund": 0.8545,
+          "fund": 0.8542,
           "benchmark": 0.8219
         },
         {
           "date": "2022-05-25",
-          "fund": 0.8788,
+          "fund": 0.8785,
           "benchmark": 0.8452
         },
         {
           "date": "2022-06-03",
-          "fund": 0.8663,
+          "fund": 0.8661,
           "benchmark": 0.8376
         },
         {
           "date": "2022-06-14",
-          "fund": 0.8324,
+          "fund": 0.8322,
           "benchmark": 0.8046
         },
         {
           "date": "2022-06-23",
-          "fund": 0.8239,
+          "fund": 0.8236,
           "benchmark": 0.7964
         },
         {
           "date": "2022-07-04",
-          "fund": 0.8075,
+          "fund": 0.8073,
           "benchmark": 0.7804
         },
         {
           "date": "2022-07-13",
-          "fund": 0.8019,
+          "fund": 0.8017,
           "benchmark": 0.7736
         },
         {
           "date": "2022-07-22",
-          "fund": 0.782,
+          "fund": 0.7818,
           "benchmark": 0.7555
         },
         {
           "date": "2022-08-02",
-          "fund": 0.765,
+          "fund": 0.7648,
           "benchmark": 0.7423
         },
         {
           "date": "2022-08-11",
-          "fund": 0.7706,
+          "fund": 0.7704,
           "benchmark": 0.7494
         },
         {
           "date": "2022-08-22",
-          "fund": 0.7826,
+          "fund": 0.7823,
           "benchmark": 0.7604
         },
         {
           "date": "2022-08-31",
-          "fund": 0.7423,
+          "fund": 0.7421,
           "benchmark": 0.7199
         },
         {
           "date": "2022-09-09",
-          "fund": 0.747,
+          "fund": 0.7468,
           "benchmark": 0.7262
         },
         {
           "date": "2022-09-20",
-          "fund": 0.7298,
+          "fund": 0.7295,
           "benchmark": 0.7086
         },
         {
           "date": "2022-09-29",
-          "fund": 0.7681,
+          "fund": 0.7678,
           "benchmark": 0.745
         },
         {
           "date": "2022-10-10",
-          "fund": 0.7655,
+          "fund": 0.7652,
           "benchmark": 0.7427
         },
         {
           "date": "2022-10-19",
-          "fund": 0.7816,
+          "fund": 0.7813,
           "benchmark": 0.7564
         },
         {
           "date": "2022-10-28",
-          "fund": 0.7903,
+          "fund": 0.79,
           "benchmark": 0.7674
         },
         {
           "date": "2022-11-08",
-          "fund": 0.7864,
+          "fund": 0.7861,
           "benchmark": 0.7637
         },
         {
           "date": "2022-11-17",
-          "fund": 0.8126,
+          "fund": 0.8122,
           "benchmark": 0.7814
         },
         {
           "date": "2022-11-28",
-          "fund": 0.82,
+          "fund": 0.8197,
           "benchmark": 0.7936
         },
         {
           "date": "2022-12-07",
-          "fund": 0.7931,
+          "fund": 0.7928,
           "benchmark": 0.7668
         },
         {
           "date": "2022-12-16",
-          "fund": 0.7901,
+          "fund": 0.7898,
           "benchmark": 0.764
         },
         {
           "date": "2022-12-27",
-          "fund": 0.7896,
+          "fund": 0.7893,
           "benchmark": 0.7635
         },
         {
           "date": "2023-01-05",
-          "fund": 0.8097,
+          "fund": 0.8093,
           "benchmark": 0.7846
         },
         {
           "date": "2023-01-16",
-          "fund": 0.833,
+          "fund": 0.8326,
           "benchmark": 0.8057
         },
         {
           "date": "2023-01-25",
-          "fund": 0.8293,
+          "fund": 0.8289,
           "benchmark": 0.8044
         },
         {
           "date": "2023-02-03",
-          "fund": 0.8525,
+          "fund": 0.852,
           "benchmark": 0.826
         },
         {
           "date": "2023-02-14",
-          "fund": 0.8389,
+          "fund": 0.8385,
           "benchmark": 0.8152
         },
         {
           "date": "2023-02-23",
-          "fund": 0.8325,
+          "fund": 0.8321,
           "benchmark": 0.808
         },
         {
           "date": "2023-03-06",
-          "fund": 0.8172,
+          "fund": 0.8168,
           "benchmark": 0.7945
         },
         {
           "date": "2023-03-15",
-          "fund": 0.8293,
+          "fund": 0.8289,
           "benchmark": 0.8072
         },
         {
           "date": "2023-03-24",
-          "fund": 0.8214,
+          "fund": 0.821,
           "benchmark": 0.7945
         },
         {
           "date": "2023-04-04",
-          "fund": 0.8342,
+          "fund": 0.8338,
           "benchmark": 0.8019
         },
         {
           "date": "2023-04-13",
-          "fund": 0.8458,
+          "fund": 0.8453,
           "benchmark": 0.8128
         },
         {
           "date": "2023-04-24",
-          "fund": 0.8478,
+          "fund": 0.8473,
           "benchmark": 0.8161
         },
         {
           "date": "2023-05-03",
-          "fund": 0.8463,
+          "fund": 0.8458,
           "benchmark": 0.8159
         },
         {
           "date": "2023-05-12",
-          "fund": 0.8338,
+          "fund": 0.8333,
           "benchmark": 0.8024
         },
         {
           "date": "2023-05-23",
-          "fund": 0.8247,
+          "fund": 0.8242,
           "benchmark": 0.7957
         },
         {
           "date": "2023-06-01",
-          "fund": 0.8429,
+          "fund": 0.8423,
           "benchmark": 0.8163
         },
         {
           "date": "2023-06-12",
-          "fund": 0.8566,
+          "fund": 0.856,
           "benchmark": 0.8333
         },
         {
           "date": "2023-06-21",
-          "fund": 0.8268,
+          "fund": 0.8262,
           "benchmark": 0.8032
         },
         {
           "date": "2023-06-30",
-          "fund": 0.8208,
+          "fund": 0.8202,
           "benchmark": 0.8
         },
         {
           "date": "2023-07-11",
-          "fund": 0.8214,
+          "fund": 0.8208,
           "benchmark": 0.8036
         },
         {
           "date": "2023-07-20",
-          "fund": 0.8374,
+          "fund": 0.8369,
           "benchmark": 0.8113
         },
         {
           "date": "2023-07-31",
-          "fund": 0.8444,
+          "fund": 0.8438,
           "benchmark": 0.8225
         },
         {
           "date": "2023-08-09",
-          "fund": 0.8443,
+          "fund": 0.8437,
           "benchmark": 0.8198
         },
         {
           "date": "2023-08-18",
-          "fund": 0.8589,
+          "fund": 0.8583,
           "benchmark": 0.8335
         },
         {
           "date": "2023-08-29",
-          "fund": 0.8658,
+          "fund": 0.8652,
           "benchmark": 0.8403
         },
         {
           "date": "2023-09-07",
-          "fund": 0.9023,
+          "fund": 0.9016,
           "benchmark": 0.8738
         },
         {
           "date": "2023-09-18",
-          "fund": 0.922,
+          "fund": 0.9213,
           "benchmark": 0.8896
         },
         {
           "date": "2023-09-27",
-          "fund": 0.9283,
+          "fund": 0.9276,
           "benchmark": 0.8954
         },
         {
           "date": "2023-10-06",
-          "fund": 0.9383,
+          "fund": 0.9376,
           "benchmark": 0.9066
         },
         {
           "date": "2023-10-17",
-          "fund": 0.9445,
+          "fund": 0.9437,
           "benchmark": 0.914
         },
         {
           "date": "2023-10-26",
-          "fund": 0.9586,
+          "fund": 0.9578,
           "benchmark": 0.9285
         },
         {
           "date": "2023-11-06",
-          "fund": 0.9439,
+          "fund": 0.9432,
           "benchmark": 0.9132
         },
         {
           "date": "2023-11-15",
-          "fund": 0.9155,
+          "fund": 0.9147,
           "benchmark": 0.8894
         },
         {
           "date": "2023-11-24",
-          "fund": 0.9289,
+          "fund": 0.9281,
           "benchmark": 0.8968
         },
         {
           "date": "2023-12-05",
-          "fund": 0.9357,
+          "fund": 0.9349,
           "benchmark": 0.9012
         },
         {
           "date": "2023-12-14",
-          "fund": 0.9282,
+          "fund": 0.9274,
           "benchmark": 0.8897
         },
         {
           "date": "2023-12-25",
-          "fund": 0.9604,
+          "fund": 0.9596,
           "benchmark": 0.9225
         },
         {
           "date": "2024-01-03",
-          "fund": 0.9235,
+          "fund": 0.9227,
           "benchmark": 0.8828
         },
         {
           "date": "2024-01-12",
-          "fund": 0.9179,
+          "fund": 0.9171,
           "benchmark": 0.8765
         },
         {
           "date": "2024-01-23",
-          "fund": 0.9291,
+          "fund": 0.9283,
           "benchmark": 0.8862
         },
         {
           "date": "2024-02-01",
-          "fund": 0.9282,
+          "fund": 0.9273,
           "benchmark": 0.8897
         },
         {
           "date": "2024-02-12",
-          "fund": 0.9427,
+          "fund": 0.9418,
           "benchmark": 0.8992
         },
         {
           "date": "2024-02-21",
-          "fund": 0.9709,
+          "fund": 0.97,
           "benchmark": 0.9264
         },
         {
           "date": "2024-03-01",
-          "fund": 0.9439,
+          "fund": 0.943,
           "benchmark": 0.9001
         },
         {
           "date": "2024-03-12",
-          "fund": 0.9311,
+          "fund": 0.9302,
           "benchmark": 0.8845
         },
         {
           "date": "2024-03-21",
-          "fund": 0.96,
+          "fund": 0.9591,
           "benchmark": 0.9134
         },
         {
           "date": "2024-04-01",
-          "fund": 0.9238,
+          "fund": 0.9229,
           "benchmark": 0.8794
         },
         {
           "date": "2024-04-10",
-          "fund": 0.9182,
+          "fund": 0.9173,
           "benchmark": 0.8751
         },
         {
           "date": "2024-04-19",
-          "fund": 0.9661,
+          "fund": 0.9651,
           "benchmark": 0.9177
         },
         {
           "date": "2024-04-30",
-          "fund": 0.9919,
+          "fund": 0.9909,
           "benchmark": 0.9381
         },
         {
           "date": "2024-05-09",
-          "fund": 1.0148,
+          "fund": 1.0138,
           "benchmark": 0.9599
         },
         {
           "date": "2024-05-20",
-          "fund": 1.0346,
+          "fund": 1.0336,
           "benchmark": 0.9771
         },
         {
           "date": "2024-05-29",
-          "fund": 1.0074,
+          "fund": 1.0064,
           "benchmark": 0.9477
         },
         {
           "date": "2024-06-07",
-          "fund": 1.0279,
+          "fund": 1.0269,
           "benchmark": 0.9646
         },
         {
           "date": "2024-06-18",
-          "fund": 1.0519,
+          "fund": 1.0508,
           "benchmark": 0.9822
         },
         {
           "date": "2024-06-27",
-          "fund": 1.0756,
+          "fund": 1.0745,
           "benchmark": 1.0004
         },
         {
           "date": "2024-07-08",
-          "fund": 1.0657,
+          "fund": 1.0646,
           "benchmark": 0.9915
         },
         {
           "date": "2024-07-17",
-          "fund": 1.0659,
+          "fund": 1.0648,
           "benchmark": 0.9944
         },
         {
           "date": "2024-07-26",
-          "fund": 1.0322,
+          "fund": 1.0311,
           "benchmark": 0.9609
         },
         {
           "date": "2024-08-06",
-          "fund": 1.0482,
+          "fund": 1.0471,
           "benchmark": 0.9782
         },
         {
           "date": "2024-08-15",
-          "fund": 1.0906,
+          "fund": 1.0895,
           "benchmark": 1.0151
         },
         {
           "date": "2024-08-26",
-          "fund": 1.1006,
+          "fund": 1.0995,
           "benchmark": 1.0226
         },
         {
           "date": "2024-09-04",
-          "fund": 1.0889,
+          "fund": 1.0877,
           "benchmark": 1.0137
         },
         {
           "date": "2024-09-13",
-          "fund": 1.0798,
+          "fund": 1.0787,
           "benchmark": 0.9999
         },
         {
           "date": "2024-09-24",
-          "fund": 1.116,
+          "fund": 1.1148,
           "benchmark": 1.0308
         },
         {
           "date": "2024-10-03",
-          "fund": 1.1664,
+          "fund": 1.1651,
           "benchmark": 1.0796
         },
         {
           "date": "2024-10-14",
-          "fund": 1.2117,
+          "fund": 1.2104,
           "benchmark": 1.1198
         },
         {
           "date": "2024-10-23",
-          "fund": 1.236,
+          "fund": 1.2346,
           "benchmark": 1.1343
         },
         {
           "date": "2024-11-01",
-          "fund": 1.2651,
+          "fund": 1.2637,
           "benchmark": 1.1673
         },
         {
           "date": "2024-11-12",
-          "fund": 1.291,
+          "fund": 1.2895,
           "benchmark": 1.1886
         },
         {
           "date": "2024-11-21",
-          "fund": 1.343,
+          "fund": 1.3415,
           "benchmark": 1.2317
         },
         {
           "date": "2024-12-02",
-          "fund": 1.383,
+          "fund": 1.3814,
           "benchmark": 1.2646
         },
         {
           "date": "2024-12-11",
-          "fund": 1.3982,
+          "fund": 1.3965,
           "benchmark": 1.2764
         },
         {
           "date": "2024-12-20",
-          "fund": 1.3724,
+          "fund": 1.3707,
           "benchmark": 1.2529
         },
         {
           "date": "2024-12-31",
-          "fund": 1.3543,
+          "fund": 1.3526,
           "benchmark": 1.2327
         },
         {
           "date": "2025-01-09",
-          "fund": 1.3679,
+          "fund": 1.3663,
           "benchmark": 1.2411
         },
         {
           "date": "2025-01-20",
-          "fund": 1.3693,
+          "fund": 1.3676,
           "benchmark": 1.2466
         },
         {
           "date": "2025-01-29",
-          "fund": 1.4037,
+          "fund": 1.402,
           "benchmark": 1.2739
         },
         {
           "date": "2025-02-07",
-          "fund": 1.3615,
+          "fund": 1.3598,
           "benchmark": 1.2349
         },
         {
           "date": "2025-02-18",
-          "fund": 1.3991,
+          "fund": 1.3974,
           "benchmark": 1.2683
         },
         {
           "date": "2025-02-27",
-          "fund": 1.3979,
+          "fund": 1.3962,
           "benchmark": 1.2674
         },
         {
           "date": "2025-03-10",
-          "fund": 1.4546,
+          "fund": 1.4528,
           "benchmark": 1.3148
         },
         {
           "date": "2025-03-19",
-          "fund": 1.4116,
+          "fund": 1.4098,
           "benchmark": 1.2789
         },
         {
           "date": "2025-03-28",
-          "fund": 1.4608,
+          "fund": 1.459,
           "benchmark": 1.32
         },
         {
           "date": "2025-04-08",
-          "fund": 1.4636,
+          "fund": 1.4618,
           "benchmark": 1.3245
         },
         {
           "date": "2025-04-17",
-          "fund": 1.4447,
+          "fund": 1.4428,
           "benchmark": 1.3032
         },
         {
           "date": "2025-04-28",
-          "fund": 1.4267,
+          "fund": 1.4249,
           "benchmark": 1.2824
         },
         {
           "date": "2025-05-07",
-          "fund": 1.4719,
+          "fund": 1.47,
           "benchmark": 1.3189
         },
         {
           "date": "2025-05-16",
-          "fund": 1.5757,
+          "fund": 1.5737,
           "benchmark": 1.412
         },
         {
           "date": "2025-05-27",
-          "fund": 1.6522,
+          "fund": 1.6501,
           "benchmark": 1.4917
         },
         {
           "date": "2025-06-05",
-          "fund": 1.7169,
+          "fund": 1.7147,
           "benchmark": 1.5433
         },
         {
           "date": "2025-06-16",
-          "fund": 1.7046,
+          "fund": 1.7024,
           "benchmark": 1.5295
         },
         {
           "date": "2025-06-25",
-          "fund": 1.7221,
+          "fund": 1.7198,
           "benchmark": 1.5435
         },
         {
           "date": "2025-07-04",
-          "fund": 1.7062,
+          "fund": 1.704,
           "benchmark": 1.5362
         },
         {
           "date": "2025-07-15",
-          "fund": 1.7172,
+          "fund": 1.7149,
           "benchmark": 1.5392
         },
         {
           "date": "2025-07-24",
-          "fund": 1.7782,
+          "fund": 1.7759,
           "benchmark": 1.5907
         },
         {
           "date": "2025-08-04",
-          "fund": 1.761,
+          "fund": 1.7586,
           "benchmark": 1.5704
         },
         {
           "date": "2025-08-13",
-          "fund": 1.7802,
+          "fund": 1.7777,
           "benchmark": 1.5846
         },
         {
           "date": "2025-08-22",
-          "fund": 1.7732,
+          "fund": 1.7707,
           "benchmark": 1.5854
         },
         {
           "date": "2025-09-02",
-          "fund": 1.7943,
+          "fund": 1.7918,
           "benchmark": 1.6055
         },
         {
           "date": "2025-09-11",
-          "fund": 1.7871,
+          "fund": 1.7846,
           "benchmark": 1.5983
         },
         {
           "date": "2025-09-22",
-          "fund": 1.8221,
+          "fund": 1.8195,
           "benchmark": 1.6251
         },
         {
           "date": "2025-10-01",
-          "fund": 1.8629,
+          "fund": 1.8601,
           "benchmark": 1.6655
         },
         {
           "date": "2025-10-10",
-          "fund": 1.9202,
+          "fund": 1.9173,
           "benchmark": 1.7214
         },
         {
           "date": "2025-10-21",
-          "fund": 1.883,
+          "fund": 1.8802,
           "benchmark": 1.69
         },
         {
           "date": "2025-10-30",
-          "fund": 1.9865,
+          "fund": 1.9835,
           "benchmark": 1.783
         },
         {
           "date": "2025-11-10",
-          "fund": 1.9962,
+          "fund": 1.9932,
           "benchmark": 1.7964
         },
         {
           "date": "2025-11-19",
-          "fund": 2.0357,
+          "fund": 2.0327,
           "benchmark": 1.8332
         },
         {
           "date": "2025-11-28",
-          "fund": 2.0399,
+          "fund": 2.0369,
           "benchmark": 1.846
         },
         {
           "date": "2025-12-09",
-          "fund": 2.0621,
+          "fund": 2.059,
           "benchmark": 1.8624
         },
         {
           "date": "2025-12-18",
-          "fund": 2.0902,
+          "fund": 2.087,
           "benchmark": 1.8864
         },
         {
           "date": "2025-12-29",
-          "fund": 2.1239,
+          "fund": 2.1206,
           "benchmark": 1.9152
         },
         {
           "date": "2026-01-07",
-          "fund": 2.1855,
+          "fund": 2.182,
           "benchmark": 1.9579
         },
         {
           "date": "2026-01-16",
-          "fund": 2.1297,
+          "fund": 2.1264,
           "benchmark": 1.9082
         },
         {
           "date": "2026-01-27",
-          "fund": 2.1377,
+          "fund": 2.1343,
           "benchmark": 1.9066
         },
         {
           "date": "2026-02-05",
-          "fund": 2.1891,
+          "fund": 2.1855,
           "benchmark": 1.951
         },
         {
           "date": "2026-02-16",
-          "fund": 2.1709,
+          "fund": 2.1674,
           "benchmark": 1.9211
         },
         {
           "date": "2026-02-25",
-          "fund": 2.0584,
+          "fund": 2.0551,
           "benchmark": 1.8202
         },
         {
           "date": "2026-03-06",
-          "fund": 2.0417,
+          "fund": 2.0384,
           "benchmark": 1.8046
         },
         {
           "date": "2026-03-17",
-          "fund": 2.0283,
+          "fund": 2.025,
           "benchmark": 1.8023
         },
         {
           "date": "2026-03-26",
-          "fund": 2.069,
+          "fund": 2.0657,
           "benchmark": 1.8302
         },
         {
           "date": "2026-04-06",
-          "fund": 2.0293,
+          "fund": 2.026,
           "benchmark": 1.7893
         },
         {
           "date": "2026-04-15",
-          "fund": 2.0383,
+          "fund": 2.0349,
           "benchmark": 1.7942
         },
         {
           "date": "2026-04-24",
-          "fund": 2.1079,
+          "fund": 2.1044,
           "benchmark": 1.8463
         },
         {
           "date": "2026-05-05",
-          "fund": 2.1679,
+          "fund": 2.1644,
           "benchmark": 1.9045
         },
         {
           "date": "2026-05-14",
-          "fund": 2.1146,
+          "fund": 2.1112,
           "benchmark": 1.8585
         },
         {
           "date": "2026-05-25",
-          "fund": 2.1611,
+          "fund": 2.1575,
           "benchmark": 1.9079
         },
         {
           "date": "2026-06-03",
-          "fund": 2.2108,
+          "fund": 2.2071,
           "benchmark": 1.9486
         },
         {
           "date": "2026-06-05",
-          "fund": 2.1865,
+          "fund": 2.1828,
           "benchmark": 1.9267
         }
       ],
@@ -4713,43 +4713,43 @@
         },
         {
           "sector": "Financials",
-          "weight": 0.1159
+          "weight": 0.1161
         },
         {
           "sector": "Communication Services",
-          "weight": 0.1106
+          "weight": 0.1107
         },
         {
           "sector": "Consumer Staples",
-          "weight": 0.1086
+          "weight": 0.1088
         },
         {
           "sector": "Energy",
-          "weight": 0.0973
+          "weight": 0.0965
         },
         {
           "sector": "Utilities",
-          "weight": 0.0938
+          "weight": 0.0933
         },
         {
           "sector": "Consumer Discretionary",
-          "weight": 0.0866
+          "weight": 0.0868
         },
         {
           "sector": "Industrials",
-          "weight": 0.068
+          "weight": 0.0681
         },
         {
           "sector": "Real Estate",
-          "weight": 0.0674
+          "weight": 0.0675
         },
         {
           "sector": "Health Care",
-          "weight": 0.0665
+          "weight": 0.0667
         },
         {
           "sector": "Materials",
-          "weight": 0.06
+          "weight": 0.0601
         }
       ]
     },

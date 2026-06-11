@@ -111,9 +111,14 @@ pipeline or type changes. All five Python suites must end "ALL PASS".
 
 Priority order, roughly:
 1. Sector-neutral (within-GICS) percentile scoring.
-2. Min factor-coverage gate before ranking (stop pillar-50 fallback gaming).
+2. ~~Min factor-coverage gate before ranking (stop pillar-50 fallback
+   gaming).~~ **Done (linear shrinkage)**: pillar scores shrink toward 50 in
+   proportion to factor coverage — missing factors are imputed at the universe
+   median; the empty-pillar 50 is now the coverage-0 limit, not a special case.
 3. 3yr CAGR for growth; 2-3yr average FCF (replace noisy single-year).
-4. Fix PEG to use earnings growth, or drop it (currently uses revenue growth).
+4. ~~Fix PEG to use earnings growth, or drop it (currently uses revenue
+   growth).~~ **Done** (commit 7548d5d): PEG factor removed as a category
+   error; weights renormalised.
 5. Add Sortino + Calmar + deflated Sharpe to the forward panel — the rigorous
    answer to "is Sharpe robust for this fund" (NOT CQNS, which is a selection
    objective the QUBO already embodies, not an evaluation metric).

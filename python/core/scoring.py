@@ -22,10 +22,12 @@ settings.SCORE_WEIGHTS (default 70 / 20 / 10):
 
 Each raw factor is converted to a *percentile rank* across the scored universe
 (0 = worst in the universe, 100 = best). This is robust to outliers and to the
-different natural scales of the factors. A stock missing a given factor is
-simply excluded from that factor's average (it is not penalised to zero), so a
-REIT that doesn't report gross profit is still scored fairly on what it does
-report. A pillar with no usable factors at all falls back to the neutral 50.
+different natural scales of the factors. Missing factors are imputed at the
+universe median: each pillar mean is shrunk toward the neutral 50 in proportion
+to factor coverage, so a name reporting 1 of 6 health factors keeps only 1/6 of
+its distance from the median rather than posting an extreme pillar score from a
+single ratio. A pillar with no usable factors lands exactly on 50 — the
+coverage-0 limit of the same rule, not a special case.
 
 The composite is the weighted average of the three pillar scores. Everything
 here is pure pandas/numpy: no network, fully unit-testable.
@@ -82,8 +84,13 @@ def _pillar_score(df: pd.DataFrame, factors: dict) -> tuple[pd.Series, pd.DataFr
         empty = pd.Series(np.nan, index=df.index)
         return empty, pd.DataFrame(index=df.index)
     pct = pd.DataFrame(cols, index=df.index)
-    # Row mean over available (non-NaN) factor percentiles.
-    score = pct.mean(axis=1, skipna=True)
+    # Row mean over available factor percentiles, shrunk toward the neutral 50
+    # in proportion to factor coverage — equivalent to imputing each missing
+    # factor at the universe median. coverage == 0 gives exactly 50, subsuming
+    # the old empty-pillar fallback.
+    raw = pct.mean(axis=1, skipna=True)
+    coverage = pct.notna().sum(axis=1) / len(factors)
+    score = 50.0 + (raw.fillna(50.0) - 50.0) * coverage
     return score, pct
 
 
