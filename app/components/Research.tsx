@@ -248,6 +248,10 @@ function StatRow({ p }: { p: ForwardArmStat }) {
         <Mini label="Active (ann.)" v={signedPct(p.activeReturnAnnualised)} />
         <Mini label="Tracking err" v={pct(p.trackingError)} />
         <Mini label="Info ratio" v={num(p.informationRatio)} />
+        <Mini label="Max DD (fwd)" v={pct(p.maxDrawdown?.arm)} />
+        <Mini label="Sortino" v={num(p.sortino?.arm)} />
+        <Mini label="Calmar" v={num(p.calmar?.arm)} />
+        <Mini label="PSR > 0" v={num(p.probSharpePositive?.arm)} />
         <Mini label="Sharpe Δ" v={sd?.difference == null ? "—" : `${sd.difference >= 0 ? "+" : ""}${num(sd.difference)}`} />
         <Mini label="95% CI" v={sd?.ci95 ? `[${num(sd.ci95[0], 2)}, ${num(sd.ci95[1], 2)}]` : "—"} />
         <Mini label="p-value" v={num(sd?.pValue, 2)} />

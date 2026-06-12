@@ -68,6 +68,12 @@ BASELINE_ARM = "greedy"
 # cumulative active return and the bootstrap/HAC tests have their own gates.
 _MIN_ANNUALISE_DAYS = 20
 
+# Calmar gets a HIGHER floor than the other annualised stats: at small n the
+# max-drawdown denominator is necessarily tiny while the annualised-return
+# numerator is noisy, so early Calmar prints absurd ratios — the same
+# pathology as annualising a 2-day mean. Below this, None and the UI shows "—".
+_MIN_CALMAR_DAYS = 60
+
 
 # --------------------------------------------------------------------------- #
 # Arm + diagnostics builders
@@ -233,6 +239,83 @@ def _annualised_sharpe(daily: np.ndarray) -> float:
     return float(daily.mean() / sd * np.sqrt(TRADING_DAYS))
 
 
+def _annual_return_geometric(daily: np.ndarray) -> float:
+    """Geometric annualisation, same convention as metrics.annual_return."""
+    years = len(daily) / TRADING_DAYS
+    if years <= 0:
+        return 0.0
+    return float(np.prod(1.0 + daily) ** (1.0 / years) - 1.0)
+
+
+def _max_drawdown(daily: np.ndarray) -> float:
+    """Worst peak-to-trough of the cumulative forward NAV. Cumulative, not
+    annualised — defined and honest at any n, like the cumulative active
+    return, so it is reported ungated from day one."""
+    nav = np.cumprod(1.0 + daily)
+    peak = np.maximum.accumulate(nav)
+    return float(((nav - peak) / peak).min())
+
+
+def _sortino(daily: np.ndarray) -> float | None:
+    """Annualised return over downside deviation, with a ZERO risk-free
+    target — not metrics.sortino_ratio's rf-excess: this panel's Sharpe
+    (_annualised_sharpe) and the PSR are raw (no rf), and mixing an
+    excess-of-4% Sortino into the same panel would be inconsistent. The
+    3Y/5Y in-sample windows keep the rf-excess version, matching their
+    rf-excess Sharpe. Revisit when the hardcoded rf becomes time-varying
+    (roadmap item 6). Downside-deviation construction otherwise matches
+    metrics.sortino_ratio. None (not 0) when there is no downside in the
+    sample: the ratio is undefined there, and 0 would read as "bad"."""
+    downside = daily[daily < 0.0]
+    if len(downside) == 0:
+        return None
+    dd = float(np.sqrt(np.mean(downside ** 2)) * np.sqrt(TRADING_DAYS))
+    if dd == 0:
+        return None
+    return _annual_return_geometric(daily) / dd
+
+
+def _calmar(daily: np.ndarray) -> float | None:
+    """Annualised return over |max drawdown| (metrics.calmar_ratio's
+    convention), but None — not 0 — on a zero-drawdown series, where the
+    ratio is undefined."""
+    mdd = abs(_max_drawdown(daily))
+    if mdd == 0:
+        return None
+    return _annual_return_geometric(daily) / mdd
+
+
+def _prob_sharpe_positive(daily: np.ndarray) -> float | None:
+    """Probabilistic Sharpe Ratio, Bailey & López de Prado (2012): the
+    probability the TRUE Sharpe exceeds 0 given the observed Sharpe, sample
+    length, skewness and kurtosis —
+
+        PSR = Phi( SR * sqrt(n-1) / sqrt(1 - g3*SR + (g4-1)/4 * SR^2) )
+
+    SR is the PER-PERIOD (daily, non-annualised) Sharpe; g3 is skewness and
+    g4 is RAW kurtosis (3 for a normal; scipy fisher=False). With g3=0,
+    g4=3 the denominator reduces to the textbook Lo/Mertens standard error
+    sqrt(1 + SR^2/2) — the check that pins the kurtosis convention.
+
+    Deliberately NOT the deflated (multiple-testing) variant: the experiment
+    runs 3 pre-registered arms, not a mined family of trials, so there is no
+    selection bias to deflate away.
+    """
+    n = len(daily)
+    if n < 3:
+        return None
+    sd = daily.std(ddof=1)
+    if sd == 0:
+        return None
+    sr = float(daily.mean() / sd)
+    g3 = float(stats.skew(daily))
+    g4 = float(stats.kurtosis(daily, fisher=False))
+    denom_sq = 1.0 - g3 * sr + (g4 - 1.0) / 4.0 * sr * sr
+    if denom_sq <= 0:  # numerically degenerate (extreme SR/moments at tiny n)
+        return None
+    return float(stats.norm.cdf(sr * np.sqrt(n - 1) / np.sqrt(denom_sq)))
+
+
 def _newey_west_t(active: np.ndarray) -> float:
     """HAC (Bartlett) t-stat for H0: mean daily active return = 0."""
     n = len(active)
@@ -300,14 +383,24 @@ def forward_stats(history: list[dict], baseline: str = BASELINE_ARM) -> dict:
         # bootstrap (>=10) and Newey-West (>=3) gates already apply.
         sufficient = n >= _MIN_ANNUALISE_DAYS
         cumulative_active = float(np.prod(1.0 + active) - 1.0)  # always honest
+        # Max drawdown is cumulative (never annualised) so, like the
+        # cumulative active return, it is reported from day one.
+        mdd_arm, mdd_base = _max_drawdown(series), _max_drawdown(base)
         if sufficient:
             te = active.std(ddof=1) * np.sqrt(TRADING_DAYS)
             ann_active = active.mean() * TRADING_DAYS
             ir = ann_active / te if te and not np.isnan(te) and te != 0 else None
             sharpe_arm = _annualised_sharpe(series)
             sharpe_base = _annualised_sharpe(base)
+            sortino_arm, sortino_base = _sortino(series), _sortino(base)
+            psr_arm, psr_base = _prob_sharpe_positive(series), _prob_sharpe_positive(base)
         else:
             te = ann_active = ir = sharpe_arm = sharpe_base = None
+            sortino_arm = sortino_base = psr_arm = psr_base = None
+        if n >= _MIN_CALMAR_DAYS:
+            calmar_arm, calmar_base = _calmar(series), _calmar(base)
+        else:
+            calmar_arm = calmar_base = None
         per_arm.append({
             "arm": arm,
             "vsBaseline": baseline,
@@ -322,6 +415,24 @@ def forward_stats(history: list[dict], baseline: str = BASELINE_ARM) -> dict:
             "sharpe": {
                 "arm": _r(sharpe_arm, 3),
                 "baseline": _r(sharpe_base, 3),
+            },
+            # Robustness-to-non-normality panel (roadmap item 5).
+            "maxDrawdown": {
+                "arm": _r(mdd_arm, 4),
+                "baseline": _r(mdd_base, 4),
+            },
+            "sortino": {
+                "arm": _r(sortino_arm, 3),
+                "baseline": _r(sortino_base, 3),
+            },
+            "minDaysForCalmar": _MIN_CALMAR_DAYS,
+            "calmar": {
+                "arm": _r(calmar_arm, 3),
+                "baseline": _r(calmar_base, 3),
+            },
+            "probSharpePositive": {
+                "arm": _r(psr_arm, 3),
+                "baseline": _r(psr_base, 3),
             },
             "neweyWestT_meanActive": _r(_newey_west_t(active), 3),
             "sharpeDifference": _block_bootstrap_sharpe_diff(series, base),

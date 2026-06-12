@@ -113,6 +113,97 @@ def test_history_roundtrip_and_stats(tmp_path):
     return hist_file
 
 
+def test_probabilistic_sharpe():
+    """PSR unit tests (Bailey & López de Prado 2012)."""
+    from scipy import stats
+
+    rng = np.random.default_rng(3)
+    n = 120
+
+    # (1) Convention check: independently re-derive the formula with RAW
+    # kurtosis (gamma4 = 3 for a normal; scipy fisher=False). If the
+    # implementation ever switches to excess kurtosis, this fails.
+    r = rng.normal(0.0015, 0.01, n)
+    sr = r.mean() / r.std(ddof=1)
+    g3, g4 = stats.skew(r), stats.kurtosis(r, fisher=False)
+    expected = stats.norm.cdf(sr * np.sqrt(n - 1)
+                              / np.sqrt(1 - g3 * sr + (g4 - 1) / 4 * sr * sr))
+    got = R._prob_sharpe_positive(r)
+    assert abs(got - expected) < 1e-12, f"PSR formula mismatch: {got} vs {expected}"
+    print(f"  PASS: PSR matches the raw-kurtosis formula exactly ({got:.4f})")
+
+    # (2) Normal returns, positive Sharpe: PSR ~ Phi(SR*sqrt(n-1)) since the
+    # sample moments are near (0, 3). Tolerance covers moment noise at n=120.
+    approx = stats.norm.cdf(sr * np.sqrt(n - 1))
+    assert abs(got - approx) < 0.02, f"normal-case PSR {got} far from {approx}"
+    print(f"  PASS: normal positive-SR series gives PSR ≈ Phi(SR·sqrt(n-1)) "
+          f"({got:.4f} vs {approx:.4f})")
+
+    # (3) Non-normality penalty: same first two moments (so identical SR), but
+    # a 5% crash mixture injecting negative skew + fat tails must LOWER PSR.
+    crash = rng.random(n) < 0.05
+    c = np.where(crash, rng.normal(-0.025, 0.012, n), rng.normal(0.0027, 0.007, n))
+    c = (c - c.mean()) / c.std(ddof=1) * r.std(ddof=1) + r.mean()
+    assert stats.skew(c) < -0.5, "test construction failed to inject skew"
+    psr_c = R._prob_sharpe_positive(c)
+    assert psr_c < got, f"PSR penalty failed: skewed {psr_c} >= normal {got}"
+    print(f"  PASS: negative skew / fat tails at identical SR lower PSR "
+          f"({psr_c:.4f} < {got:.4f})")
+
+    # Degenerate inputs -> None, not a crash.
+    assert R._prob_sharpe_positive(np.array([0.01, 0.01, 0.01])) is None  # sd=0
+    assert R._prob_sharpe_positive(np.array([0.01, -0.01])) is None       # n<3
+    print("  PASS: PSR degrades to None on degenerate inputs")
+
+
+def test_gating_tiers(tmp_path):
+    """maxDrawdown ungated; Sortino/PSR gate at 20; Calmar gates at 60."""
+    rng = np.random.default_rng(11)
+    rets = rng.normal(0.0005, 0.01, 60)
+    hist_file = tmp_path / "gating_log.jsonl"
+
+    def current_stats():
+        return R.forward_stats(R.load_history(hist_file))["perArm"][0]
+
+    n_written = 0
+
+    def grow_to(n):
+        nonlocal n_written
+        for d in range(n_written, n):
+            R.append_run_record(
+                f"2026-{1 + d // 28:02d}-{1 + d % 28:02d}", "daily",
+                {"greedy": float(rets[d]), "qubo_classical": float(rets[d]) + 0.0001},
+                path=hist_file)
+        n_written = n
+
+    grow_to(1)
+    p = current_stats()
+    assert p["maxDrawdown"]["arm"] is not None, "day-1 maxDrawdown must be present"
+    assert p["sortino"]["arm"] is None and p["probSharpePositive"]["arm"] is None
+    assert p["calmar"]["arm"] is None
+    print("  PASS: day 1 — maxDrawdown present, annualised stats gated")
+
+    grow_to(19)
+    p = current_stats()
+    assert p["sortino"]["arm"] is None and p["probSharpePositive"]["arm"] is None
+    grow_to(20)
+    p = current_stats()
+    assert p["sortino"]["arm"] is not None, "Sortino must appear at 20 days"
+    assert p["probSharpePositive"]["arm"] is not None, "PSR must appear at 20 days"
+    assert 0.0 <= p["probSharpePositive"]["arm"] <= 1.0
+    assert p["calmar"]["arm"] is None, "Calmar must still be gated at 20 days"
+    print("  PASS: Sortino + PSR — None at 19 days, present at 20")
+
+    grow_to(59)
+    p = current_stats()
+    assert p["calmar"]["arm"] is None, "Calmar must be None at 59 days"
+    grow_to(60)
+    p = current_stats()
+    assert p["calmar"]["arm"] is not None, "Calmar must appear at 60 days"
+    assert p["minDaysForCalmar"] == 60
+    print("  PASS: Calmar — None at 59 days, present at 60 (own higher floor)")
+
+
 def test_research_block(arms, hist_file):
     block = R.build_research_block(arms, "2026-06-08",
                                    history=R.load_history(hist_file))
@@ -137,7 +228,9 @@ if __name__ == "__main__":
     print("=" * 64)
     test_arm_strips_weights()
     arms = test_selection_comparison()
+    test_probabilistic_sharpe()
     with tempfile.TemporaryDirectory() as td:
+        test_gating_tiers(Path(td))
         hist = test_history_roundtrip_and_stats(Path(td))
         test_research_block(arms, hist)
     print("=" * 64)

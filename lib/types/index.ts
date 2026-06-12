@@ -43,7 +43,11 @@ export interface FundWindow {
   annualReturn: number;
   annualVolatility: number;
   sharpeRatio: number;
+  // Optional: absent from JSON produced by backend versions < 2.2.
+  sortinoRatio?: number | null;
   maximumDrawdown: number;
+  // Optional: absent from JSON produced by backend versions < 2.2.
+  calmarRatio?: number | null;
   alpha: number | null;
   // Newey-West t-statistic of the daily OLS alpha (|t| >= ~2 ≈ significant at
   // 5%). Optional: absent from JSON produced by backend versions < 2.1.
@@ -146,6 +150,15 @@ export interface ForwardArmStat {
   trackingError: number | null;
   informationRatio: number | null;
   sharpe: { arm: number | null; baseline: number | null };
+  // Robustness-to-non-normality stats (backend >= 2.2; all optional for
+  // back-compat with old latest.json blobs). maxDrawdown is cumulative and
+  // ungated; sortino (zero-rf) and probSharpePositive (Bailey-López de Prado
+  // PSR vs 0) gate at minDaysForAnnualised; calmar gates at minDaysForCalmar.
+  maxDrawdown?: { arm: number | null; baseline: number | null };
+  sortino?: { arm: number | null; baseline: number | null };
+  minDaysForCalmar?: number;
+  calmar?: { arm: number | null; baseline: number | null };
+  probSharpePositive?: { arm: number | null; baseline: number | null };
   neweyWestT_meanActive: number | null;
   sharpeDifference: SharpeDifference;
   ledoitWolfTest: unknown | null; // reserved hook

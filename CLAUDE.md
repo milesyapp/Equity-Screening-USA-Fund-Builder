@@ -128,9 +128,21 @@ Priority order, roughly:
 4. ~~Fix PEG to use earnings growth, or drop it (currently uses revenue
    growth).~~ **Done** (commit 7548d5d): PEG factor removed as a category
    error; weights renormalised.
-5. Add Sortino + Calmar + deflated Sharpe to the forward panel — the rigorous
+5. ~~Add Sortino + Calmar + deflated Sharpe to the forward panel — the rigorous
    answer to "is Sharpe robust for this fund" (NOT CQNS, which is a selection
-   objective the QUBO already embodies, not an evaluation metric).
+   objective the QUBO already embodies, not an evaluation metric).~~
+   **Done**: forward panel (per arm + baseline) gains max drawdown (cumulative,
+   honest and ungated from day 1, like `activeReturnCumulative`), Sortino
+   (zero-rf to match the panel's raw Sharpe convention — the rf-excess version
+   stays in the 3Y/5Y windows; unify when item 6 lands), Calmar (own higher
+   floor `_MIN_CALMAR_DAYS = 60`: tiny-n drawdown denominators print absurd
+   ratios), and `probSharpePositive` — Bailey & López de Prado PROBABILISTIC
+   Sharpe vs 0, with γ₄ = RAW kurtosis (3 for a normal; convention verified
+   against the Lo/Mertens normal-case SE by Monte Carlo). Deliberately NOT the
+   deflated variant: 3 pre-registered arms, no mined trials to deflate.
+   Zero-denominator Sortino/Calmar report None, never 0. In-sample 3Y/5Y
+   windows gain `sortinoRatio`/`calmarRatio` via the existing metrics.py
+   functions.
 6. Time-varying / historical risk-free rate (currently hardcoded 4%).
 7. Upgrade Alpaca IEX → SIP feed.
 8. QUBO lambda sweep; weight selections from the optimiser (currently the

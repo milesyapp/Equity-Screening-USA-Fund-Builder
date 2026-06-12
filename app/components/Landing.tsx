@@ -236,9 +236,9 @@ export default function Landing() {
                 ["Annualised return", (m: FundWindow | null) => pct(m?.annualReturn)],
                 ["Volatility", (m: FundWindow | null) => pct(m?.annualVolatility)],
                 ["Sharpe", (m: FundWindow | null) => num(m?.sharpeRatio)],
-                ["Sortino", () => "—"],
+                ["Sortino", (m: FundWindow | null) => num(m?.sortinoRatio)],
                 ["Max drawdown", (m: FundWindow | null) => pct(m?.maximumDrawdown)],
-                ["Calmar", (m: FundWindow | null) => num(calmar(m))],
+                ["Calmar", (m: FundWindow | null) => num(m?.calmarRatio ?? calmar(m))],
                 ["Alpha", (m: FundWindow | null) => pct(m?.alpha)],
                 ["Beta", (m: FundWindow | null) => num(m?.beta)],
               ] as [string, (m: FundWindow | null) => string][]).map(([label, fn]) => (
@@ -287,6 +287,10 @@ export default function Landing() {
                       <FwdStat label="ACTIVE RETURN" value={signedPct(p.activeReturnAnnualised)} />
                       <FwdStat label="TRACKING ERR" value={pct(p.trackingError)} />
                       <FwdStat label="INFO RATIO" value={num(p.informationRatio)} />
+                      <FwdStat label="MAX DD (FWD)" value={pct(p.maxDrawdown?.arm)} />
+                      <FwdStat label="SORTINO" value={num(p.sortino?.arm)} />
+                      <FwdStat label="CALMAR" value={num(p.calmar?.arm)} />
+                      <FwdStat label="PSR > 0" value={num(p.probSharpePositive?.arm)} />
                     </div>
                     <div style={S.fwdSharpe}>
                       <span style={S.fwdSharpeLabel}>SHARPE Δ</span>

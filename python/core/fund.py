@@ -79,7 +79,11 @@ def _window_metrics(fund_daily: pd.Series, bench_daily: pd.Series, years: int) -
         "annualReturn":     round(fund_ann, 4),
         "annualVolatility": round(metrics.annual_volatility(f), 4),
         "sharpeRatio":      round(metrics.sharpe_ratio(f), 3),
+        # rf-excess like sharpeRatio above; the forward panel's Sortino is
+        # zero-rf to match its raw Sharpe (see research_log._sortino).
+        "sortinoRatio":     round(metrics.sortino_ratio(f), 3),
         "maximumDrawdown":  round(metrics.maximum_drawdown(f), 4),
+        "calmarRatio":      round(metrics.calmar_ratio(f), 3),
         "alpha":            round(alpha, 4) if alpha is not None else None,
         "alphaTStat":       round(alpha_t, 2) if alpha_t is not None else None,
         "beta":             round(beta, 3) if not np.isnan(beta) else None,

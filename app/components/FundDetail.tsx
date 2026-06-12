@@ -227,7 +227,9 @@ export default function FundDetail({ arm: armKey }: { arm: string }) {
           <Metric label="HOLDINGS" value={String(fund.constituents)} />
           <Metric label="3Y RETURN" value={pct(m?.annualReturn)} color={GREEN} />
           <Metric label="3Y SHARPE" value={num(m?.sharpeRatio)} />
+          <Metric label="3Y SORTINO" value={num(m?.sortinoRatio)} />
           <Metric label="3Y MAX DD" value={pct(m?.maximumDrawdown)} color={RED} />
+          <Metric label="3Y CALMAR" value={num(m?.calmarRatio)} />
           <Metric label="3Y ALPHA" value={`${pct(m?.alpha)}${m?.alphaTStat != null ? ` (t ${m.alphaTStat.toFixed(1)})` : ""}`} />
           <Metric label={`3Y BETA (vs ${fund.benchmark})`} value={num(m?.beta)} />
           <Metric label="VOLATILITY" value={pct(m?.annualVolatility)} />
@@ -408,6 +410,10 @@ export default function FundDetail({ arm: armKey }: { arm: string }) {
             <Metric label="INFO RATIO" value={num(fwdForArm.informationRatio)} small />
             <Metric label="SHARPE Δ" value={num(fwdForArm.sharpeDifference.difference)} small />
             <Metric label="NEWEY-WEST t" value={num(fwdForArm.neweyWestT_meanActive)} small />
+            <Metric label="MAX DD (FWD)" value={pct(fwdForArm.maxDrawdown?.arm)} color={RED} small />
+            <Metric label="SORTINO" value={num(fwdForArm.sortino?.arm)} small />
+            <Metric label="CALMAR" value={num(fwdForArm.calmar?.arm)} small />
+            <Metric label="PSR > 0" value={num(fwdForArm.probSharpePositive?.arm)} small />
           </div>
           <p style={S.ciLine}>
             {fwdForArm.sharpeDifference.ci95
