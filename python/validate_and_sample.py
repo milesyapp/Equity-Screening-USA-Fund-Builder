@@ -62,8 +62,9 @@ trailing = pd.DataFrame({
     "return1Y": np.clip(1.4 * r6 + rng.normal(0, 0.2, N), -0.7, 2.5),
 }, index=tickers)
 
-# ── 2. Score the universe
-scores = scoring.score_universe(fund_df, trailing)
+# ── 2. Score the universe (sector-neutral path, as the screener calls it)
+sector_series = pd.Series(sectors, index=tickers)
+scores = scoring.score_universe(fund_df, trailing, sectors=sector_series)
 
 # ── INVARIANT CHECKS ─────────────────────────────────────────────────────────
 assert scores["score"].between(0, 100).all(), "composite out of [0,100]"
@@ -75,6 +76,65 @@ top_q = scores.loc[fund_df.index[np.argsort(quality)[-50:]], "score"].mean()
 bot_q = scores.loc[fund_df.index[np.argsort(quality)[:50]], "score"].mean()
 assert top_q > bot_q, f"quality not reflected in score: {top_q:.1f} !> {bot_q:.1f}"
 print(f"[ok] scoring: top-quality mean {top_q:.1f} > bottom-quality mean {bot_q:.1f}")
+
+# ── SECTOR-NEUTRAL INVARIANTS (v2.3) ─────────────────────────────────────────
+# (a) Two structurally-different sectors: universe-wide ranking lets the
+# high-margin sector flood the top decile; sector-neutral must rebalance it
+# while preserving within-sector ordering.
+_rng2 = np.random.default_rng(11)
+_q_hi, _q_lo = _rng2.uniform(0, 1, 60), _rng2.uniform(0, 1, 60)
+_two = pd.DataFrame({
+    "netMargin":       np.r_[0.30 + 0.10 * _q_hi, 0.15 + 0.06 * _q_lo],
+    "operatingMargin": np.r_[0.35 + 0.10 * _q_hi, 0.18 + 0.06 * _q_lo],
+    "returnOnEquity":  np.r_[0.20 + 0.15 * _q_hi, 0.08 + 0.06 * _q_lo],
+}, index=[f"HI{i:02d}" for i in range(60)] + [f"LO{i:02d}" for i in range(60)])
+_two_sec = pd.Series(["HighMargin"] * 60 + ["LowMargin"] * 60, index=_two.index)
+_fac3 = {"netMargin": "higher", "operatingMargin": "higher", "returnOnEquity": "higher"}
+_uni, _, _ = scoring._pillar_score(_two, _fac3)
+_neu, _, _ = scoring._pillar_score(_two, _fac3, _two_sec)
+_top_uni = _two_sec.loc[_uni.nlargest(12).index].value_counts()
+_top_neu = _two_sec.loc[_neu.nlargest(12).index].value_counts()
+assert _top_uni.get("LowMargin", 0) == 0, "universe ranking should exclude LowMargin from top decile"
+assert _top_neu.get("LowMargin", 0) >= 4, f"sector-neutral top decile still unbalanced: {_top_neu.to_dict()}"
+for _s in ("HighMargin", "LowMargin"):
+    _m = _two_sec == _s
+    _rho = pd.Series(_uni[_m]).corr(pd.Series(_neu[_m]), method="spearman")
+    assert _rho > 0.95, f"within-{_s} ordering not preserved (rho={_rho:.3f})"
+print(f"[ok] sector-neutral: top decile {dict(_top_uni)} -> {dict(_top_neu)}, "
+      f"within-sector ordering preserved")
+
+# (b) Min-count fallback: a 4-name sector must carry universe-wide percentiles
+# bit-for-bit; same for "Unknown" regardless of its size.
+_tiny = _two.copy()
+for _i in range(4):
+    _tiny.loc[f"TY{_i:02d}"] = [0.22, 0.25, 0.14]
+for _i in range(15):  # Unknown is big enough to pass min-count — must still fall back
+    _tiny.loc[f"UN{_i:02d}"] = [0.20 + 0.005 * _i, 0.23, 0.12]
+_tiny_sec = pd.Series(["HighMargin"] * 60 + ["LowMargin"] * 60 + ["TinySector"] * 4
+                      + ["Unknown"] * 15, index=_tiny.index)
+_, _pct_t, _mask_t = scoring._pillar_score(_tiny, _fac3, _tiny_sec)
+_uni_rank = scoring._percentile_rank(_tiny["netMargin"], "higher")
+for _grp in ("TY", "UN"):
+    _idx = [t for t in _tiny.index if t.startswith(_grp)]
+    assert not _mask_t.loc[_idx, "netMargin"].any(), f"{_grp}: fallback did not fire"
+    assert np.allclose(_pct_t.loc[_idx, "netMargin"], _uni_rank[_idx]), \
+        f"{_grp}: fallback percentiles differ from universe-wide"
+print(f"[ok] sector-neutral: min-count fallback (4-name sector) and Unknown "
+      f"(15 names) both rank universe-wide")
+
+# (c) Sector-median shrinkage: knocking out one factor must shrink the pillar
+# toward the SECTOR's distribution (50 within-sector), not the universe's.
+_knock = _two.copy()
+_knock.loc["HI00", "netMargin"] = np.nan
+_neu_k, _, _ = scoring._pillar_score(_knock, _fac3, _two_sec)
+_uni_k, _, _ = scoring._pillar_score(_knock, _fac3)
+# With the factor missing, the sector-neutral pillar = 50 + (mean of the two
+# remaining WITHIN-SECTOR pctls - 50) * 2/3 exactly:
+_, _pct_k, _ = scoring._pillar_score(_knock, _fac3, _two_sec)
+_expect = 50.0 + (_pct_k.loc["HI00", ["operatingMargin", "returnOnEquity"]].mean() - 50.0) * (2 / 3)
+assert abs(_neu_k["HI00"] - _expect) < 1e-9, "sector-median shrinkage identity broken"
+print(f"[ok] sector-neutral: missing factor imputes at sector median "
+      f"(pillar {_neu_k['HI00']:.1f} vs universe-regime {_uni_k['HI00']:.1f})")
 
 combined = fund_df.join(scores).join(trailing)
 combined["sector"] = sectors

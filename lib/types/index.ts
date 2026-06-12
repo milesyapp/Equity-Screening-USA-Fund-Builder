@@ -93,6 +93,13 @@ export interface Methodology {
   // Known, disclosed limitations of the data/methodology, written by the
   // backend and rendered verbatim. Optional: absent before backend v2.1.
   limitations?: string[];
+  // Sector-neutral scoring descriptor. Optional: absent before backend v2.3.
+  sectorNeutral?: {
+    pillars: string[];
+    groupBy: string;
+    minCount: number;
+    momentumScope: string;
+  };
 }
 
 // --- Classical-vs-quantum research instrumentation -------------------------

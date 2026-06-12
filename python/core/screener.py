@@ -129,11 +129,16 @@ def run() -> dict:
                 len(scored_tickers), int(dropped_no_health))
 
     # 6. Score ---------------------------------------------------------------
-    scores = scoring.score_universe(fund_df, trailing.loc[scored_tickers])
+    # GICS sector per name (never sub-industry): health/valuation percentiles
+    # rank within these groups (v2.3 sector-neutral regime, 2026-06-12).
+    sectors = pd.Series(
+        {t: meta.get(t, {}).get("sector", "Unknown") for t in scored_tickers})
+    scores = scoring.score_universe(
+        fund_df, trailing.loc[scored_tickers], sectors=sectors)
     combined = fund_df.join(scores).join(trailing, how="left")
 
     # Sector P/E medians for valuation context in the reasons.
-    combined["sector"] = [meta.get(t, {}).get("sector", "Unknown") for t in combined.index]
+    combined["sector"] = sectors.reindex(combined.index)
     sector_pe = combined.groupby("sector")["peRatio"].median().to_dict()
 
     # 7. Rank top N ----------------------------------------------------------
@@ -255,6 +260,16 @@ def run() -> dict:
             "healthFactors": list(scoring.HEALTH_FACTORS),
             "valuationFactors": list(scoring.VALUATION_FACTORS),
             "momentumFactors": list(scoring.MOMENTUM_FACTORS),
+            # v2.3: health/valuation percentiles rank within GICS sector;
+            # momentum is deliberately universe-wide (it exists to capture
+            # sector trends). Thin (< minCount) and "Unknown" sectors fall
+            # back to universe-wide ranks per factor.
+            "sectorNeutral": {
+                "pillars": ["health", "valuation"],
+                "groupBy": "GICS sector",
+                "minCount": settings.SECTOR_NEUTRAL_MIN_COUNT,
+                "momentumScope": "universe-wide (deliberate)",
+            },
             # Known, disclosed limitations — rendered verbatim on the frontend.
             # These are structural to the data available, not bugs; the forward
             # log (data/research_log.jsonl) is the only out-of-sample evidence.
@@ -274,6 +289,14 @@ def run() -> dict:
                 "On the free IEX feed, volume reflects only IEX's ~2-3% venue share; "
                 "the liquidity floor is adjusted accordingly and capacity of the "
                 "paper portfolio is not modeled.",
+                "Scoring regime change on 2026-06-12: health and valuation factors "
+                "are now percentile-ranked within GICS sector (momentum deliberately "
+                "remains universe-wide); before that date all ranks were "
+                "universe-wide. Measured impact on the change date: 28 of the top "
+                "100 replaced; Financials fell from 32 to 8 fund slots after "
+                "dominating the universe-wide ranking at ~2.3x their universe share "
+                "via bank/insurer margins and ROE. Forward-log rows before "
+                "2026-06-12 were selected under the old regime.",
             ],
         },
         "stocks": stocks,

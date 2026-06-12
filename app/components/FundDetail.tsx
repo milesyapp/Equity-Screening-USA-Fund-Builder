@@ -474,11 +474,18 @@ function Methodology({ armKey, diag, color }: { armKey: string; diag: QuboDiagno
         years where both operating cash flow and capex were reported: the FCF margin divides that
         average by average revenue over the same years (a through-cycle margin), and FCF yield
         divides it by current market cap. <b style={B}>Valuation</b> uses P/E (inverted, negatives excluded) and FCF yield. <b style={B}>Momentum</b> reads 6-month and 3-month price
-        return. Each raw metric is converted to a percentile rank across the universe before it is
-        blended — this makes the composite robust to outliers and to the inconsistent scales between,
-        say, a margin and a debt ratio. Missing factors are imputed at the universe median: each
-        pillar score is shrunk toward the neutral 50 in proportion to factor coverage, so a name
-        reporting one of six health factors cannot post an extreme health score from a single ratio.
+        return. Health and valuation metrics are converted to percentile ranks <b style={B}>within
+        each GICS sector</b>, so a bank&apos;s margins are compared to other banks&apos;, not to software
+        companies&apos; — before this, structurally high-margin sectors crowded the top ranks on
+        business-model differences rather than quality. Sectors with too few names reporting a
+        metric (and names whose sector is unknown) fall back to universe-wide ranks for that metric.
+        Momentum is deliberately ranked across the <b style={B}>whole universe</b>: cross-sectional
+        momentum exists to capture sector trends, and ranking it within sector would erase that
+        signal. Percentile ranking makes the composite robust to outliers and to the inconsistent
+        scales between, say, a margin and a debt ratio. Missing factors are imputed at the sector
+        median (universe median where the fallback applies): each pillar score is shrunk toward the
+        neutral 50 in proportion to factor coverage, so a name reporting one of six health factors
+        cannot post an extreme health score from a single ratio.
       </P>
 
       {!isQubo && (

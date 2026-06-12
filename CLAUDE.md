@@ -103,8 +103,13 @@ pipeline or type changes. All five Python suites must end "ALL PASS".
   costs/turnover. Disclosed on the UI.
 - **Free IEX feed**: volume is ~2-3% of consolidated, distorting the liquidity
   screen. SIP feed would fix it.
-- **Cross-sector percentile scoring**: capital-light sectors dominate the top
-  quintile; sparse-data names can rank on the pillar-50 fallback.
+- ~~**Cross-sector percentile scoring**: capital-light sectors dominate the top
+  quintile; sparse-data names can rank on the pillar-50 fallback.~~ **Fixed
+  2026-06-12 (roadmap item 1) — and the original diagnosis was wrong**: the
+  measured dominator was Financials (32/100 slots, ~2.3× universe share, via
+  bank/insurer margins and ROE), not capital-light sectors. Sector-neutral
+  ranking rebalanced the mix; the sparse-data half was already fixed by the
+  item-2 coverage shrinkage.
 
 ## Git workflow
 
@@ -119,7 +124,26 @@ pipeline or type changes. All five Python suites must end "ALL PASS".
 ## Open roadmap (see EquityLens_Methodology_Audit.xlsx for full backlog)
 
 Priority order, roughly:
-1. Sector-neutral (within-GICS) percentile scoring.
+1. ~~Sector-neutral (within-GICS) percentile scoring.~~ **Done (2026-06-12,
+   commit "feat: sector-neutral percentile scoring…")**: health and valuation
+   factors rank within GICS sector; momentum stays universe-wide
+   (deliberately — cross-sectional momentum captures sector trends). Thin
+   sector×factor cells (< `SECTOR_NEUTRAL_MIN_COUNT` = 10 non-NaN names) and
+   "Unknown" sectors (regardless of size — a grab-bag, not a peer group) fall
+   back to universe-wide ranks per factor, logged when firing. The item-2
+   shrinkage line is UNCHANGED: 50 in percentile space is the median of the
+   rank population, so imputation moved to the sector median automatically
+   (universe median where the fallback fired). Reasons say "of its sector" /
+   "of the universe" per name per factor, matching the actual comparison.
+   **REGIME CHANGE — structural break in the forward log**: rows in
+   `research_log.jsonl` before 2026-06-12 were selected under universe-wide
+   ranking. Measured impact on the change date: 28/100 of the top-100
+   replaced; Financials 32 → 8 fund slots (they had dominated at ~2.3× their
+   universe share via bank/insurer margins and ROE). Disclosed in
+   `methodology.limitations[]`. Watch the greedy-vs-QUBO selection overlap
+   after the first new-regime weekly run: with Financials no longer flooding
+   the pool, the QUBO sector-concentration penalty has less to do and the
+   arms' baskets may converge.
 2. ~~Min factor-coverage gate before ranking (stop pillar-50 fallback
    gaming).~~ **Done (linear shrinkage)**: pillar scores shrink toward 50 in
    proportion to factor coverage — missing factors are imputed at the universe

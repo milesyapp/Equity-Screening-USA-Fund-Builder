@@ -37,6 +37,13 @@ SCORE_WEIGHTS = {
     "momentum":  float(os.getenv("SCORE_W_MOMENTUM", 0.10)),
 }
 
+# Sector-neutral scoring (v2.3): health and valuation factors are percentile-
+# ranked WITHIN GICS sector. If a sector has fewer than this many names with a
+# given factor, those names fall back to the universe-wide percentile for that
+# factor (a 4-name sector is not a meaningful comparison set). Momentum is
+# deliberately universe-wide — see scoring.py.
+SECTOR_NEUTRAL_MIN_COUNT = int(os.getenv("SECTOR_NEUTRAL_MIN_COUNT", 10))
+
 # Per-name cap inside the score-weighted fund (renormalized after capping).
 SCREENER_MAX_WEIGHT = float(os.getenv("SCREENER_MAX_WEIGHT", 0.04))
 
