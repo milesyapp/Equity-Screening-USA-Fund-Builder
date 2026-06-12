@@ -7,8 +7,8 @@ three pillars, ranks the top 100, and builds a score-weighted mini-fund.
 
 | Pillar | Weight | Factors |
 |---|---|---|
-| **Financial health** | 70% | ROE, operating margin, net margin, FCF margin, revenue growth, debt/equity (inverted) |
-| **Valuation** | 20% | P/E (inverted, only if > 0), FCF yield |
+| **Financial health** | 70% | ROE, operating margin, net margin, FCF margin (matched-period 3-yr average), revenue growth (3-yr elapsed-time CAGR; None below 3 annual filings — no YoY fallback), debt/equity (inverted) |
+| **Valuation** | 20% | P/E (inverted, only if > 0), FCF yield (3-yr average FCF / current market cap) |
 | **Momentum** | 10% | 6-month and 3-month price return |
 
 Each factor is converted to a **percentile rank** across the scored universe

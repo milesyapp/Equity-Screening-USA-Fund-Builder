@@ -8,8 +8,8 @@ settings.SCORE_WEIGHTS (default 70 / 20 / 10):
     + return on equity         (higher is better)
     + operating margin         (higher is better)
     + net margin               (higher is better)
-    + free-cash-flow margin    (higher is better)
-    + revenue growth (YoY)     (higher is better)
+    + free-cash-flow margin    (matched-period 3-yr average; higher is better)
+    + revenue growth (3-yr CAGR) (higher is better)
     - debt / equity            (lower is better -> inverted)
 
   VALUATION (is the price attractive for what you get?)
@@ -158,9 +158,9 @@ _FACTOR_LABELS = {
     "returnOnEquity":  ("return on equity", "%", 100),
     "operatingMargin": ("operating margin", "%", 100),
     "netMargin":       ("net margin", "%", 100),
-    "fcfMargin":       ("free-cash-flow margin", "%", 100),
-    "revenueGrowth":   ("revenue growth", "%", 100),
-    "fcfYield":        ("FCF yield", "%", 100),
+    "fcfMargin":       ("free-cash-flow margin (3-yr avg)", "%", 100),
+    "revenueGrowth":   ("revenue growth (3-yr CAGR)", "%", 100),
+    "fcfYield":        ("FCF yield (3-yr avg FCF)", "%", 100),
 }
 
 
@@ -178,7 +178,9 @@ def build_reasons(row: dict, sector_pe_median: float | None) -> tuple[list[str],
         if pctl is not None and not _isnan(pctl) and pctl >= _STRONG_PCTL and val is not None and not _isnan(val):
             top_pct = max(1, round(100 - pctl))
             band = "the highest in the universe" if pctl >= 99.5 else f"top {top_pct}% of the universe"
-            strengths.append((pctl, f"{label.capitalize()} of {val * mult:.1f}{unit} — {band}"))
+            # Upper-case only the first character — .capitalize() would
+            # lower-case acronyms like CAGR/FCF inside the label.
+            strengths.append((pctl, f"{label[:1].upper()}{label[1:]} of {val * mult:.1f}{unit} — {band}"))
     strengths.sort(reverse=True)
     reasons.extend(s[1] for s in strengths[:4])
 
@@ -208,7 +210,7 @@ def build_reasons(row: dict, sector_pe_median: float | None) -> tuple[list[str],
         flags.append(f"Elevated leverage — debt/equity {dte:.1f}")
     growth = row.get("revenueGrowth")
     if growth is not None and not _isnan(growth) and growth < 0:
-        flags.append(f"Revenue declined {abs(growth) * 100:.0f}% YoY")
+        flags.append(f"Revenue declining — {abs(growth) * 100:.0f}%/yr over ~3 years")
 
     if not reasons:
         reasons.append("Balanced profile — no single standout factor, ranks on consistency")

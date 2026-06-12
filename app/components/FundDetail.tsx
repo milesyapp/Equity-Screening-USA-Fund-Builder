@@ -237,7 +237,7 @@ export default function FundDetail({ arm: armKey }: { arm: string }) {
         <div style={S.blendedRow}>
           <Metric label="P/E" value={num(b.pe, 1)} small />
           <Metric label="FCF YIELD" value={pct(b.fcfYield)} small />
-          <Metric label="REV GROWTH" value={pct(b.revenueGrowth)} small color={GREEN} />
+          <Metric label="REV CAGR (3Y)" value={pct(b.revenueGrowth)} small color={GREEN} />
           <Metric label="ROE" value={pct(b.returnOnEquity)} small />
           <Metric label="NET MARGIN" value={pct(b.netMargin)} small />
         </div>
@@ -460,8 +460,14 @@ function Methodology({ armKey, diag, color }: { armKey: string; diag: QuboDiagno
       </P>
       <P>
         <b style={B}>Health</b> blends return on equity, operating margin, net margin, free-cash-flow
-        margin, year-over-year revenue growth, and debt/equity (inverted, so less leverage scores
-        higher). <b style={B}>Valuation</b> uses P/E (inverted, negatives excluded) and FCF yield. <b style={B}>Momentum</b> reads 6-month and 3-month price
+        margin, revenue growth, and debt/equity (inverted, so less leverage scores
+        higher). Revenue growth is a three-year compound annual rate (annualised over the actual
+        elapsed time between filings, falling back to roughly two years when only three annual
+        filings exist, and reported as missing below that) — one spike year no longer defines a
+        name&apos;s growth rank. Free cash flow is averaged over up to the three most recent fiscal
+        years where both operating cash flow and capex were reported: the FCF margin divides that
+        average by average revenue over the same years (a through-cycle margin), and FCF yield
+        divides it by current market cap. <b style={B}>Valuation</b> uses P/E (inverted, negatives excluded) and FCF yield. <b style={B}>Momentum</b> reads 6-month and 3-month price
         return. Each raw metric is converted to a percentile rank across the universe before it is
         blended — this makes the composite robust to outliers and to the inconsistent scales between,
         say, a margin and a debt ratio. Missing factors are imputed at the universe median: each
@@ -646,7 +652,7 @@ function HoldingDetail({ row, color }: { row: Row; color: string }) {
       <div style={S.fundGridMini}>
         <Mini label="P/E" value={num(s.peRatio, 1)} />
         <Mini label="FCF YIELD" value={pct(s.fcfYield)} />
-        <Mini label="REV GROWTH" value={signedPct(s.revenueGrowth, 0)} />
+        <Mini label="REV CAGR (3Y)" value={signedPct(s.revenueGrowth, 0)} />
         <Mini label="ROE" value={pct(s.returnOnEquity, 0)} />
         <Mini label="NET MARGIN" value={pct(s.netMargin, 0)} />
         <Mini label="OP MARGIN" value={pct(s.operatingMargin, 0)} />
@@ -752,7 +758,7 @@ const HEADERS: { key: SortKey; label: string; align: "left" | "right"; narrow?: 
   { key: "weight", label: "Weight", align: "right", narrow: true },
   { key: "peRatio", label: "P/E", align: "right" },
   { key: "fcfYield", label: "FCF Yld", align: "right" },
-  { key: "revenueGrowth", label: "Rev Gr", align: "right" },
+  { key: "revenueGrowth", label: "Rev CAGR", align: "right" },
   { key: "returnOnEquity", label: "ROE", align: "right" },
   { key: "return6M", label: "6M", align: "right" },
   { key: "return3M", label: "3M", align: "right" },

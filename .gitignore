@@ -11,3 +11,4 @@ python/**/__pycache__/
 .env*.local
 python/test_output.json
 *.tsbuildinfo
+python/sample_latest.json

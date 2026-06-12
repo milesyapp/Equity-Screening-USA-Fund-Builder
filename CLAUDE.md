@@ -115,7 +115,16 @@ Priority order, roughly:
    gaming).~~ **Done (linear shrinkage)**: pillar scores shrink toward 50 in
    proportion to factor coverage — missing factors are imputed at the universe
    median; the empty-pillar 50 is now the coverage-0 limit, not a special case.
-3. 3yr CAGR for growth; 2-3yr average FCF (replace noisy single-year).
+3. ~~3yr CAGR for growth; 2-3yr average FCF (replace noisy single-year).~~
+   **Done**: revenue growth → 3-yr elapsed-time CAGR (exponent = actual days
+   between filings / 365.25; degrades to ~2-yr at 3 annual points; None below
+   that — deliberately NO YoY fallback, shrinkage imputes the median). FCF →
+   matched-period 3-yr average (margin = avg FCF ÷ avg revenue over the SAME
+   years; yield = avg FCF ÷ current mcap). Rode along: fixed a latent capex
+   period mismatch — first-concept-wins paired current CFO with a stale tag's
+   last reported year for 45 scored names (NVDA: FY2026 CFO − FY2012 capex);
+   capex is now per-year max across tags via `_merged_annual_series`, the
+   revenue-merge generalised.
 4. ~~Fix PEG to use earnings growth, or drop it (currently uses revenue
    growth).~~ **Done** (commit 7548d5d): PEG factor removed as a category
    error; weights renormalised.
@@ -127,7 +136,4 @@ Priority order, roughly:
 8. QUBO lambda sweep; weight selections from the optimiser (currently the
    covariance-aware solution is discarded at the score-weighting step).
 
-## Out-of-band action item
 
-Rotate the Alpaca API key/secret — they were bundled into an uploaded zip
-during v2.1 work. Do this in the Alpaca dashboard; not a code change.

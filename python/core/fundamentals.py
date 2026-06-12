@@ -45,6 +45,37 @@ revenue "growth" of 1,000%+) for ~a quarter of the universe. Fixes:
      poisoning the percentile ranks. Revenue growth > 1,000% is likewise
      nulled as a residual guard. Genuine one-off cases sacrificed by these
      gates are far rarer than the data errors they catch.
+
+v2.2 — SMOOTHED GROWTH & FCF (roadmap item 3)
+---------------------------------------------
+Single-year YoY revenue growth and single-year FCF were noisy: percentile
+ranking tames outlier magnitude but not ordering — one spike year reordered
+names (CALM's egg-price year ranked it as an 83% grower; its 3-year rate is
+34%). Changes:
+
+  5. REVENUE GROWTH = 3-YEAR ELAPSED-TIME CAGR (_revenue_cagr). The exponent
+     is the actual elapsed time between the two endpoints' end dates, never an
+     assumed integer (the duration filter can drop transition years). With
+     only 3 annual points this naturally degrades to a ~2-year CAGR; below 3
+     points the field is None — there is deliberately NO single-year YoY
+     fallback, because mixing horizons inside one percentile column would
+     reintroduce spike noise for exactly the fragile names (the scoring
+     layer's coverage shrinkage imputes the median instead).
+
+  6. FCF = MATCHED-PERIOD 3-YEAR AVERAGE (_matched_fcf). Per-fiscal-year FCF
+     is built only for years where BOTH CFO and capex exist, then averaged
+     over up to the 3 most recent. fcfMargin divides average FCF by average
+     revenue over the SAME years (a through-cycle margin); fcfYield divides
+     average FCF by current market cap (the CAPE convention).
+
+  7. MERGED CAPEX (_merged_annual_series, the revenue-merge generalised).
+     Filers switch capex tags over time (NVDA last used PaymentsToAcquire-
+     PropertyPlantAndEquipment in FY2012, ProductiveAssets since); the old
+     first-concept-wins lookup paired FY2026 CFO with FY2012 capex for 45
+     scored names (AMZN, T, LMT, ...). Capex is now the per-year MAX across
+     capex concepts, exactly like revenue — the broadest definition, and
+     conservative for a quality screen since higher capex can only pull FCF
+     down.
 """
 from __future__ import annotations
 
@@ -100,7 +131,8 @@ _ANNUAL_MAX_DAYS = 400
 # Margins above this are accounting-impossible for a consolidated annual
 # period and indicate a data fault upstream; report None instead.
 _MARGIN_CAP = 1.005
-# Residual guard on YoY revenue growth (1,000%+ is a data fault in practice).
+# Residual guard on the ANNUALISED revenue growth rate (a 1,000%+/yr CAGR is
+# a data fault in practice).
 _GROWTH_CAP = 10.0
 
 # HTTP status codes that warrant a retry (transient server-side issues).
@@ -231,22 +263,29 @@ def _annual_series(
     return None
 
 
-def _annual_revenue_series(facts: dict):
-    """Merged annual revenue: for each fiscal-year end, the MAX across every
-    revenue concept that reports it.
+def _merged_annual_series(facts: dict, concepts: list):
+    """Merged annual series: for each fiscal-year end, the MAX across every
+    given concept that reports it (restatements win within each concept).
 
-    Rationale: alternative revenue tags are alternative *definitions of the
-    same top line* (e.g. fee income alone vs total revenues net of interest
-    expense), never additive components — so the max is the broadest
-    consolidated figure. For a bank, contract-with-customer fee income might
-    be $2B while RevenuesNetOfInterestExpense is $25B; dividing net income by
-    the former produced the 2,000% "margins" this rewrite removes. A larger
-    denominator can only pull margins DOWN toward truth, which is the
-    conservative direction for a quality screen.
+    Rationale: alternative tags for one line item are alternative *definitions
+    of the same quantity*, never additive components — so the max is the
+    broadest figure. Two production failure modes demand the per-year merge
+    rather than first-concept-wins:
+
+    * Revenue (banks/insurers): contract-with-customer fee income might be
+      $2B while RevenuesNetOfInterestExpense is $25B; dividing net income by
+      the former produced the 2,000% "margins" v2.1 removed. A larger
+      denominator can only pull margins DOWN toward truth.
+    * Capex (tag switches): filers move between capex tags over time (NVDA:
+      PaymentsToAcquirePropertyPlantAndEquipment until FY2012, ProductiveAssets
+      since). First-concept-wins froze capex at the old tag's last year and
+      paired it with current-year CFO for 45 scored names. Per-year max keeps
+      every year on its own period, and higher capex can only pull FCF down —
+      conservative for a quality screen.
     """
     merged: dict = {}
     node = facts.get("facts", {}).get("us-gaap", {})
-    for concept in _REVENUE:
+    for concept in concepts:
         units = node.get(concept, {}).get("units", {})
         items = units.get("USD")
         if not items:
@@ -269,6 +308,83 @@ def _annual_revenue_series(facts: dict):
     if not merged:
         return None
     return sorted(merged.items())
+
+
+def _annual_revenue_series(facts: dict):
+    """Merged annual revenue across all revenue concepts (per-year max)."""
+    return _merged_annual_series(facts, _REVENUE)
+
+
+def _revenue_cagr(rev_series):
+    """Annualised revenue growth: ~3-year elapsed-time CAGR.
+
+    Endpoints are the most recent annual point and the EARLIER point whose end
+    date is closest to three years before it. The exponent is the actual
+    elapsed time in years — never an assumed integer, since the duration
+    filter can drop transition years and leave gaps. With exactly 3 annual
+    points the nearest earlier point is ~2 years back, so this degrades to a
+    ~2-year CAGR. Below 3 points: None, with deliberately NO single-year YoY
+    fallback — mixing horizons inside one percentile column reintroduces
+    spike-year noise for exactly the fragile names; coverage shrinkage in the
+    scoring layer imputes the median instead.
+    """
+    if not rev_series or len(rev_series) < 3:
+        return None
+    end_t, rev_t = rev_series[-1]
+    d_t = _parse_date(end_t)
+    if d_t is None or rev_t is None or rev_t <= 0:
+        return None
+    target = d_t.toordinal() - round(3 * 365.25)
+    candidates = []
+    for end, val in rev_series[:-1]:
+        d = _parse_date(end)
+        if d is not None:
+            candidates.append((abs(d.toordinal() - target), d, val))
+    if not candidates:
+        return None
+    _, d_then, rev_then = min(candidates)
+    if rev_then is None or rev_then <= 0:
+        return None
+    years = (d_t - d_then).days / 365.25
+    if years <= 0:
+        return None
+    cagr = (rev_t / rev_then) ** (1.0 / years) - 1.0
+    if cagr > _GROWTH_CAP:
+        logger.debug("Gated implausible revenueGrowth (CAGR) = %.2f", cagr)
+        return None
+    return cagr
+
+
+def _matched_fcf(facts: dict, rev_series):
+    """Matched-period free cash flow, averaged over up to the 3 most recent
+    fiscal years where BOTH CFO and capex were reported. Averaging 2 (or 1)
+    years when that is all there is remains the same statistic with less
+    smoothing — safe, unlike a horizon fallback for a growth rate.
+
+    Returns (avg_fcf, margin_fcf, margin_revenue):
+      avg_fcf        — mean FCF over the matched years; feeds fcfYield
+                       (divided by CURRENT market cap, the CAPE convention).
+      margin_fcf     — mean FCF over the subset of matched years that also
+                       report positive revenue, and
+      margin_revenue — mean revenue over that SAME subset, so that
+                       margin_fcf / margin_revenue is a through-cycle margin
+                       (average-FCF-over-latest-revenue would understate
+                       growers).
+    """
+    cfo_by_end = dict(_annual_series(facts, _CFO) or [])
+    capex_by_end = dict(_merged_annual_series(facts, _CAPEX) or [])
+    rev_by_end = dict(rev_series or [])
+    matched = sorted(set(cfo_by_end) & set(capex_by_end))[-3:]
+    if not matched:
+        return None, None, None
+    fcf_by_end = {e: cfo_by_end[e] - capex_by_end[e] for e in matched}
+    avg_fcf = sum(fcf_by_end.values()) / len(matched)
+    rev_years = [e for e in matched if rev_by_end.get(e) and rev_by_end[e] > 0]
+    if not rev_years:
+        return avg_fcf, None, None
+    margin_fcf = sum(fcf_by_end[e] for e in rev_years) / len(rev_years)
+    margin_revenue = sum(rev_by_end[e] for e in rev_years) / len(rev_years)
+    return avg_fcf, margin_fcf, margin_revenue
 
 
 def _latest(
@@ -317,7 +433,6 @@ def _shares_outstanding(facts: dict):
 def _metrics_from_facts(facts: dict, price: float | None) -> dict:
     rev_series = _annual_revenue_series(facts)
     revenue = rev_series[-1][1] if rev_series else None
-    revenue_prev = rev_series[-2][1] if rev_series and len(rev_series) >= 2 else None
     # A non-positive consolidated annual revenue is a tagging fault, not a
     # business reality, at S&P-1500 scale — don't divide by it.
     if revenue is not None and revenue <= 0:
@@ -327,15 +442,13 @@ def _metrics_from_facts(facts: dict, price: float | None) -> dict:
     gross_profit = _latest(facts, _GROSS_PROFIT)
     operating_income = _latest(facts, _OPERATING_INCOME)
     equity = _latest(facts, _EQUITY, instant=True)
-    cfo = _latest(facts, _CFO)
-    capex = _latest(facts, _CAPEX)
     eps = _latest(facts, _EPS_DILUTED, unit="USD/shares")
     dps = _latest(facts, _DPS, unit="USD/shares")
     lt_debt = _latest(facts, _LT_DEBT, instant=True)
     shares = _shares_outstanding(facts)
     cost_of_rev = _latest(facts, _COST_OF_REVENUE)
 
-    fcf = (cfo - capex) if (cfo is not None and capex is not None) else None
+    avg_fcf, fcf_margin_num, fcf_margin_rev = _matched_fcf(facts, rev_series)
 
     # Gross profit: prefer the reported tag, else derive from revenue - COGS.
     if gross_profit is None and revenue is not None and cost_of_rev is not None:
@@ -357,15 +470,6 @@ def _metrics_from_facts(facts: dict, price: float | None) -> dict:
     use_shares = implied_shares or shares
     market_cap = (price * use_shares) if (price is not None and use_shares) else None
 
-    growth = (
-        _safe_div(revenue - revenue_prev, revenue_prev)
-        if (revenue is not None and revenue_prev and revenue_prev > 0)
-        else None
-    )
-    if growth is not None and growth > _GROWTH_CAP:
-        logger.debug("Gated implausible revenueGrowth=%.2f", growth)
-        growth = None
-
     return {
         "peRatio": _safe_div(price, eps) if eps and eps > 0 else None,
         "dividendYield": _safe_div(dps, price),
@@ -373,9 +477,9 @@ def _metrics_from_facts(facts: dict, price: float | None) -> dict:
         "operatingMargin": _gated_margin(operating_income, revenue, "operatingMargin"),
         "netMargin": _gated_margin(net_income, revenue, "netMargin"),
         "returnOnEquity": roe,
-        "fcfMargin": _gated_margin(fcf, revenue, "fcfMargin"),
-        "fcfYield": _safe_div(fcf, market_cap),
-        "revenueGrowth": growth,
+        "fcfMargin": _gated_margin(fcf_margin_num, fcf_margin_rev, "fcfMargin"),
+        "fcfYield": _safe_div(avg_fcf, market_cap),
+        "revenueGrowth": _revenue_cagr(rev_series),
         "debtToEquity": dte,
         "marketCap": market_cap,
     }
