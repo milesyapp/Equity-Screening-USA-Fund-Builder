@@ -82,6 +82,15 @@ pipeline or type changes. All five Python suites must end "ALL PASS".
   IR / arm-Sharpe are gated behind `_MIN_ANNUALISE_DAYS` (20). Below that they
   are None and the UI shows "—". A `activeReturnCumulative` field is honest at
   any n. This fixed a spurious −48% annualised figure at n=2.
+- **Robustness stats** (v2.2, `core/research_log.py`): per-arm-and-baseline
+  `maxDrawdown` (cumulative, ungated), `sortino` (ZERO-rf — the forward panel's
+  Sharpe/PSR are raw, so no 4% subtraction here; the 3Y/5Y windows keep
+  rf-excess via metrics.py — unify at roadmap item 6), `calmar` (own gate
+  `_MIN_CALMAR_DAYS` = 60; tiny-n drawdown denominators explode), and
+  `probSharpePositive` (Bailey–López de Prado PSR vs 0; γ₄ is RAW kurtosis,
+  scipy `fisher=False` — NOT excess; deliberately not the deflated variant).
+  Zero-denominator Sortino/Calmar are None, never 0. All new JSON fields are
+  optional in `lib/types/index.ts`.
 - **Limitations**: `screener.py` writes a machine-readable
   `methodology.limitations[]`, rendered verbatim on the fund page.
 - Dead code removed: `Screener.tsx`, v1 multi-asset config block.
