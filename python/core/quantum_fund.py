@@ -5,9 +5,19 @@ The classical greedy fund takes the top-N names by score and weights them. It
 never accounts for *covariance* between holdings — two highly-correlated
 high-scorers both get in. This module formulates selection as a QUBO (Quadratic
 Unconstrained Binary Optimisation) that balances quality against correlation,
-and solves it either on a classical simulator or on real D-Wave hardware. The
-SELECTION is the quantum step; the continuous weighting afterwards reuses the
-existing classical `fund.build_fund`, so the output matches the Fund schema.
+and solves it either on a classical simulator or on real D-Wave hardware.
+
+TWO-STAGE DESIGN (v2.4, roadmap 8b). The QUBO is binary, so it SELECTS; a
+continuous second stage then WEIGHTS the selected names by maximising the
+relaxation of the same objective (l1*s'w - l2*w'(cov/cmax)w, same lambdas,
+same covariance matrix, same normalisations) subject to sum(w)=1 and the same
+4% cap the greedy fund uses. Weighting is a deterministic convex programme of
+the selection, so the classical-vs-quantum gap stays a pure solver
+comparison. The greedy arm remains score-weighted: the greedy->QUBO gap now
+measures the objective applied END-TO-END (selection + weighting). On
+optimiser failure the arm falls back to score weights with
+weighting="score_fallback" in its diagnostics — a solver hiccup never breaks
+the pipeline or silently changes what an arm is.
 
 OBJECTIVE (minimise)
     -l1 * sum_i  s_i * x_i                         quality   (reward)
@@ -95,6 +105,25 @@ def lambdas() -> dict:
     return out
 
 
+def weight_lambdas() -> dict:
+    """Stage-two (continuous weighting) lambdas. Default to the QUBO's own
+    l1/l2 — at current values the weighting is a genuine quality-risk
+    trade-off (verified non-degenerate on real selections: predicted vol sits
+    mid-range between the quality-corner and min-variance extremes). Separate
+    env knobs exist because the 8a sweep will want to move stage-two lambdas
+    independently of selection."""
+    lam = lambdas()
+    out = {"l1": lam["l1"], "l2": lam["l2"]}
+    for k in out:
+        v = os.getenv(f"WEIGHT_{k.upper()}")
+        if v is not None:
+            try:
+                out[k] = float(v)
+            except ValueError:
+                pass
+    return out
+
+
 def hardware_available() -> bool:
     """True when a D-Wave Leap token is configured (enables the quantum arm)."""
     return bool(os.getenv("DWAVE_API_TOKEN"))
@@ -112,13 +141,22 @@ class QuboProblem:
     """A built QUBO: the matrix plus the metadata needed to interpret solutions."""
 
     def __init__(self, Q: dict, tickers: list[str], lam: dict, k: int,
-                 cov_condition: float | None):
+                 cov_condition: float | None,
+                 scores_norm: np.ndarray | None = None,
+                 cov: np.ndarray | None = None,
+                 cmax: float | None = None):
         self.Q = Q
         self.tickers = tickers
         self.lambdas = lam
         self.target_size = k
         self.n = len(tickers)
         self.cov_condition = cov_condition  # diagnostic: covariance conditioning
+        # Stage-two inputs (v2.4): the SAME normalised scores, covariance
+        # matrix and normaliser the QUBO terms were built from, kept so the
+        # continuous weighting provably reuses them (restricted, no refit).
+        self.scores_norm = scores_norm
+        self.cov = cov
+        self.cmax = cmax
 
 
 def build_qubo(candidates: list[dict], returns: pd.DataFrame,
@@ -193,7 +231,8 @@ def build_qubo(candidates: list[dict], returns: pd.DataFrame,
                 add(i, j, l4)
 
     logger.info("QUBO built: %d candidates, target K=%d, lambdas=%s", n, k, lam)
-    return QuboProblem(Q, tickers, lam, k, cov_condition)
+    return QuboProblem(Q, tickers, lam, k, cov_condition,
+                       scores_norm=s, cov=cov, cmax=cmax)
 
 
 # --------------------------------------------------------------------------- #
@@ -267,21 +306,133 @@ def solve(problem: QuboProblem, kind: str = "sim",
 # --------------------------------------------------------------------------- #
 # Assemble a Fund object from a QUBO selection
 # --------------------------------------------------------------------------- #
+def objective_weights(problem: QuboProblem,
+                      selected: list[str]) -> tuple[dict | None, dict]:
+    """Stage two (v2.4): continuous relaxation of the QUBO objective over the
+    selected names —
+
+        minimize  l2 * w' (cov/cmax) w  -  l1 * (s/100)' w
+        s.t.      sum(w) = 1,   0 <= w <= SCREENER_MAX_WEIGHT
+
+    using the SAME lambdas (weight_lambdas, defaulting to the QUBO's),
+    covariance matrix, and normalisations the QUBO was built from, restricted
+    to the selection (no refit; cmax stays the full-pool normaliser). The
+    sector term (l4) is DELIBERATELY omitted: selection already enforced
+    sector spread, and a continuous same-sector penalty would re-trade what
+    the binary stage settled.
+
+    The problem is convex (PSD covariance), so SLSQP from a fixed start (the
+    score weights, which are also the fallback) is deterministic. Returns
+    (weights_dict | None, diagnostics): None means the caller must fall back
+    to score weights; diagnostics always carries the comparison fields.
+    """
+    from scipy.optimize import minimize  # local: keep module import light
+
+    lam = weight_lambdas()
+    wmax = settings.SCREENER_MAX_WEIGHT
+    sel = set(selected)
+    idx = [i for i, t in enumerate(problem.tickers) if t in sel]
+    tickers = [problem.tickers[i] for i in idx]
+    diag: dict = {"weighting": "score_fallback", "weightLambdas": lam}
+
+    if problem.scores_norm is None or problem.cov is None or not problem.cmax:
+        diag["weightingNote"] = "problem lacks stage-two inputs"
+        return None, diag
+    if len(idx) < len(selected):
+        # A selected name missing from the covariance ordering means the
+        # matrix cannot price it — weight the whole arm by score instead of
+        # silently optimising a subset.
+        diag["weightingNote"] = "selection not fully covered by covariance"
+        return None, diag
+
+    n = len(idx)
+    s = problem.scores_norm[idx]
+    ctil = problem.cov[np.ix_(idx, idx)] / problem.cmax
+    cov_sel = problem.cov[np.ix_(idx, idx)]
+
+    # Score weights on this selection: the optimiser start, the fallback, and
+    # the comparison baseline for the diagnostics.
+    sw = fund.score_weights([{"ticker": t, "score": float(s[j] * 100.0)}
+                             for j, t in enumerate(tickers)])
+    x0 = np.array([sw[t] for t in tickers])
+    diag["wSigmaWScore"] = round(float(x0 @ cov_sel @ x0), 8)
+
+    if n * wmax < 1.0 - 1e-12:
+        diag["weightingNote"] = f"cap infeasible: {n} names x {wmax} < 1"
+        return None, diag
+
+    def f_obj(w):
+        return lam["l2"] * (w @ ctil @ w) - lam["l1"] * (s @ w)
+
+    def jac(w):
+        return 2.0 * lam["l2"] * (ctil @ w) - lam["l1"] * s
+
+    res = minimize(f_obj, x0, jac=jac, method="SLSQP",
+                   bounds=[(0.0, wmax)] * n,
+                   constraints=[{"type": "eq",
+                                 "fun": lambda w: w.sum() - 1.0,
+                                 "jac": lambda w: np.ones(n)}],
+                   options={"ftol": 1e-10, "maxiter": 500})
+
+    w = res.x
+    converged = (bool(res.success)
+                 and abs(float(w.sum()) - 1.0) <= 1e-8
+                 and float(w.min()) >= -1e-9
+                 and float(w.max()) <= wmax + 1e-9
+                 and float(f_obj(w)) <= float(f_obj(x0)) + 1e-12)
+    if not converged:
+        diag["weightingNote"] = f"SLSQP not accepted: {res.message} (nit={res.nit})"
+        logger.warning("stage-two weighting fell back to score weights: %s",
+                       diag["weightingNote"])
+        return None, diag
+
+    w = np.clip(w, 0.0, wmax)
+    w = w / w.sum()
+    diag.update({
+        "weighting": "objective",
+        "weightIterations": int(res.nit),
+        "wSigmaW": round(float(w @ cov_sel @ w), 8),
+        "maxWeight": round(float(w.max()), 5),
+        "namesAtCap": int((w >= wmax - 1e-9).sum()),
+        "effectiveN": round(float(1.0 / np.sum(w ** 2)), 1),
+    })
+    return {t: float(w[j]) for j, t in enumerate(tickers)}, diag
+
+
 def build_fund_from_selection(selected: list[str], candidates: list[dict],
                               returns: pd.DataFrame,
                               bench_daily: pd.Series,
-                              rf_series: pd.Series | None = None) -> tuple[dict, dict]:
-    """Weight the selected names with the existing classical weighting and build
-    the Fund object. Returns (fund_dict, weights_dict). The fund's 'weights' key
-    is popped out and returned separately (kept on the arm, never on stocks)."""
+                              rf_series: pd.Series | None = None,
+                              problem: QuboProblem | None = None,
+                              ) -> tuple[dict, dict, dict]:
+    """Weight the selected names — objective-derived (stage two) when the
+    QUBO problem is supplied, score weights otherwise/on fallback — and build
+    the Fund object. Returns (fund_dict, weights_dict, weight_diagnostics).
+    The fund's 'weights' key is popped out and returned separately (kept on
+    the arm, never on stocks)."""
     chosen = [c for c in candidates if c["ticker"] in set(selected)]
     if not chosen:
         raise ValueError("QUBO selection is empty; check lambdas/target size")
-    f = fund.build_fund(chosen, returns, bench_daily, rf_series)
+
+    if problem is not None:
+        w_obj, wdiag = objective_weights(problem, selected)
+    else:
+        w_obj, wdiag = None, {"weighting": "score_fallback",
+                              "weightingNote": "no QUBO problem supplied"}
+
+    f = fund.build_fund(chosen, returns, bench_daily, rf_series, weights=w_obj)
     f["name"] = "US Quality-Tilted Fund (QUBO)"
-    f["weighting"] = "QUBO-selected, score-weighted"
+    f["weighting"] = ("QUBO-selected, objective-weighted"
+                      if wdiag.get("weighting") == "objective"
+                      else "QUBO-selected, score-weighted (fallback)")
     weights = f.pop("weights", {})
-    return f, weights
+    if wdiag.get("weighting") != "objective":
+        # Fallback diagnostics still report the achieved (score-weight) risk.
+        wn = np.array(list(weights.values()))
+        wdiag.setdefault("maxWeight", round(float(wn.max()), 5) if wn.size else None)
+        wdiag.setdefault("effectiveN",
+                         round(float(1.0 / np.sum(wn ** 2)), 1) if wn.size else None)
+    return f, weights, wdiag
 
 
 # --------------------------------------------------------------------------- #
@@ -294,5 +445,7 @@ def build_arm(candidates: list[dict], returns: pd.DataFrame, bench_daily: pd.Ser
     QUBO (the controlled-comparison requirement)."""
     problem = problem or build_qubo(candidates, returns)
     selection, diagnostics = solve(problem, kind)
-    f, weights = build_fund_from_selection(selection, candidates, returns, bench_daily)
+    f, weights, wdiag = build_fund_from_selection(
+        selection, candidates, returns, bench_daily, problem=problem)
+    diagnostics.update(wdiag)
     return {"fund": f, "selection": selection, "weights": weights, "diagnostics": diagnostics}

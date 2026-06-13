@@ -174,9 +174,13 @@ export default function Research({ research }: { research: ResearchBlock }) {
           penalises holding correlated pairs, and penalty terms hold portfolio size and
           sector concentration. The identical problem is solved twice — once with classical
           simulated annealing, once on D-Wave hardware — so the gap between those two arms
-          isolates the <em>solver</em>, while their gap to the greedy fund isolates the{" "}
-          <em>objective</em>. Selected names are then score-weighted exactly like the
-          classical fund. Selections freeze for the week; both are re-priced daily.
+          isolates the <em>solver</em>, while their gap to the greedy fund measures the{" "}
+          <em>objective applied end-to-end</em>. Selected names are then weighted by the
+          continuous relaxation of the same objective — same lambdas, same covariance,
+          same 4% cap — so the covariance-awareness survives into the weights rather than
+          being discarded at a score-weighting step (the greedy fund stays score-weighted
+          as the baseline; weighting is a deterministic function of selection, keeping the
+          solver comparison pure). Selections freeze for the week; both are re-priced daily.
         </p>
         <p style={R.disclaimer}>{research.disclaimer}</p>
       </div>

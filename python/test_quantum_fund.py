@@ -113,6 +113,89 @@ def test_identical_qubo_for_both_arms():
     print("  PASS: both arms solve one shared QUBO (controlled comparison holds)")
 
 
+def test_objective_weighting():
+    """Stage two (8b): correlated-pair downweighting, constraints, cap,
+    determinism, and the comparison diagnostics."""
+    candidates, returns, bench = _universe()
+    prob = QF.build_qubo(candidates, returns, k=100)
+    sel, _ = QF.solve(prob, "sim", num_reads=100)
+
+    w1, d1 = QF.objective_weights(prob, sel)
+    assert d1["weighting"] == "objective", f"stage two failed: {d1}"
+    wv = np.array(list(w1.values()))
+    # Constraints to documented tolerance.
+    assert abs(wv.sum() - 1.0) <= 1e-8, "simplex constraint violated"
+    assert wv.min() >= 0.0 and wv.max() <= 0.04 + 1e-9, "bounds violated"
+    assert d1["namesAtCap"] >= 1, "cap should bind somewhere on a 100-name optimum"
+    assert d1["effectiveN"] < len(sel), "objective weights should concentrate"
+    # In-objective dominance: achieved risk <= score-weight risk on the SAME
+    # selection is not guaranteed in general (quality trades against it), but
+    # the optimum must not be worse on the combined objective — proxied here
+    # by the diagnostics carrying both variances for inspection.
+    assert d1["wSigmaW"] is not None and d1["wSigmaWScore"] is not None
+    # Determinism: same inputs -> bit-identical weights.
+    w2, _ = QF.objective_weights(prob, sel)
+    assert w1 == w2, "stage two must be deterministic"
+    print(f"  PASS: objective weighting — sum=1±1e-8, cap binds ({d1['namesAtCap']} names), "
+          f"effN {d1['effectiveN']} of {len(sel)}, deterministic")
+
+    # Correlated-pair behaviour. NOTE the scale-dependence: at the production
+    # 4% cap on ~100 names, per-name variance costs are second-order, so even
+    # near-duplicates can both sit at the cap (quality wins — economically
+    # correct). The covariance-awareness shows where weights are large enough
+    # for the quadratic term to bite, so test at a looser cap on a small
+    # selection: two rho=0.9 high-scorers among uncorrelated mid-scorers must
+    # be held asymmetrically (hold one, not both), unlike score weighting.
+    from config import settings as _settings
+    n12 = 12
+    tk12 = [f"PAIR{i:02d}" for i in range(n12)]
+    s12 = np.array([0.92, 0.90] + [0.68 + 0.02 * i for i in range(10)])
+    vols = np.full(n12, 0.02)
+    corr = np.eye(n12)
+    corr[0, 1] = corr[1, 0] = 0.90
+    cov12 = corr * np.outer(vols, vols)
+    prob12 = QF.QuboProblem({}, tk12, QF.lambdas(), 12, None,
+                            scores_norm=s12, cov=cov12,
+                            cmax=float(np.abs(cov12).max()))
+    saved_cap = _settings.SCREENER_MAX_WEIGHT
+    _settings.SCREENER_MAX_WEIGHT = 0.15
+    try:
+        w3, d3 = QF.objective_weights(prob12, tk12)
+    finally:
+        _settings.SCREENER_MAX_WEIGHT = saved_cap
+    assert d3["weighting"] == "objective"
+    lo, hi = sorted([w3[tk12[0]], w3[tk12[1]]])
+    assert lo <= 0.5 * hi + 1e-6, \
+        f"near-duplicate pair should be held asymmetrically (got {lo:.4f}/{hi:.4f})"
+    assert d3["wSigmaW"] is not None
+    print(f"  PASS: rho=0.9 pair held asymmetrically ({lo:.4f} vs {hi:.4f}; "
+          f"score weighting would hold both equally) — covariance survives weighting")
+
+
+def test_weighting_fallback():
+    """Optimizer failure -> score weights with weighting='score_fallback'."""
+    candidates, returns, bench = _universe()
+    prob = QF.build_qubo(candidates, returns, k=100)
+    sel, _ = QF.solve(prob, "sim", num_reads=100)
+
+    # (1) no problem supplied -> fallback path through build_fund_from_selection
+    f, w, wd = QF.build_fund_from_selection(sel, candidates, returns, bench)
+    assert wd["weighting"] == "score_fallback"
+    assert f["weighting"].endswith("(fallback)")
+    assert abs(sum(w.values()) - 1.0) < 1e-3  # weights rounded to 5dp in build_fund
+
+    # (2) corrupted covariance -> SLSQP cannot converge -> fallback
+    prob.cov = prob.cov.copy()
+    prob.cov[0, 0] = np.nan
+    f2, w2, wd2 = QF.build_fund_from_selection(sel, candidates, returns, bench,
+                                               problem=prob)
+    assert wd2["weighting"] == "score_fallback", "NaN covariance must trigger fallback"
+    assert abs(sum(w2.values()) - 1.0) < 1e-3  # weights rounded to 5dp in build_fund
+    assert w2 == w, "fallback weights must equal plain score weights"
+    print("  PASS: fallback — missing problem and corrupt covariance both "
+          "degrade to score weights with weighting='score_fallback'")
+
+
 def test_hardware_gating():
     import os
     saved = os.environ.pop("DWAVE_API_TOKEN", None)
@@ -136,6 +219,8 @@ if __name__ == "__main__":
     test_diversification_vs_greedy()
     test_end_to_end_arm()
     test_identical_qubo_for_both_arms()
+    test_objective_weighting()
+    test_weighting_fallback()
     test_hardware_gating()
     print("=" * 64)
     print("ALL PASS")

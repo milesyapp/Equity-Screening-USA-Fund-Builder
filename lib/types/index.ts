@@ -117,6 +117,17 @@ export interface QuboDiagnostics {
   wallSeconds: number | null;
   lambdas: { l1: number; l2: number; l3: number; l4: number } | null;
   targetSize: number | null;
+  // Stage-two objective weighting (backend >= 2.4; all optional for
+  // back-compat). weighting is "objective" or "score_fallback".
+  weighting?: string;
+  weightingNote?: string;
+  weightLambdas?: { l1: number; l2: number } | null;
+  weightIterations?: number | null;
+  wSigmaW?: number | null;       // achieved daily w'Σw under shipped weights
+  wSigmaWScore?: number | null;  // same selection under score weights
+  maxWeight?: number | null;
+  namesAtCap?: number | null;
+  effectiveN?: number | null;    // 1 / Σw²
 }
 
 export interface FundArm {

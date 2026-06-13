@@ -535,9 +535,13 @@ function Methodology({ armKey, diag, color }: { armKey: string; diag: QuboDiagno
               <>It is solved with a <b style={{ color }}>SimulatedAnnealingSampler</b> — a classical
               solver. Using a classical solver demonstrates the QUBO objective independently of any
               quantum hardware, which is exactly what makes this the controlled comparison arm.</>
-            )} The optimiser returns roughly 96–100 names, which are then score-weighted with the same
-            capped scheme as the greedy fund — the continuous weighting is classical; only the selection
-            is the QUBO step.
+            )} The optimiser returns roughly 96–100 names, which are then weighted by maximising the
+            continuous relaxation of the same objective (same lambdas, same covariance matrix, same 4%
+            per-name cap as the greedy fund) — so the covariance-awareness carries through to the weights
+            instead of being discarded at a score-weighting step. The optimum is deliberately
+            concentrated: long-only mean–variance genuinely prefers ~25–30 effective names within the
+            ~100-name selection, with the cap as the binding breadth control. If the optimiser ever fails
+            to converge, the arm falls back to score weights and says so in its diagnostics.
           </P>
 
           {isQuantum && (
@@ -603,6 +607,18 @@ function Methodology({ armKey, diag, color }: { armKey: string; diag: QuboDiagno
             <Diag label="Target size" value={diag.targetSize == null ? "—" : String(diag.targetSize)} />
             {diag.lambdas && (
               <Diag label="Lambdas" value={`λ1 ${diag.lambdas.l1} · λ2 ${diag.lambdas.l2} · λ3 ${diag.lambdas.l3} · λ4 ${diag.lambdas.l4}`} wide />
+            )}
+            {diag.weighting && (
+              <Diag label="Weighting" value={diag.weighting === "objective" ? "objective (stage two)" : "score (fallback)"} />
+            )}
+            {diag.effectiveN != null && (
+              <Diag label="Effective N" value={diag.effectiveN.toFixed(1)} />
+            )}
+            {diag.namesAtCap != null && (
+              <Diag label="At 4% cap" value={String(diag.namesAtCap)} />
+            )}
+            {diag.wSigmaW != null && diag.wSigmaWScore != null && (
+              <Diag label="w'Σw vs score wts" value={`${diag.wSigmaW.toExponential(2)} vs ${diag.wSigmaWScore.toExponential(2)}`} wide />
             )}
             {diag.chainBreakFraction != null && (
               <Diag label="Chain breaks" value={diag.chainBreakFraction.toFixed(4)} wide />

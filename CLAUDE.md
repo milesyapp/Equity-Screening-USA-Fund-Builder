@@ -75,7 +75,10 @@ pipeline or type changes. All six Python suites must end "ALL PASS".
   >1000% are gated to None. This killed the old "446% net margin" class of bug.
 - **Covariance** (`core/covariance.py`): real EWMA / Ledoit-Wolf / sample
   estimator, windowed to LOOKBACK_YEARS with a 60% coverage filter. Feeds the
-  QUBO risk term. COV_METHOD/EWMA_HALFLIFE are now genuinely used.
+  QUBO risk term AND (v2.4) the stage-two weighting. The OPERATIVE production
+  estimator is EWMA (`COV_METHOD` defaults to "ewma"; no .env override) —
+  earlier references to "the Ledoit-Wolf matrix" were shorthand and wrong;
+  Ledoit-Wolf is available but not what runs.
 - **Benchmark**: SPTM (S&P 1500), matching the selection universe — alpha/beta
   are not size artifacts. (Was IVV.)
 - **Alpha**: CAPM alpha now ships with a Newey-West HAC t-stat (`alphaTStat`).
@@ -205,7 +208,32 @@ Priority order, roughly:
    unaffected (scoring never used rf): metric values shifted, NO forward-log
    structural break. Disclosed in `methodology.limitations[]`.
 7. Upgrade Alpaca IEX → SIP feed.
-8. QUBO lambda sweep; weight selections from the optimiser (currently the
-   covariance-aware solution is discarded at the score-weighting step).
+8. (a) QUBO lambda sweep — **still open**. The 8b work flags two things for
+   the sweep: stage-two lambdas are independently tunable (`WEIGHT_L1/L2`,
+   defaulting to `QUANTUM_L1/L2`), and `SCREENER_MAX_WEIGHT` should be treated
+   as a sweep PARAMETER, not a constant — see the regime note below.
+   (b) ~~Weight selections from the optimiser.~~ **Done (2026-06-12)**:
+   two-stage design — the QUBO selects (binary, unchanged), then SLSQP
+   maximises the continuous relaxation of the SAME objective
+   (l1·s'w − l2·w'(Σ/cmax)w, same lambdas, same covariance/normalisations,
+   l4 omitted — selection already enforced sector spread) over the selection,
+   s.t. Σw=1, 0≤w≤4%. Deterministic (convex, fixed start = score weights);
+   any failure falls back to score weights with `weighting:"score_fallback"`
+   in diagnostics. Applied identically to both QUBO arms (solver comparison
+   stays pure); greedy stays score-weighted, so greedy→QUBO now measures the
+   objective END-TO-END (selection + weighting).
+   **WEIGHTING REGIME CHANGE — structural break #2 (2026-06-12)**: forward-log
+   rows before this date used score weights for all arms. Measured at the
+   change date (qubo_classical): turnover 0.68, predicted vol 10.8%→10.5%,
+   effN 98→27, 21 names at cap; selections bit-identical. Two structural
+   facts to keep straight: (1) BREADTH ASYMMETRY — the binary stage expresses
+   a size preference through l3 (~K names) that has NO analog in continuous
+   weight space, so selection says "100 names" while weighting says "27
+   effective names"; that is coherent (selection defines the eligible set,
+   weighting allocates conviction within it), and the concentration is the
+   continuous optimum at EVERY lambda ratio (min-var itself has effN≈31),
+   not a tuning artifact. (2) THE 4% CAP IS LOAD-BEARING — with ~21 names
+   capped it is the primary breadth control in stage two, and it was
+   inherited from the greedy fund's design, not chosen for this role.
 
 

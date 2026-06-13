@@ -231,12 +231,19 @@ def run() -> dict:
         problem = quantum_fund.build_qubo(candidates, returns)
 
         sel_c, diag_c = quantum_fund.solve(problem, "sim")
-        f_c, w_c = quantum_fund.build_fund_from_selection(sel_c, candidates, returns, bench_daily, rf_series)
+        f_c, w_c, wdiag_c = quantum_fund.build_fund_from_selection(
+            sel_c, candidates, returns, bench_daily, rf_series, problem=problem)
+        diag_c.update(wdiag_c)
         arms.append(research_log.make_arm("qubo_classical", f_c, sel_c, w_c, diag_c))
 
         if quantum_fund.hardware_available():
             sel_q, diag_q = quantum_fund.solve(problem, quantum_fund.production_sampler())
-            f_q, w_q = quantum_fund.build_fund_from_selection(sel_q, candidates, returns, bench_daily, rf_series)
+            # IDENTICAL stage-two weighting for the quantum arm: weighting is
+            # a deterministic function of selection, so the classical-vs-
+            # quantum gap remains a pure solver comparison.
+            f_q, w_q, wdiag_q = quantum_fund.build_fund_from_selection(
+                sel_q, candidates, returns, bench_daily, rf_series, problem=problem)
+            diag_q.update(wdiag_q)
             arms.append(research_log.make_arm("qubo_quantum", f_q, sel_q, w_q, diag_q))
         else:
             logger.info("No DWAVE_API_TOKEN — qubo_quantum skipped; logging classical QUBO only.")
@@ -312,6 +319,19 @@ def run() -> dict:
                 "(3Y Sharpe ~ -0.05 at the change date, rates having averaged "
                 "4.7% over that window) but the forward log has no structural "
                 "break.",
+                "Weighting regime change on 2026-06-12: the QUBO arms moved from "
+                "score weights to weights derived from the continuous relaxation "
+                "of the QUBO objective (same lambdas and covariance; greedy "
+                "remains score-weighted as the baseline). Selections are "
+                "unchanged, but forward-log rows before this date used score "
+                "weights for all arms. Measured at the change date: weight "
+                "turnover ~0.68, predicted vol 10.8% -> 10.5%, effective N "
+                "98 -> ~27 with ~21 names at the 4% cap. The concentration is "
+                "the continuous optimum, not a tuning artifact — long-only "
+                "mean-variance genuinely prefers ~27 effective names — and the "
+                "QUBO arms' effective breadth is now jointly set by the "
+                "objective and the per-name cap, a cap inherited from the "
+                "greedy fund's design rather than chosen for this role.",
             ],
         },
         "stocks": stocks,

@@ -143,6 +143,7 @@ def build_fund(
     returns: pd.DataFrame,
     bench_daily: pd.Series,
     rf_series: pd.Series | None = None,
+    weights: dict[str, float] | None = None,
 ) -> dict:
     """
     stocks      : ranked top-N list of stock dicts (must include 'ticker','score',
@@ -151,8 +152,11 @@ def build_fund(
     bench_daily : daily-return Series for the benchmark (IVV).
     rf_series   : annual T-bill yields by date (riskfree.get_rf_series());
                   None falls back to the constant settings.RISK_FREE_RATE.
+    weights     : optional precomputed {ticker: weight} (v2.4: the QUBO arms'
+                  objective-derived stage-two weights). None -> score weights
+                  (the greedy baseline, unchanged).
     """
-    weights = score_weights(stocks)
+    weights = weights if weights is not None else score_weights(stocks)
     held = [s["ticker"] for s in stocks if s["ticker"] in returns.columns]
     w_series = pd.Series({t: weights[t] for t in held})
     w_series /= w_series.sum()
