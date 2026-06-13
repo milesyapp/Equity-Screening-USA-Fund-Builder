@@ -222,9 +222,12 @@ Priority order, roughly:
    in diagnostics. Applied identically to both QUBO arms (solver comparison
    stays pure); greedy stays score-weighted, so greedy→QUBO now measures the
    objective END-TO-END (selection + weighting).
-   **WEIGHTING REGIME CHANGE — structural break #2 (2026-06-12)**: forward-log
-   rows before this date used score weights for all arms. Measured at the
-   change date (qubo_classical): turnover 0.68, predicted vol 10.8%→10.5%,
+   **WEIGHTING REGIME CHANGE — structural break #2 (code 2026-06-12,
+   forward-log effective at the FIRST weekly rebalance after — weights freeze
+   between weeklies, and the 2026-06-13 weekly Action run pre-dated this
+   commit, so rows through that week still carry score weights; the first
+   objective-weighted row is the next weekly, price-date ~2026-06-19)**.
+   Measured at the change date (qubo_classical): turnover 0.68, predicted vol 10.8%→10.5%,
    effN 98→27, 21 names at cap; selections bit-identical. Two structural
    facts to keep straight: (1) BREADTH ASYMMETRY — the binary stage expresses
    a size preference through l3 (~K names) that has NO analog in continuous
