@@ -40,17 +40,35 @@ def annual_volatility(daily: pd.Series) -> float:
     return float(daily.std() * np.sqrt(TD))
 
 
-def sharpe_ratio(daily: pd.Series, rf: float = settings.RISK_FREE_RATE) -> float:
+def _rf_components(daily: pd.Series, rf) -> tuple[float, pd.Series]:
+    """Resolve rf (constant or an ANNUAL-yield Series, e.g. riskfree.py's
+    DGS3MO-equivalent) into (window-mean annual rate, per-day daily-rate
+    Series aligned to `daily`). A Series is forward-filled onto the return
+    dates, so each day uses the yield that actually prevailed (v2.3,
+    roadmap item 6); a float reproduces the old constant behaviour."""
+    if isinstance(rf, pd.Series):
+        naive = (daily.index.tz_localize(None)
+                 if getattr(daily.index, "tz", None) is not None else daily.index)
+        ann = rf.reindex(naive.normalize(), method="ffill")
+        ann.index = daily.index
+        ann = ann.fillna(settings.RISK_FREE_RATE)
+        return float(ann.mean()), ann / TD
+    return float(rf), pd.Series(rf / TD, index=daily.index)
+
+
+def sharpe_ratio(daily: pd.Series, rf=settings.RISK_FREE_RATE) -> float:
+    rf_ann, _ = _rf_components(daily, rf)
     vol = annual_volatility(daily)
-    return 0.0 if vol == 0 else (annual_return(daily) - rf) / vol
+    return 0.0 if vol == 0 else (annual_return(daily) - rf_ann) / vol
 
 
-def sortino_ratio(daily: pd.Series, rf: float = settings.RISK_FREE_RATE) -> float:
-    # Downside deviation only penalizes returns below the daily risk-free target.
-    daily_rf = rf / TD
-    downside = daily[daily < daily_rf] - daily_rf
+def sortino_ratio(daily: pd.Series, rf=settings.RISK_FREE_RATE) -> float:
+    # Downside deviation only penalizes returns below the daily risk-free
+    # target — a per-day target when rf is a yield series.
+    rf_ann, rf_daily = _rf_components(daily, rf)
+    downside = (daily - rf_daily)[daily < rf_daily]
     dd = np.sqrt((downside ** 2).mean()) * np.sqrt(TD) if len(downside) else 0.0
-    return 0.0 if dd == 0 else (annual_return(daily) - rf) / dd
+    return 0.0 if dd == 0 else (annual_return(daily) - rf_ann) / dd
 
 
 def maximum_drawdown(daily: pd.Series) -> float:
@@ -144,7 +162,8 @@ def win_rate(daily: pd.Series) -> float:
     return float((daily > 0).sum() / len(daily))
 
 
-def summary(daily: pd.Series, market_daily: pd.Series | None = None) -> dict:
+def summary(daily: pd.Series, market_daily: pd.Series | None = None,
+            rf=settings.RISK_FREE_RATE) -> dict:
     """
     Bundle the headline metrics into a dict whose keys match the frontend's
     camelCase TypeScript types.
@@ -160,8 +179,8 @@ def summary(daily: pd.Series, market_daily: pd.Series | None = None) -> dict:
         # ── Core metrics ────────────────────────────────────────────────────
         "annualReturn": annual_return(daily),
         "annualVolatility": annual_volatility(daily),
-        "sharpeRatio": sharpe_ratio(daily),
-        "sortinoRatio": sortino_ratio(daily),
+        "sharpeRatio": sharpe_ratio(daily, rf),
+        "sortinoRatio": sortino_ratio(daily, rf),
         "maximumDrawdown": maximum_drawdown(daily),
         "calmarRatio": calmar_ratio(daily),
         "valueAtRisk95": value_at_risk(daily, 0.95),
@@ -195,7 +214,7 @@ def summary(daily: pd.Series, market_daily: pd.Series | None = None) -> dict:
 def alpha_newey_west(
     daily: pd.Series,
     benchmark_daily: pd.Series,
-    rf: float = settings.RISK_FREE_RATE,
+    rf=settings.RISK_FREE_RATE,
 ) -> tuple[float | None, float | None]:
     """
     CAPM regression alpha with a Newey-West (HAC) t-statistic.
@@ -221,7 +240,10 @@ def alpha_newey_west(
     if n < 60:
         return None, None
 
-    rf_d = rf / TD
+    # Per-day rf when a yield series is supplied: both regression legs use
+    # the rate that prevailed on each date, not a window constant.
+    _, rf_daily = _rf_components(aligned.iloc[:, 0], rf)
+    rf_d = rf_daily.to_numpy(dtype=float)
     y = aligned.iloc[:, 0].to_numpy(dtype=float) - rf_d
     x = aligned.iloc[:, 1].to_numpy(dtype=float) - rf_d
     X = np.column_stack([np.ones(n), x])

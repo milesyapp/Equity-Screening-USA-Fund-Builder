@@ -214,29 +214,40 @@ def load_history(path: Path | None = None) -> list[dict]:
     return out
 
 
-def forward_return_matrix(history: list[dict]) -> dict[str, np.ndarray]:
-    """Stack the per-run realized returns into one aligned series per arm.
-
-    Only runs where *every* arm reported a return are kept, so the series are
-    aligned and pairwise comparisons use identical days.
-    """
+def _aligned_rows(history: list[dict]) -> list[dict]:
+    """Runs where *every* arm reported a return, so the series are aligned
+    and pairwise comparisons use identical days."""
     rows = [r for r in history if r.get("armReturns")]
     if not rows:
-        return {}
+        return []
     arms = set().union(*(r["armReturns"].keys() for r in rows))
-    aligned = [r for r in rows
-               if all(r["armReturns"].get(a) is not None for a in arms)]
+    return [r for r in rows
+            if all(r["armReturns"].get(a) is not None for a in arms)]
+
+
+def forward_return_matrix(history: list[dict]) -> dict[str, np.ndarray]:
+    """Stack the per-run realized returns into one aligned series per arm."""
+    aligned = _aligned_rows(history)
+    if not aligned:
+        return {}
+    arms = set().union(*(r["armReturns"].keys() for r in aligned))
     return {a: np.array([r["armReturns"][a] for r in aligned], float) for a in arms}
 
 
 # --------------------------------------------------------------------------- #
 # Forward comparison statistics
 # --------------------------------------------------------------------------- #
-def _annualised_sharpe(daily: np.ndarray) -> float:
-    sd = daily.std(ddof=1)
-    if sd == 0 or len(daily) < 2:
+def _annualised_sharpe(daily: np.ndarray, rf: np.ndarray | None = None) -> float:
+    """Annualised Sharpe of the EXCESS-of-rf series (v2.3 convention change:
+    previously raw, no rf — now unified with the in-sample windows; `rf` is
+    the aligned per-day risk-free return, None degrades to raw for legacy
+    callers). Sortino and the SR feeding the PSR use the same excess series,
+    so the whole forward panel is one convention."""
+    excess = daily if rf is None else daily - rf
+    sd = excess.std(ddof=1)
+    if sd == 0 or len(excess) < 2:
         return float("nan")
-    return float(daily.mean() / sd * np.sqrt(TRADING_DAYS))
+    return float(excess.mean() / sd * np.sqrt(TRADING_DAYS))
 
 
 def _annual_return_geometric(daily: np.ndarray) -> float:
@@ -256,23 +267,24 @@ def _max_drawdown(daily: np.ndarray) -> float:
     return float(((nav - peak) / peak).min())
 
 
-def _sortino(daily: np.ndarray) -> float | None:
-    """Annualised return over downside deviation, with a ZERO risk-free
-    target — not metrics.sortino_ratio's rf-excess: this panel's Sharpe
-    (_annualised_sharpe) and the PSR are raw (no rf), and mixing an
-    excess-of-4% Sortino into the same panel would be inconsistent. The
-    3Y/5Y in-sample windows keep the rf-excess version, matching their
-    rf-excess Sharpe. Revisit when the hardcoded rf becomes time-varying
-    (roadmap item 6). Downside-deviation construction otherwise matches
-    metrics.sortino_ratio. None (not 0) when there is no downside in the
-    sample: the ratio is undefined there, and 0 would read as "bad"."""
-    downside = daily[daily < 0.0]
+def _sortino(daily: np.ndarray, rf: np.ndarray | None = None) -> float | None:
+    """Annualised excess return over downside deviation, with the aligned
+    per-day risk-free return as the target (v2.3: the item-5 zero-rf
+    carve-out is resolved — Sharpe, Sortino, and the PSR's SR are all
+    excess-of-rf now that rf is the actual contemporaneous T-bill yield,
+    matching the metrics.sortino_ratio convention in the 3Y/5Y windows).
+    `rf=None` degrades to a zero target for legacy callers. None (not 0)
+    when there is no downside in the sample: the ratio is undefined there,
+    and 0 would read as "bad"."""
+    rf = np.zeros(len(daily)) if rf is None else rf
+    downside = (daily - rf)[daily < rf]
     if len(downside) == 0:
         return None
     dd = float(np.sqrt(np.mean(downside ** 2)) * np.sqrt(TRADING_DAYS))
     if dd == 0:
         return None
-    return _annual_return_geometric(daily) / dd
+    rf_ann = float(rf.mean()) * TRADING_DAYS
+    return (_annual_return_geometric(daily) - rf_ann) / dd
 
 
 def _calmar(daily: np.ndarray) -> float | None:
@@ -334,8 +346,11 @@ def _newey_west_t(active: np.ndarray) -> float:
 
 
 def _block_bootstrap_sharpe_diff(a: np.ndarray, b: np.ndarray,
+                                 rf: np.ndarray | None = None,
                                  n_boot: int = 2000, seed: int = 7) -> dict:
-    """Moving-block bootstrap CI + two-sided p-value for Sharpe(a) - Sharpe(b).
+    """Moving-block bootstrap CI + two-sided p-value for Sharpe(a) - Sharpe(b),
+    both excess-of-rf (the rf array is resampled with the same block indices,
+    so each bootstrap day keeps its own contemporaneous rate).
 
     Block bootstrap (not i.i.d.) because daily returns are autocorrelated.
     """
@@ -343,15 +358,16 @@ def _block_bootstrap_sharpe_diff(a: np.ndarray, b: np.ndarray,
     if n < 10:
         return {"difference": None, "ci95": None, "pValue": None,
                 "note": "insufficient forward history for bootstrap (need >=10 aligned days)"}
+    rf = np.zeros(n) if rf is None else rf
     rng = np.random.default_rng(seed)
     block = max(1, int(round(n ** (1 / 3))))
     n_blocks = int(np.ceil(n / block))
-    obs_diff = _annualised_sharpe(a) - _annualised_sharpe(b)
+    obs_diff = _annualised_sharpe(a, rf) - _annualised_sharpe(b, rf)
     diffs = np.empty(n_boot)
     for k in range(n_boot):
         starts = rng.integers(0, n - block + 1, size=n_blocks)
         idx = np.concatenate([np.arange(s, s + block) for s in starts])[:n]
-        diffs[k] = _annualised_sharpe(a[idx]) - _annualised_sharpe(b[idx])
+        diffs[k] = _annualised_sharpe(a[idx], rf[idx]) - _annualised_sharpe(b[idx], rf[idx])
     lo, hi = np.percentile(diffs, [2.5, 97.5])
     # two-sided p-value: how often the resampled diff crosses zero relative to obs
     p = 2 * min((diffs <= 0).mean(), (diffs >= 0).mean())
@@ -361,8 +377,17 @@ def _block_bootstrap_sharpe_diff(a: np.ndarray, b: np.ndarray,
             "method": f"moving-block bootstrap (block={block}, n_boot={n_boot})"}
 
 
-def forward_stats(history: list[dict], baseline: str = BASELINE_ARM) -> dict:
-    """Forward comparison of each non-baseline arm against the baseline."""
+def forward_stats(history: list[dict], baseline: str = BASELINE_ARM,
+                  rf_daily: dict[str, float] | None = None) -> dict:
+    """Forward comparison of each non-baseline arm against the baseline.
+
+    rf_daily: {ISO date: DAILY risk-free return} from riskfree.daily_rf_map —
+    Sharpe, Sortino, and the PSR's SR are computed on excess-of-rf series
+    (v2.3; previously raw). None degrades to rf=0 (raw) so offline callers
+    keep working; production always passes the map (its terminal fallback is
+    the constant, applied upstream in riskfree.py). Active return, tracking
+    error, IR, max drawdown, and Calmar are rf-free by construction.
+    """
     mat = forward_return_matrix(history)
     if baseline not in mat:
         return {"available": False,
@@ -370,6 +395,14 @@ def forward_stats(history: list[dict], baseline: str = BASELINE_ARM) -> dict:
                 "nDays": 0}
     base = mat[baseline]
     n = len(base)
+    dates = [r["date"] for r in _aligned_rows(history)]
+    if rf_daily:
+        # A date missing from the map (shouldn't happen — the caller builds
+        # the map from these dates) borrows the map mean; yields move slowly.
+        rf_fill = float(np.mean(list(rf_daily.values())))
+        rf_arr = np.array([rf_daily.get(d, rf_fill) for d in dates])
+    else:
+        rf_arr = np.zeros(n)
     per_arm = []
     for arm, series in mat.items():
         if arm == baseline:
@@ -390,10 +423,12 @@ def forward_stats(history: list[dict], baseline: str = BASELINE_ARM) -> dict:
             te = active.std(ddof=1) * np.sqrt(TRADING_DAYS)
             ann_active = active.mean() * TRADING_DAYS
             ir = ann_active / te if te and not np.isnan(te) and te != 0 else None
-            sharpe_arm = _annualised_sharpe(series)
-            sharpe_base = _annualised_sharpe(base)
-            sortino_arm, sortino_base = _sortino(series), _sortino(base)
-            psr_arm, psr_base = _prob_sharpe_positive(series), _prob_sharpe_positive(base)
+            sharpe_arm = _annualised_sharpe(series, rf_arr)
+            sharpe_base = _annualised_sharpe(base, rf_arr)
+            sortino_arm, sortino_base = _sortino(series, rf_arr), _sortino(base, rf_arr)
+            # PSR on the excess series: P(true excess-Sharpe > 0).
+            psr_arm = _prob_sharpe_positive(series - rf_arr)
+            psr_base = _prob_sharpe_positive(base - rf_arr)
         else:
             te = ann_active = ir = sharpe_arm = sharpe_base = None
             sortino_arm = sortino_base = psr_arm = psr_base = None
@@ -435,7 +470,7 @@ def forward_stats(history: list[dict], baseline: str = BASELINE_ARM) -> dict:
                 "baseline": _r(psr_base, 3),
             },
             "neweyWestT_meanActive": _r(_newey_west_t(active), 3),
-            "sharpeDifference": _block_bootstrap_sharpe_diff(series, base),
+            "sharpeDifference": _block_bootstrap_sharpe_diff(series, base, rf_arr),
             "ledoitWolfTest": None,  # HOOK: parametric HAC Sharpe-diff test (recommended at scale)
         })
     return {
@@ -479,7 +514,8 @@ def forward_nav_series(history: list[dict]) -> list[dict]:
 # --------------------------------------------------------------------------- #
 def build_research_block(arms: list[dict], as_of: str,
                          history: list[dict] | None = None,
-                         baseline: str = BASELINE_ARM) -> dict:
+                         baseline: str = BASELINE_ARM,
+                         rf_daily: dict[str, float] | None = None) -> dict:
     history = history if history is not None else load_history()
     inception = history[0]["date"] if history else as_of
     return {
@@ -490,7 +526,7 @@ def build_research_block(arms: list[dict], as_of: str,
         "armOrder": list(ARM_LABELS.keys()),
         "arms": arms,
         "selectionComparison": compare_selections(arms),
-        "forwardStats": forward_stats(history, baseline),
+        "forwardStats": forward_stats(history, baseline, rf_daily),
         "forwardNav": forward_nav_series(history),
         "disclaimer": (
             "Research instrument. Per-arm 3Y/5Y metrics are in-sample "

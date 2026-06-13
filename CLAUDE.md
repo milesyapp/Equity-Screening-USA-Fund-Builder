@@ -41,6 +41,7 @@ python3 test_fundamentals.py                    # SEC extraction logic
 python3 test_covariance.py                      # EWMA / Ledoit-Wolf estimator
 python3 test_quantum_fund.py                    # QUBO build/solve regression
 python3 test_research_log.py                    # forward-stats regression
+python3 test_riskfree.py                        # time-varying rf (offline, synthetic)
 python3 validate_and_sample.py                  # full offline pipeline check
 
 # Frontend (run from repo root)
@@ -49,7 +50,7 @@ npm run dev                                      # local dev server
 ```
 
 Always run the full Python test suite + `tsc --noEmit` before committing
-pipeline or type changes. All five Python suites must end "ALL PASS".
+pipeline or type changes. All six Python suites must end "ALL PASS".
 
 ## Conventions & environment
 
@@ -83,14 +84,24 @@ pipeline or type changes. All five Python suites must end "ALL PASS".
   are None and the UI shows "—". A `activeReturnCumulative` field is honest at
   any n. This fixed a spurious −48% annualised figure at n=2.
 - **Robustness stats** (v2.2, `core/research_log.py`): per-arm-and-baseline
-  `maxDrawdown` (cumulative, ungated), `sortino` (ZERO-rf — the forward panel's
-  Sharpe/PSR are raw, so no 4% subtraction here; the 3Y/5Y windows keep
-  rf-excess via metrics.py — unify at roadmap item 6), `calmar` (own gate
+  `maxDrawdown` (cumulative, ungated), `sortino`, `calmar` (own gate
   `_MIN_CALMAR_DAYS` = 60; tiny-n drawdown denominators explode), and
   `probSharpePositive` (Bailey–López de Prado PSR vs 0; γ₄ is RAW kurtosis,
   scipy `fisher=False` — NOT excess; deliberately not the deflated variant).
   Zero-denominator Sortino/Calmar are None, never 0. All new JSON fields are
-  optional in `lib/types/index.ts`.
+  optional in `lib/types/index.ts`. (The original v2.2 zero-rf forward
+  Sortino carve-out was RESOLVED by item 6: forward Sharpe/Sortino/PSR are
+  now all excess of the time-varying rf, one convention everywhere.)
+- **Time-varying risk-free rate** (v2.3, `core/riskfree.py`): every
+  rf-dependent metric uses the contemporaneous 3-month T-bill yield. Source
+  is the U.S. Treasury daily par curve ("3 Mo" — the series FRED republishes
+  as DGS3MO; FRED's own endpoints 403 datacenter IPs / timed out, so Treasury
+  is deliberately the PRIMARY). Resilience chain: fetch → committed cache
+  `data/riskfree_3mo.csv` → 4% constant with warning. daily rf = annual /
+  TRADING_DAYS (simple division — do NOT introduce a geometric convention);
+  alignment is ffill onto the trading index (bond holidays, the unpublished
+  seam, stale cache all carry the last print forward). Tests are offline
+  (`test_riskfree.py` injects synthetic series — never hit Treasury in tests).
 - **Limitations**: `screener.py` writes a machine-readable
   `methodology.limitations[]`, rendered verbatim on the fund page.
 - Dead code removed: `Screener.tsx`, v1 multi-asset config block.
@@ -115,11 +126,14 @@ pipeline or type changes. All five Python suites must end "ALL PASS".
 
 - The daily Action commits to `main` autonomously. ALWAYS `git pull --rebase`
   before a local rescreen, or you'll hit a one-row conflict on
-  `research_log.jsonl` / `latest.json`.
+  `research_log.jsonl` / `latest.json` / `data/riskfree_3mo.csv`.
 - That conflict resolution: keep the WEEKLY row for a shared date (it carries
   `selectionByArm`); a weekly run supersedes a same-day daily mark. After
   resolving, verify no duplicate dates in the log before pushing.
 - After any forward-log edit, validate JSONL parses and has one row per date.
+- A conflict on `data/riskfree_3mo.csv` is trivial: take EITHER side — it is a
+  cache of public Treasury yields and is refetched/rewritten on the next run.
+  Don't puzzle over it like the forward log; nothing in it is evidence.
 
 ## Open roadmap (see EquityLens_Methodology_Audit.xlsx for full backlog)
 
@@ -176,7 +190,20 @@ Priority order, roughly:
    Zero-denominator Sortino/Calmar report None, never 0. In-sample 3Y/5Y
    windows gain `sortinoRatio`/`calmarRatio` via the existing metrics.py
    functions.
-6. Time-varying / historical risk-free rate (currently hardcoded 4%).
+6. ~~Time-varying / historical risk-free rate (currently hardcoded 4%).~~
+   **Done (2026-06-12)**: 3-month T-bill from the Treasury daily par curve
+   (DGS3MO-equivalent; FRED itself blocks datacenter IPs — found before it
+   could strand the cache), threaded through `metrics.sharpe_ratio` /
+   `sortino_ratio` / `alpha_newey_west` (now accept float | Series),
+   `fund._window_metrics` (each window uses ITS OWN mean prevailing rate),
+   and the forward panel (Sharpe/Sortino/PSR all excess-of-rf — the item-5
+   zero-rf carve-out is resolved; bootstrap Sharpe-diff resamples rf with the
+   same block indices). Measured at the change date: 3Y Sharpe −0.05 (window
+   rf averaged 4.70%), 5Y ≈ unchanged (3.80%); alpha moved ~1bp because its
+   rf sensitivity is (1−β)·Δrf and β≈0.99 — that near-cancellation is
+   structural, not a wiring bug (comment at the alpha call site). Selections
+   unaffected (scoring never used rf): metric values shifted, NO forward-log
+   structural break. Disclosed in `methodology.limitations[]`.
 7. Upgrade Alpaca IEX → SIP feed.
 8. QUBO lambda sweep; weight selections from the optimiser (currently the
    covariance-aware solution is discarded at the score-weighting step).

@@ -106,7 +106,10 @@ def main() -> int:
         close[bench].pct_change(fill_method=None).replace([np.inf, -np.inf], np.nan).clip(-0.5, 0.5)
         if bench in close.columns else pd.Series(dtype=float)
     )
-    refreshed = fund.build_fund(stocks, rets, bench_daily)
+    # Time-varying rf (v2.3) — one fetch per run; chain inside riskfree.py.
+    from core import riskfree
+    rf_series = riskfree.get_rf_series()
+    refreshed = fund.build_fund(stocks, rets, bench_daily, rf_series)
     refreshed.pop("weights", None)
     # The daily job re-prices against the benchmark FROZEN in latest.json (the
     # one the weekly run selected). Pin the label to that series so a changed
@@ -139,7 +142,9 @@ def main() -> int:
             arm_returns[arm["key"]] = float((last_ret * wser).sum())
         if arm_returns:
             research_log.append_run_record(price_date, "daily", arm_returns)
-            prev["forwardStats"] = research_log.forward_stats(research_log.load_history())
+            history = research_log.load_history()
+            rf_map = riskfree.daily_rf_map(rf_series, [r["date"] for r in history])
+            prev["forwardStats"] = research_log.forward_stats(history, rf_daily=rf_map)
             port["research"] = prev
 
     blob["run_type"] = "daily"

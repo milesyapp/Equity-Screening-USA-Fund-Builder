@@ -269,14 +269,15 @@ def solve(problem: QuboProblem, kind: str = "sim",
 # --------------------------------------------------------------------------- #
 def build_fund_from_selection(selected: list[str], candidates: list[dict],
                               returns: pd.DataFrame,
-                              bench_daily: pd.Series) -> tuple[dict, dict]:
+                              bench_daily: pd.Series,
+                              rf_series: pd.Series | None = None) -> tuple[dict, dict]:
     """Weight the selected names with the existing classical weighting and build
     the Fund object. Returns (fund_dict, weights_dict). The fund's 'weights' key
     is popped out and returned separately (kept on the arm, never on stocks)."""
     chosen = [c for c in candidates if c["ticker"] in set(selected)]
     if not chosen:
         raise ValueError("QUBO selection is empty; check lambdas/target size")
-    f = fund.build_fund(chosen, returns, bench_daily)
+    f = fund.build_fund(chosen, returns, bench_daily, rf_series)
     f["name"] = "US Quality-Tilted Fund (QUBO)"
     f["weighting"] = "QUBO-selected, score-weighted"
     weights = f.pop("weights", {})

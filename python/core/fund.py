@@ -55,8 +55,12 @@ def score_weights(stocks: list[dict], max_weight: float | None = None) -> dict:
     return {t: v / total for t, v in w.items()}
 
 
-def _window_metrics(fund_daily: pd.Series, bench_daily: pd.Series, years: int) -> dict | None:
-    """Compute annualised metrics for the trailing `years` of overlap."""
+def _window_metrics(fund_daily: pd.Series, bench_daily: pd.Series, years: int,
+                    rf_series: pd.Series | None = None) -> dict | None:
+    """Compute annualised metrics for the trailing `years` of overlap.
+    rf_series: annual T-bill yields by date (riskfree.get_rf_series); each
+    window uses the mean yield that actually prevailed over ITS OWN span, so
+    the 3Y and 5Y rf differ. None falls back to the constant."""
     aligned = pd.concat([fund_daily, bench_daily], axis=1).dropna()
     aligned.columns = ["fund", "bench"]
     need = int(years * TD * 0.9)  # allow ~10% missing days
@@ -66,11 +70,17 @@ def _window_metrics(fund_daily: pd.Series, bench_daily: pd.Series, years: int) -
     f, b = aligned["fund"], aligned["bench"]
 
     beta = metrics.beta_vs_market(f, b)
-    rf = settings.RISK_FREE_RATE
+    rf = rf_series if rf_series is not None else settings.RISK_FREE_RATE
+    rf_window, _ = metrics._rf_components(f, rf)  # window-mean annual rate
     fund_ann = metrics.annual_return(f)
     bench_ann = metrics.annual_return(b)
-    # CAPM alpha: actual return minus what beta would predict for the bench's excess.
-    alpha = fund_ann - (rf + beta * (bench_ann - rf)) if not np.isnan(beta) else None
+    # CAPM alpha: actual return minus what beta would predict for the bench's
+    # excess. NOTE its rf sensitivity is (1 - beta) * delta_rf — with beta
+    # near 1 the rf terms almost cancel across the two legs, so moving from
+    # the 4% constant to actual yields shifts alpha by ~1bp per 100bp of rate
+    # difference. Sharpe/Sortino carry the full shift; alpha barely moves,
+    # and that is correct, not a wiring bug.
+    alpha = fund_ann - (rf_window + beta * (bench_ann - rf_window)) if not np.isnan(beta) else None
     # Newey-West t-stat of the daily OLS alpha — a bare alpha point estimate is
     # not interpretable; this says whether it is distinguishable from zero.
     _, alpha_t = metrics.alpha_newey_west(f, b, rf)
@@ -78,10 +88,8 @@ def _window_metrics(fund_daily: pd.Series, bench_daily: pd.Series, years: int) -
     return {
         "annualReturn":     round(fund_ann, 4),
         "annualVolatility": round(metrics.annual_volatility(f), 4),
-        "sharpeRatio":      round(metrics.sharpe_ratio(f), 3),
-        # rf-excess like sharpeRatio above; the forward panel's Sortino is
-        # zero-rf to match its raw Sharpe (see research_log._sortino).
-        "sortinoRatio":     round(metrics.sortino_ratio(f), 3),
+        "sharpeRatio":      round(metrics.sharpe_ratio(f, rf), 3),
+        "sortinoRatio":     round(metrics.sortino_ratio(f, rf), 3),
         "maximumDrawdown":  round(metrics.maximum_drawdown(f), 4),
         "calmarRatio":      round(metrics.calmar_ratio(f), 3),
         "alpha":            round(alpha, 4) if alpha is not None else None,
@@ -134,12 +142,15 @@ def build_fund(
     stocks: list[dict],
     returns: pd.DataFrame,
     bench_daily: pd.Series,
+    rf_series: pd.Series | None = None,
 ) -> dict:
     """
     stocks      : ranked top-N list of stock dicts (must include 'ticker','score',
                   sector + fundamentals).
     returns     : daily-return DataFrame for the holdings (columns = tickers).
     bench_daily : daily-return Series for the benchmark (IVV).
+    rf_series   : annual T-bill yields by date (riskfree.get_rf_series());
+                  None falls back to the constant settings.RISK_FREE_RATE.
     """
     weights = score_weights(stocks)
     held = [s["ticker"] for s in stocks if s["ticker"] in returns.columns]
@@ -150,7 +161,7 @@ def build_fund(
 
     windows = {}
     for yrs in settings.FUND_WINDOWS_YEARS:
-        windows[f"metrics{yrs}Y"] = _window_metrics(fund_daily, bench_daily, yrs)
+        windows[f"metrics{yrs}Y"] = _window_metrics(fund_daily, bench_daily, yrs, rf_series)
 
     # Sector breakdown (by fund weight).
     sector_w: dict = {}

@@ -22,7 +22,7 @@ import numpy as np
 import pandas as pd
 
 from config import settings
-from core import data_fetcher, fundamentals, metrics, scoring, fund
+from core import data_fetcher, fundamentals, metrics, riskfree, scoring, fund
 from reports import market_analyzer
 
 logger = logging.getLogger(__name__)
@@ -172,7 +172,10 @@ def run() -> dict:
         [settings.SCREENER_BENCHMARK], lookback_years=max_years
     )
     bench_daily = _clean_returns(bench_close).iloc[:, 0] if not bench_close.empty else pd.Series(dtype=float)
-    the_fund = fund.build_fund(stocks, returns, bench_daily)
+    # Time-varying risk-free rate (v2.3): fetched once per run, threaded
+    # into every rf-dependent metric. Resilience chain inside riskfree.py.
+    rf_series = riskfree.get_rf_series()
+    the_fund = fund.build_fund(stocks, returns, bench_daily, rf_series)
     # Attach each stock's fund weight for display.
     fw = the_fund.pop("weights", {})
     for s in stocks:
@@ -228,12 +231,12 @@ def run() -> dict:
         problem = quantum_fund.build_qubo(candidates, returns)
 
         sel_c, diag_c = quantum_fund.solve(problem, "sim")
-        f_c, w_c = quantum_fund.build_fund_from_selection(sel_c, candidates, returns, bench_daily)
+        f_c, w_c = quantum_fund.build_fund_from_selection(sel_c, candidates, returns, bench_daily, rf_series)
         arms.append(research_log.make_arm("qubo_classical", f_c, sel_c, w_c, diag_c))
 
         if quantum_fund.hardware_available():
             sel_q, diag_q = quantum_fund.solve(problem, quantum_fund.production_sampler())
-            f_q, w_q = quantum_fund.build_fund_from_selection(sel_q, candidates, returns, bench_daily)
+            f_q, w_q = quantum_fund.build_fund_from_selection(sel_q, candidates, returns, bench_daily, rf_series)
             arms.append(research_log.make_arm("qubo_quantum", f_q, sel_q, w_q, diag_q))
         else:
             logger.info("No DWAVE_API_TOKEN — qubo_quantum skipped; logging classical QUBO only.")
@@ -245,7 +248,10 @@ def run() -> dict:
         price_date, "weekly", arm_returns,
         rebalance={"selectionByArm": {a["key"]: a["selection"] for a in arms}},
     )
-    research_block = research_log.build_research_block(arms, as_of=market["date"])
+    history = research_log.load_history()
+    rf_map = riskfree.daily_rf_map(rf_series, [r["date"] for r in history])
+    research_block = research_log.build_research_block(
+        arms, as_of=market["date"], history=history, rf_daily=rf_map)
 
     return {
         "asOf": market["date"],
@@ -297,6 +303,15 @@ def run() -> dict:
                 "dominating the universe-wide ranking at ~2.3x their universe share "
                 "via bank/insurer margins and ROE. Forward-log rows before "
                 "2026-06-12 were selected under the old regime.",
+                "Risk-free rate change on 2026-06-12: Sharpe, Sortino, CAPM alpha "
+                "and the probabilistic Sharpe ratio now use the contemporaneous "
+                "3-month T-bill yield (U.S. Treasury daily par curve — the series "
+                "FRED republishes as DGS3MO; cached fallback, then the 4% "
+                "constant) instead of a hardcoded 4%. Selections are unaffected — "
+                "scoring never used rf — so printed risk-adjusted metrics shift "
+                "(3Y Sharpe ~ -0.05 at the change date, rates having averaged "
+                "4.7% over that window) but the forward log has no structural "
+                "break.",
             ],
         },
         "stocks": stocks,
